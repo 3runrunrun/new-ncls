@@ -201,4 +201,8 @@ $autoload['model'] = array(
   'transaction/ko-tender/Ko_Tender_Detail' => 'kotd',
   'transaction/ko-tender/Ko_Tender_Onoff' => 'koto',
   'transaction/ko-tender/Ko_Tender_Status' => 'kots',
+
+  'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus' => 'ppn', 
+  'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus_Detail' => 'ppnd', 
+  'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus_Status' => 'ppns',
 );
