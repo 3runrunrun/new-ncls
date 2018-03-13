@@ -19,7 +19,7 @@ class C_Produk extends CI_Controller {
       $this->session->set_flashdata('query_msg', $data['produk']['data']);
     }
 
-    // var_dump($data['operasional']['data']->result());
+    // var_dump($data['produk']['data']->result());
 
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
@@ -56,9 +56,9 @@ class C_Produk extends CI_Controller {
       $produk_jenis['id_produk'] = $input_var['id'];
       $produk_jenis['id_jenis'] = $input_var['id_jenis'];
       
-      $this->Operasional->store($produk);
-      $this->Operasional->store($produk_harga);
-      $this->Operasional->store($produk_jenis);
+      $this->Produk->store($produk);
+      $this->Produk->store($produk_harga);
+      $this->Produk->store($produk_jenis);
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
         $this->session->set_flashdata('error_msg', 'Penambahan data produk <strong>gagal</strong>.');

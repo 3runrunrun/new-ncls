@@ -65,6 +65,7 @@ $route['store-area/(:any)'] = 'master/C_Area/store/$1';
 $route['master-operasional'] = 'master/C_Operasional/index';
 $route['master-aset'] = 'master/C_Aset/index';
 $route['master-produk'] = 'master/C_Produk/index';
+$route['store-produk/(:any)'] = 'master/C_Produk/store/$1';
 
 // distributor
 $route['master-distributor'] = 'master/C_Distributor/index';
