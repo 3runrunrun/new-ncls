@@ -148,8 +148,48 @@ $autoload['model'] = array(
   'master/Master_Distributor',
   'master/Cogm',
   'master/Master_Cogm',
+  
   'master/Operasional',
 
   // report
+  'master/Produk',
+  'master/Outlet',
+  'master/Aset',
+  'master/Customer',
+  'master/Detailer',
+  'master/Subdist',
+
+  // report
   'report/sales/Sales_Distributor' => 'salo',
+
+  // transaction
+  'transaction/ineks/Ekstensifikasi' => 'eks',
+  'transaction/ineks/Intensifikasi' => 'ins',
+  'transaction/ineks/Subdist_Eksten' => 'subeks',
+  'transaction/ineks/Subdist_Intensifikasi' => 'subins',
+
+  'transaction/wpr/Wpr',
+  'transaction/wpr/Wpr_Detail',
+  'transaction/wpr/Wpr_Status',
+
+  'transaction/sales/Sales' => 'sal',
+  'transaction/sales/Sales_Diskon' => 'sald',
+  'transaction/sales/Sales_Subdist' => 'salsub',
+
+  'transaction/sales-customer/Sales_Customer' => 'salcust',
+  'transaction/sales-customer/Sales_Customer_Detail' => 'salcustd',
+
+  'transaction/reward/Customer_Reward' => 'reward',
+  'transaction/reward/Customer_Reward_Detail' => 'rewdetail',
+  'transaction/reward/Customer_Reward_Status' => 'rewstatus',
+
+  'transaction/ko-general/Ko_General' => 'kog',
+  'transaction/ko-general/Ko_General_Detail' => 'kogd',
+  'transaction/ko-general/Ko_General_Onoff' => 'kogo',
+  'transaction/ko-general/Ko_General_Status' => 'kogs',
+
+  'transaction/ko-tender/Ko_Tender' => 'kot',
+  'transaction/ko-tender/Ko_Tender_Detail' => 'kotd',
+  'transaction/ko-tender/Ko_Tender_Onoff' => 'koto',
+  'transaction/ko-tender/Ko_Tender_Status' => 'kots',
 );
