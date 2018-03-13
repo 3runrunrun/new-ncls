@@ -24,11 +24,13 @@ class Area extends CI_Model {
     }
     return $ret_val;
   }
+  
   public function store($data = array())
   {
     $query = $this->db->set($data)->get_compiled_insert('area');
     $this->db->query($query);
   }
+  
   public function update($id, $data = array())
   {
     $this->db->set($data);
@@ -36,6 +38,7 @@ class Area extends CI_Model {
     $query = $this->db->get_compiled_insert('area');
     $this->db->query($query);
   }
+
   public function destroy($id)
   {
     $this->db->set('hapus', date('Y-m-d'));

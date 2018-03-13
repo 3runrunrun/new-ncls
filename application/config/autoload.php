@@ -153,5 +153,5 @@ $autoload['model'] = array(
   'master/Aset',
   'master/Customer',
   'master/Detailer',
-  'master/Subdist'
+  'master/Subdist',
 );
