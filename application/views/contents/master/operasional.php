@@ -58,7 +58,21 @@
                       </tr>
                     </thead>
                     <tbody>
-
+                      <?php foreach ($operasional['data']->result() as $value): ?>
+                      <tr>
+                        <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
+                        <td><?php echo $tanggal; ?></td>
+                        <td><?php echo number_format($value->city, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->allowance, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->tol_parkir, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->bensin, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->comm, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->entertainment, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->medcare, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->other, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->total, 0, ',', '.'); ?></td>
+                      </tr>
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                 </div>

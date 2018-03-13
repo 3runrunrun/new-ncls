@@ -19,6 +19,8 @@ class C_Detailer extends CI_Controller {
     $data['area'] = $this->Area->get_data('id, UPPER(nama) as nama');
     $data['jabatan'] = $this->Master_Jabatan->get_data('id, UPPER(jabatan) as jabatan');
 
+    $data['detailer'] = $this->Detailer->get_detailer_aktif('id, UPPER(nama_detailer) as nama_detailer, UPPER(nama_area) as nama_area, tanggal_masuk, status');
+
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
     $this->load->view('contents/master/detailer', $data);
