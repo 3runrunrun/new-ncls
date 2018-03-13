@@ -70,6 +70,8 @@ $route['store-operasional/(:any)'] = 'master/C_Operasional/store/$1';
 $route['store-aset/(:any)'] = 'master/C_Aset/store/$1';
 $route['master-outlet'] = 'master/C_Outlet/index';
 $route['store-outlet/(:any)'] = 'master/C_Outlet/store/$1';
+$route['master-customer'] = 'master/C_Customer/index';
+$route['store-customer/(:any)'] = 'master/C_Customer/store/$1';
 
 // distributor
 $route['master-distributor'] = 'master/C_Distributor/index';
