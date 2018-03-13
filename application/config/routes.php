@@ -74,3 +74,43 @@ $route['store-cogm'] = 'master/C_Cogm/store';
 $route['store-cogm/(:any)'] = 'master/C_Cogm/store/$1';
 
 
+
+/**
+|
+| Report 
+|
+ */
+$route['daily-sales-product'] = 'report/C_Daily_Sales/show_product';
+$route['daily-sales-outlet'] = 'report/C_Daily_Sales/show_outlet';
+$route['store-sales'] = 'report/C_Daily_Sales/store';
+$route['store-sales/(:any)'] = 'report/C_Daily_Sales/store/$1';
+
+$route['daily-sales-distributor'] = 'report/C_Daily_Sales_Distributor/index';
+$route['store-sales-distributor'] = 'report/C_Daily_Sales_Distributor/store';
+$route['store-sales-distributor/(:any)'] = 'report/C_Daily_Sales_Distributor/store/$1';
+
+$route['stock-product-nucleus'] = 'report/C_Stock_Product_Nucleus/index';
+$route['store-product-nucleus'] = 'report/C_Stock_Product_Nucleus/store';
+$route['store-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/store/$1';
+
+$route['stock-product-distributor'] = 'report/C_Stock_Product_Distributor/index';
+$route['store-product-distributor'] = 'report/C_Stock_Product_Distributor/store';
+$route['store-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/store/$1';
+
+$route['entry-breakdown-general'] = 'report/C_Entry_Breakdown/show_general';
+$route['entry-breakdown-product'] = 'report/C_Entry_Breakdown/show_product';
+$route['store-entry-breakdown'] = 'report/C_Entry_Breakdown/store';
+$route['store-entry-breakdown/(:any)'] = 'report/C_Entry_Breakdown/store/$1';
+
+$route['pemindahan-sales'] = 'report/C_Pemindahan_Sales/index';
+$route['pemindahan-sales'] = 'report/C_Pemindahan_Sales/store';
+$route['pemindahan-sales/(:any)'] = 'report/C_Pemindahan_Sales/store/$1';
+
+$route['actual-sales'] = 'report/C_Actual_Sales/index';
+
+$route['reward'] = 'report/C_Reward/index';
+$route['store-reward'] = 'report/C_Reward/store';
+$route['store-reward/(:any)'] = 'report/C_Reward/store/$1';
+
+$route['klm'] = 'report/C_Klm/index';
+
