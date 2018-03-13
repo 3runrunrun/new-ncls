@@ -68,7 +68,7 @@ $route['master-distributor'] = 'master/C_Distributor/index';
 $route['store-distributor'] = 'master/C_Distributor/store';
 $route['store-distributor/(:any)'] = 'master/C_Distributor/store/$1';
 
-// vogm
+// cogm
 $route['master-cogm'] = 'master/C_Cogm/index';
 $route['store-cogm'] = 'master/C_Cogm/store';
 $route['store-cogm/(:any)'] = 'master/C_Cogm/store/$1';
