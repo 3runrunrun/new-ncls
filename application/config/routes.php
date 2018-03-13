@@ -62,6 +62,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['master-area'] = 'master/C_Area/index';
 $route['store-area'] = 'master/C_Area/store';
 $route['store-area/(:any)'] = 'master/C_Area/store/$1';
+$route['master-operasional'] = 'master/C_Operasional/index';
+$route['master-aset'] = 'master/C_Aset/index';
 
 // distributor
 $route['master-distributor'] = 'master/C_Distributor/index';
