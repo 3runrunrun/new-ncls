@@ -46,7 +46,6 @@ class C_Area extends CI_Controller {
       }
     }
     
-    
     redirect('/master-area');
   }
 
