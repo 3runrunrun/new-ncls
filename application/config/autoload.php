@@ -150,6 +150,7 @@ $autoload['model'] = array(
   'master/Master_Cogm',
   
   'master/Operasional',
+  'master/Subdist_distributor',
 
   // report
   'master/Produk',
