@@ -1,6 +1,6 @@
 <?php 
 
-class Permohonan_Produk_Nucleus_Detail extends CI_Model {
+class Permohonan_Produk_Nucleus_Status extends CI_Model {
 
   function __construct()
   {
