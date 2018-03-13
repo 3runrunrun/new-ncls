@@ -62,7 +62,16 @@ $route['translate_uri_dashes'] = FALSE;
 $route['master-area'] = 'master/C_Area/index';
 $route['store-area'] = 'master/C_Area/store';
 $route['store-area/(:any)'] = 'master/C_Area/store/$1';
+
+// detailer
+$route['master-detailer'] = 'master/C_Detailer/index';
+$route['store-detailer'] = 'master/C_Detailer/store';
+$route['store-detailer/(:any)'] = 'master/C_Detailer/store/$1';
+
+// operasional
 $route['master-operasional'] = 'master/C_Operasional/index';
+
+// aset
 $route['master-aset'] = 'master/C_Aset/index';
 $route['master-produk'] = 'master/C_Produk/index';
 $route['store-produk/(:any)'] = 'master/C_Produk/store/$1';

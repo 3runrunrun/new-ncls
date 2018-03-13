@@ -84,12 +84,18 @@
                 <form action="<?php echo site_url(); ?>/store-operasional" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
-                      <div class="col-sm-6 offset-sm-6 col-xs-12">
+                      <div class="col-sm-6 offset-sm-3 col-xs-12">
                         <div class="form-group">
                           <label class="label-control">Detailer</label>
                           <select name="id_detailer" class="form-control select2" required>
-                            <option value=""></option>
-                            <option value=""></option>
+                            <option value="" selected disabled>Pilih Detailer</option>
+                            <?php if ($detailer['data']->num_rows() < 1): ?>
+                            <option value="" disabled>Detailer belum tersedia</option>
+                            <?php else: ?>
+                            <?php foreach ($detailer['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id; ?>"><?php echo $value->nama; ?></option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
                           </select>
                         </div>
                         <!-- /id-detailer -->
@@ -107,7 +113,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="city" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="city" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -117,7 +123,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="allowance" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="allowance" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -127,7 +133,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="city" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="tol_parkir" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -137,7 +143,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="bensin" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="bensin" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -149,7 +155,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="comm" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="comm" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -159,7 +165,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="entertainment" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="entertainment" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -169,7 +175,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="medcare" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="medcare" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -179,7 +185,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="other" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="other" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -189,7 +195,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="total" id="total" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="total" id="total" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -199,7 +205,7 @@
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
-                              <input type="number" name="potongan_ca" id="total" class="form-control border-primary" min="0" value="0">
+                              <input type="number" name="potongan_ca" id="total" class="form-control border-primary" min="0" required>
                             </div>
                           </fieldset>
                         </div>
@@ -231,48 +237,5 @@
     });
     $('#report-table td').addClass('text-truncate');
     $('#report-table td:even').addClass('bg-table-blue');
-  });
-</script>
-
-<script type="text/javascript">
-  
-  $(document).ready(function(){
-    var target_selector = $('#total');
-    var total = 0;
-    
-    $(target_selector).val(parseInt(total));
-
-    $('[name=city] , [name=allowance] , [name=tol_parkir] , [name=bensin] , [name=comm] , [name=entertainment] , [name=medcare] , [name=other]').keyup(function(){
-      if ($('[name=city]').val() == '') {
-        $('[name=city]').val(0);
-      }
-      if ($('[name=allowance]').val() == '') {
-        $('[name=allowance]').val(0);
-      }
-      if ($('[name=tol_parkir]').val() == '') {
-        $('[name=tol_parkir]').val(0);
-      }
-      if ($('[name=bensin]').val() == '') {
-        $('[name=bensin]').val(0);
-        show_bensin_km($('[name=bensin]'));
-      }
-      if ($('[name=comm]').val() == '') {
-        $('[name=comm]').val(0);
-      }
-      if ($('[name=entertainment]').val() == '') {
-        $('[name=entertainment]').val(0);
-      }
-      if ($('[name=med_care]').val() == '') {
-        $('[name=medcare]').val(0);
-      }
-      if ($('[name=other]').val() == '') {
-        $('[name=other]').val(0);
-      }
-
-      total = parseInt($('[name=city]').val()) + parseInt($('[name=allowance]').val()) + parseInt($('[name=tol_parkir]').val()) + parseInt($('[name=bensin]').val()) + parseInt($('[name=comm]').val()) + parseInt($('[name=entertainment]').val()) + parseInt($('[name=med_care]').val()) + parseInt($('[name=other]').val());
-      $(target_selector).val(parseInt(total));
-
-      show_bensin_km($('[name=bensin]'));
-    });
   });
 </script>
