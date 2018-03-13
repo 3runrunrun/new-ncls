@@ -1,5 +1,5 @@
 <?php
-class Produk extends CI_Model
+class Master_Jenis_Produk extends CI_Model
 {
     public function __construct()
     {
@@ -9,12 +9,8 @@ class Produk extends CI_Model
     public function get_data($column = '*')
     {
         $this->db->select($column);
-        $this->db->from('produk a');
-        $this->db->join('produk_harga b', 'a.id = b.id_produk');
-        $this->db->join('produk_jenis c', 'a.id = c.id_produk');
-        $this->db->join('master_jenis_produk d', 'd.id = c.id_produk');
-        $this->db->where('a.hapus', null);
-        $result = $this->db->get('produk');
+        $this->db->where('hapus', null);
+        $result = $this->db->get('master_jenis_produk');
         if (!$result) {
             $ret_val = array(
                 'status' => 'error',
@@ -28,31 +24,23 @@ class Produk extends CI_Model
         }
         return $ret_val;
     }
-
-
-
-
-
-
-
-
     public function store($data = array())
     {
-        $query = $this->db->set($data)->get_compiled_insert('produk');
+        $query = $this->db->set($data)->get_compiled_insert('master_jenis_produk');
         $this->db->query($query);
     }
     public function update($id, $data = array())
     {
         $this->db->set($data);
         $this->db->where('id', $id);
-        $query = $this->db->get_compiled_insert('produk');
+        $query = $this->db->get_compiled_insert('master_jenis_produk');
         $this->db->query($query);
     }
     public function destroy($id)
     {
         $this->db->set('hapus', date('Y-m-d'));
         $this->db->where('id', $id);
-        $query = $this->db->get_compiled_insert('produk');
+        $query = $this->db->get_compiled_insert('master_jenis_produk');
         $this->db->query($query);
     }
 }
