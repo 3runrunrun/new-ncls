@@ -143,6 +143,10 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 $autoload['model'] = array(
+  // core
+  'core/Master_Jabatan',
+  'core/User_Account',
+   
   'master/Area',
   'master/Distributor',
   'master/Master_Distributor',
@@ -158,6 +162,10 @@ $autoload['model'] = array(
   'master/Aset',
   'master/Customer',
   'master/Detailer',
+  'master/Detailer_Keluarga',
+  'master/Detailer_Anak',
+  'master/Detailer_Fieldforce',
+  'master/Detailer_Gaji',
   'master/Subdist',
 
   //aset

@@ -12,8 +12,7 @@ class C_Operasional extends CI_Controller {
   public function index()
   {
     $data['operasional'] = $this->Operasional->get_data('a.id, tanggal, city, allowance, tol_parkir, bensin, comm, entertainment, medcare, other, total');
-    $row = $data['operasional']['data']->num_rows();
-    $data['id'] = $this->nsu->zerofill_generator(3, $row);
+    $data['detailer'] = $this->Detailer->get_data('id, UPPER(nama) as nama');
 
     if ($data['operasional']['status'] == 'error') {
       $this->session->set_flashdata('query_msg', $data['operasional']['data']);
