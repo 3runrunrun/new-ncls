@@ -148,4 +148,7 @@ $autoload['model'] = array(
   'master/Master_Distributor',
   'master/Cogm',
   'master/Master_Cogm',
+
+  // report
+  'report/sales/Sales_Distributor' => 'salo,
 );
