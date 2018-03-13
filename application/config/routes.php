@@ -66,6 +66,10 @@ $route['master-operasional'] = 'master/C_Operasional/index';
 $route['master-aset'] = 'master/C_Aset/index';
 $route['master-produk'] = 'master/C_Produk/index';
 $route['store-produk/(:any)'] = 'master/C_Produk/store/$1';
+$route['store-operasional/(:any)'] = 'master/C_Operasional/store/$1';
+$route['store-aset/(:any)'] = 'master/C_Aset/store/$1';
+$route['master-outlet'] = 'master/C_Outlet/index';
+$route['store-outlet/(:any)'] = 'master/C_Outlet/store/$1';
 
 // distributor
 $route['master-distributor'] = 'master/C_Distributor/index';

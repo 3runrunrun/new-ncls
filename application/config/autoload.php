@@ -160,6 +160,10 @@ $autoload['model'] = array(
   'master/Detailer',
   'master/Subdist',
 
+  'master/Produk_Harga',
+  'master/Produk_Jenis',
+  'master/Master_Jenis_Produk',
+
   //aset
   'aset/Aset',
   'aset/Aset_Penyusutan',
