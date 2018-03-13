@@ -15,6 +15,7 @@ class Cogm extends CI_Model {
     $this->db->join('master_cogm b', 'a.id_cogm = b.id');
     $this->db->where('a.tahun', $this->session->userdata('tahun'));
     $this->db->where('a.hapus', null);
+    $this->db->order_by('b.id');
     $result = $this->db->get();
     if ( ! $result) {
       $ret_val = array(

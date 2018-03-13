@@ -46,13 +46,23 @@
                     <thead>
                       <tr>
                         <th>Kode</th>
+                        <th>Nama</th>
                         <th>Area</th>
                         <th>Tanggal Masuk</th>
                         <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
-
+                      <?php foreach ($detailer['data']->result() as $value): ?>
+                      <tr>
+                        <td><?php echo strtoupper($value->id); ?></td>
+                        <td><?php echo $value->nama_detailer; ?></td>
+                        <td><?php echo $value->nama_area; ?></td>
+                        <?php $tanggal_masuk = date('d-M-Y', strtotime($value->tanggal_masuk)) ?>
+                        <td><?php echo $tanggal_masuk; ?></td>
+                        <td><?php echo $value->status; ?></td>
+                      </tr>
+                      <?php endforeach ?>
                     </tbody>
                   </table>
                 </div>
