@@ -62,15 +62,35 @@ $route['translate_uri_dashes'] = FALSE;
 $route['master-area'] = 'master/C_Area/index';
 $route['store-area'] = 'master/C_Area/store';
 $route['store-area/(:any)'] = 'master/C_Area/store/$1';
+
+// detailer
+$route['master-detailer'] = 'master/C_Detailer/index';
+$route['store-detailer'] = 'master/C_Detailer/store';
+$route['store-detailer/(:any)'] = 'master/C_Detailer/store/$1';
+
+// operasional
 $route['master-operasional'] = 'master/C_Operasional/index';
+$route['store-operasional'] = 'master/C_Operasional/store';
+$route['store-operasional/(:any)'] = 'master/C_Operasional/store/$1';
+
+// aset
 $route['master-aset'] = 'master/C_Aset/index';
 $route['master-produk'] = 'master/C_Produk/index';
 $route['store-produk/(:any)'] = 'master/C_Produk/store/$1';
+$route['store-aset/(:any)'] = 'master/C_Aset/store/$1';
+$route['master-outlet'] = 'master/C_Outlet/index';
+$route['store-outlet/(:any)'] = 'master/C_Outlet/store/$1';
+$route['master-customer'] = 'master/C_Customer/index';
+$route['store-customer/(:any)'] = 'master/C_Customer/store/$1';
 
 // distributor
 $route['master-distributor'] = 'master/C_Distributor/index';
 $route['store-distributor'] = 'master/C_Distributor/store';
 $route['store-distributor/(:any)'] = 'master/C_Distributor/store/$1';
+$route['master-subdistributor'] = 'master/C_Subdistributor/index';
+$route['store-subdistributor/(:any)'] = 'master/C_Subdistributor/storeSubdist/$1';
+$route['store-subdistributorEkstern/(:any)'] = 'master/C_Subdistributor/storeSubdistEkstern/$1';
+$route['store-subdistributorIntern/(:any)'] = 'master/C_Subdistributor/storeSubdistIntern/$1';
 
 // cogm
 $route['master-cogm'] = 'master/C_Cogm/index';

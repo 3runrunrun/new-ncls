@@ -47,12 +47,12 @@
                       <tr>
                         <th>TANGGAL</th>
                         <?php foreach ($jenis['data']->result() as $value): ?>
-                        <th><?php echo $value->nama; ?><br />(Rp)</th>                          
+                        <th><?php echo $value->nama; ?><br />(Rp)</th>
                         <?php endforeach; ?>
                       </tr>
                     </thead>
                     <tbody>
-
+                      
                     </tbody>
                   </table>
                 </div>

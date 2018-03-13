@@ -50,10 +50,14 @@ class C_Cogm extends CI_Controller {
 
   private function save_cogm($data = array())
   {
-    $data['id'] = $this->nsu->digit_id_generator(4, 'co');
-    var_dump($data);
-
-    die();
+    foreach ($data['id_cogm'] as $key => $value) {
+      $val['id'] = $this->nsu->digit_id_generator(4, 'co');
+      $val['id_cogm'] = $value;
+      $val['tahun'] = date('Y');
+      $val['tanggal'] = $data['tanggal'][$key];
+      $val['biaya'] = $data['biaya'][$key];
+      $this->Cogm->store($val);
+    }
   }
 
 }
