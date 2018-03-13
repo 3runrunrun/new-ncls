@@ -86,6 +86,10 @@ $route['store-customer/(:any)'] = 'master/C_Customer/store/$1';
 $route['master-distributor'] = 'master/C_Distributor/index';
 $route['store-distributor'] = 'master/C_Distributor/store';
 $route['store-distributor/(:any)'] = 'master/C_Distributor/store/$1';
+$route['master-subdistributor'] = 'master/C_Subdistributor/index';
+$route['store-subdistributor/(:any)'] = 'master/C_Subdistributor/storeSubdist/$1';
+$route['store-subdistributorEkstern/(:any)'] = 'master/C_Subdistributor/storeSubdistEkstern/$1';
+$route['store-subdistributorIntern/(:any)'] = 'master/C_Subdistributor/storeSubdistIntern/$1';
 
 // cogm
 $route['master-cogm'] = 'master/C_Cogm/index';
