@@ -32,4 +32,20 @@ class Area extends CI_Model {
     $query = $this->db->set($data)->get_compiled_insert('area');
     $this->db->query($query);
   }
+
+  public function update($id, $data = array())
+  {
+    $this->db->set($data);
+    $this->db->where('id', $id);
+    $query = $this->db->get_compiled_insert('area');
+    $this->db->query($query);
+  }
+
+  public function destroy($id)
+  {
+    $this->db->set('hapus' => date('Y-m-d'));
+    $this->db->where('id', $id);
+    $query = $this->db->get_compiled_insert('area');
+    $this->db->query($query);
+  }
 }
