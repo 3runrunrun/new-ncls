@@ -142,6 +142,7 @@ $route['detail-promo/(:any)'] = 'transaction/C_Promo_Trial/show/$1';
 $route['detail-promo/(:any)/(:any)'] = 'transaction/C_Promo_Trial/show/$1/$2';
 
 $route['wpr'] = 'transaction/C_WPR/index';
+$route['store-wpr'] = 'transaction/C_WPR/store';
 $route['store-wpr/(:any)'] = 'transaction/C_WPR/store/$1';
 
 $route['master-general'] = 'transaction/C_General/index';
