@@ -10,8 +10,8 @@ class Customer extends CI_Model
     {
         $this->db->select($column);
         $this->db->from('customer a');
-        $this->db->join('detailer b', 'a.id_rm = b.id');
-        $this->db->join('area c', 'a.id_area = c.id');
+        $this->db->join('area b', 'a.id_area = b.id');
+        $this->db->join('detailer c', 'a.id_rm = c.id', 'left');
         $this->db->where('a.hapus', null);
         $result = $this->db->get();
         if (!$result) {

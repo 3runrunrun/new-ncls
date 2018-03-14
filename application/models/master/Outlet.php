@@ -9,12 +9,26 @@ class Outlet extends CI_Model
     public function get_data($column = '*')
     {
         $this->db->select($column);
-        $this->db->from('outlet a');
-        $this->db->join('distributor b', 'a.id_distributor = b.id');
-        $this->db->join('area c', 'a.id_area = c.id');
-        $this->db->join('detailer d', 'a.id_detailer = d.id');
-        $this->db->where('a.hapus', null);
-        $result = $this->db->get();
+        $this->db->where('hapus', null);
+        $result = $this->db->get('outlet');
+        if (!$result) {
+            $ret_val = array(
+                'status' => 'error',
+                'data'   => $this->db->error(),
+            );
+        } else {
+            $ret_val = array(
+                'status' => 'success',
+                'data'   => $result,
+            );
+        }
+        return $ret_val;
+    }
+    public function get_outlet_aktif($column = '*')
+    {
+        $this->db->select($column);
+        $this->db->where('hapus', null);
+        $result = $this->db->get('v_outlet');
         if (!$result) {
             $ret_val = array(
                 'status' => 'error',

@@ -50,23 +50,18 @@ class C_Stock_Product_Nucleus extends CI_Controller {
       $pmh['tanggal_target'] = $input_var['tanggal_target'];
       $pmh['status'] = $status;
       $this->ppn->store($pmh);
-
-  // repopulate and store data permohonan
+      
       foreach ($input_var['id_produk'] as $key => $value) {
         $pmh_detail['id_permohonan'] = $input_var['id'];
         $pmh_detail['id_produk'] = $value;
         $pmh_detail['jumlah'] = $input_var['jumlah'][$key];
         $this->ppnd->store($pmh_detail);
       }
-
+      
       $pmh_status['id_permohonan'] = $input_var['id'];
       $pmh_status['tanggal'] = date('Y-m-d');
       $pmh_status['status'] = $status;
-      
       $this->ppns->store($pmh_status);
-
-  // var_dump($input_var);
-  // die();
 
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();

@@ -1,5 +1,5 @@
   <footer class="footer navbar-fixed-bottom undefined footer-dark">
-    <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  © <?php echo date('Y'); ?> <a href="#" target="_blank" class="text-bold-800 grey darken-2">Nucleus Farma  </a>, All rights reserved. </span></p>
+    <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  © <?php echo date('Y'); ?> <a href="#" target="_blank" class="text-bold-800 grey darken-2">Nucleus Farma  </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block white">Tahun Laporan <strong class="text-bold-500"><?php echo $this->session->userdata('tahun'); ?></strong></span></p>
   </footer>
 
   <script type="text/javascript">

@@ -11,20 +11,24 @@ class C_Subdistributor extends CI_Controller {
 
   public function index()
   {
-    $data['subdistributor'] = $this->Subdist->get_data('a.id, a.nama as subdist, b.nama as area');
-    $row = $data['subdistributor']['data']->num_rows();
-    $data['id'] = $this->nsu->zerofill_generator(3, $row);
+    $data['subdistributor'] = $this->Subdist->get_data('a.id, UPPER(a.nama) as nama_subdist, UPPER(b.alias_area) as alias_area, UPPER(b.nama) as nama_area');
+    $data['area'] = $this->Area->get_data('id, UPPER(nama) as nama, UPPER(alias_area) as alias_area');
+    $data['user'] = $this->User->get_data('id, UPPER(alias_area) as alias_area, UPPER(nama) as nama, UPPER(jenis) as jenis');
+    $data['produk'] = $this->Produk->get_produk_harga('id, UPPER(nama) as nama, UPPER(kemasan) as kemasan, harga_master, harga_hna');
+    $data['id_subdist'] = $this->nsu->digit_id_generator(4,'sd');
+    $data['id_sks'] = $this->nsu->digit_id_generator(4,'sks');
+    $data['id_sns'] = $this->nsu->digit_id_generator(4,'sns');
 
     if ($data['subdistributor']['status'] == 'error') {
       $this->session->set_flashdata('query_msg', $data['subdistributor']['data']);
     }
 
-    var_dump($data['subdistributor']['data']->result());
+    // var_dump($data['subdistributor']['data']->result());
 
-    // $this->load->view('heads/head-form-simple-table');
-    // $this->load->view('navbar');
-    // $this->load->view('contents/master/operasional', $data);
-    // $this->load->view('footers/footer-js-form-simple-table');
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/master/subdist', $data);
+    $this->load->view('footers/footer-js-form-simple-table');
   }
 
   public function storeSubdist($operation = null)
@@ -36,7 +40,7 @@ class C_Subdistributor extends CI_Controller {
       # code...
     } else {
       $input_var = $this->input->post();
-      $input_var['id'] = $this->nsu->digit_id_generator(4,'sd');
+      $input_var['id'] = $this->session->userdata('id_subdist');
       
       $this->Subdist->store($input_var);
       if ($this->db->trans_status() === FALSE) {
@@ -59,8 +63,9 @@ class C_Subdistributor extends CI_Controller {
       # code...
     } else {
       $input_var = $this->input->post();
-      $input_var['id'] = $this->nsu->digit_id_generator(4,'sks');
+      $input_var['id'] = $this->session->userdata('id_sks');
       $input_var['tahun'] = date('Y');
+      $input_var['tanggal'] = date('Y-m-d');
       
       $this->subeks->store($input_var);
       if ($this->db->trans_status() === FALSE) {
@@ -83,7 +88,7 @@ class C_Subdistributor extends CI_Controller {
       # code...
     } else {
       $input_var = $this->input->post();
-      $input_var['id'] = $this->nsu->digit_id_generator(4,'sns');
+      $input_var['id'] = $this->session->userdata('id_sns');
       $input_var['tahun'] = date('Y');
       
       $this->subins->store($input_var);

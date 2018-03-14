@@ -17,4 +17,18 @@ class Home extends CI_Controller {
     $this->load->view('footers/footer-js-dashboard');
   }
 
+  public function login()
+  {
+    $this->load->view('heads/head-login');
+    $this->load->view('contents/login');
+    $this->load->view('footers/footer-js-login');
+  }
+
+  public function auth()
+  {
+    $input_var = $this->input->post();
+    $this->session->set_userdata('tahun', $input_var['tahun']);
+    redirect('/');
+  }
+
 }

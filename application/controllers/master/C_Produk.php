@@ -11,19 +11,18 @@ class C_Produk extends CI_Controller {
 
   public function index()
   {
-    $data['produk'] = $this->Produk->get_data('a.id, a.nama, a.kemasan, b.harga_hna, b.harga_master');
-    $row = $data['produk']['data']->num_rows();
-    $data['id'] = $this->nsu->zerofill_generator(3, $row);
+    $data['produk'] = $this->Produk->get_produk_harga('id, UPPER(nama) as nama, UPPER(kemasan) as kemasan, harga_master, harga_hna');
+    $data['jenis'] = $this->Master_Jenis_Produk->get_data('id, UPPER(nama) as nama');
+    $data['area'] = $this->Area->get_data('id, UPPER(nama) as nama, UPPER(alias_area) as alias_area');
+    $data['id'] = $this->nsu->digit_id_generator(4,'pr');
 
     if ($data['produk']['status'] == 'error') {
       $this->session->set_flashdata('query_msg', $data['produk']['data']);
     }
 
-    // var_dump($data['produk']['data']->result());
-
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
-    // $this->load->view('contents/master/produk', $data);
+    $this->load->view('contents/master/produk', $data);
     $this->load->view('footers/footer-js-form-simple-table');
   }
 
@@ -36,29 +35,12 @@ class C_Produk extends CI_Controller {
       # code...
     } else {
       $input_var = $this->input->post();
-      $input_var['id'] = $this->nsu->digit_id_generator(4,'pr');
+      $input_var['id'] = $this->session->userdata('id_produk');
       $input_var['tanggal'] = date('Y-m-d');
-
-      $produk = array();
-      $produk_harga = array();
-      $produk_jenis = array();
-
-      $produk['id'] = $input_var['id'];
-      $produk['nama'] = $input_var['nama'];
-      $produk['kemasan'] = $input_var['kemasan'];
-      $produk['keterangan'] = $input_var['keterangan'];
-
-      $produk_harga['id_produk'] = $input_var['id'];
-      $produk_harga['tanggal'] = $input_var['tanggal'];
-      $produk_harga['harga_master'] = $input_var['harga_master'];
-      $produk_harga['harga_hna'] = $input_var['harga_hna'];
-
-      $produk_jenis['id_produk'] = $input_var['id'];
-      $produk_jenis['id_jenis'] = $input_var['id_jenis'];
       
-      $this->Produk->store($produk);
-      $this->Produk_Harga->store($produk_harga);
-      $this->Produk_Jenis->store($produk_jenis);
+      $this->save_produk($input_var);
+      $this->save_harga($input_var);
+      $this->save_jenis($input_var);
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
         $this->session->set_flashdata('error_msg', 'Penambahan data produk <strong>gagal</strong>.');
@@ -66,9 +48,34 @@ class C_Produk extends CI_Controller {
         $this->db->trans_commit();
         $this->session->set_flashdata('success_msg', 'Data produk baru <strong>berhasil</strong> disimpan.');
       }
+      $this->session->unset_userdata('id_produk');
     }
-    redirect('/master-operasional');
+    redirect('/master-product');
   }
 
+  private function save_produk($data = array())
+  {
+    $val['id'] = $data['id'];
+    $val['nama'] = $data['nama'];
+    $val['kemasan'] = $data['kemasan'];
+    $val['keterangan'] = $data['keterangan'];
+    $this->Produk->store($val);
+  }
+  private function save_harga($data = array())
+  {
+    $val['id_produk'] = $data['id'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['harga_master'] = $data['harga_master'];
+    $val['harga_hna'] = $data['harga_hna'];
+    $this->Produk_Harga->store($val);
+  }
+  private function save_jenis($data = array())
+  {
+    foreach ($data['id_jenis'] as $key => $value) {
+      $val['id_produk'] = $data['id'];
+      $val['id_jenis'] = $value;
+      $this->Produk_Jenis->store($val);
+    }
+  }
 
 }

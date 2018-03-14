@@ -11,8 +11,7 @@ class C_Customer_non extends CI_Controller {
 
   public function index()
   {
-    
+    # code    
   }
-
 
 }

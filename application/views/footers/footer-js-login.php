@@ -1,5 +1,5 @@
   <footer class="footer navbar-fixed-bottom undefined footer-dark">
-    <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  © <?php echo date('Y'); ?> <a href="#" target="_blank" class="text-bold-800 grey darken-2">Nucleus Farma  </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block white">Tahun Laporan <strong class="text-bold-500"><?php echo $this->session->userdata('tahun'); ?></strong></span></p>
+    <p class="clearfix text-muted text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  © <?php echo date('Y'); ?> <a href="#" target="_blank" class="text-bold-800 grey darken-2">Nucleus Farma  </a>, All rights reserved. </span></p>
   </footer>
 
   <!-- BEGIN VENDOR JS-->
@@ -20,12 +20,9 @@
   <script src="<?php echo base_url() ?>assets/js/vendors/ui/jquery.sticky.js" type="text/javascript"></script>
   <script src="<?php echo base_url() ?>assets/js/vendors/charts/jquery.sparkline.min.js" type="text/javascript"></script><!-- chart -->
 
-  <script src="<?php echo base_url() ?>assets/js/vendors/datatables/jquery.dataTables.min.js" type="text/javascript"></script><!-- datatable > use in export -->
-  <script src="<?php echo base_url() ?>assets/js/vendors/datatables/dataTables.bootstrap4.min.js" type="text/javascript"></script><!-- datatable > use in export -->
-
   <script src="<?php echo base_url() ?>assets/js/vendors/forms/icheck.min.js" type="text/javascript"></script><!-- form -->
   <script src="<?php echo base_url() ?>assets/js/vendors/extensions/jquery.knob.min.js" type="text/javascript"></script>
-  <script src="<?php echo base_url() ?>assets/js/vendors/forms/select2.full.min.js" type="text/javascript"></script><!-- form -->
+  <script src="<?php echo base_url() ?>assets/js/vendors/extensions/unslider-min.js" type="text/javascript"></script>
   <!-- END PAGE VENDOR JS-->
   <!-- BEGIN ROBUST JS-->
   <!-- build:js app-assets/js/app.min.js-->
@@ -36,13 +33,8 @@
   <!-- END ROBUST JS-->
   <!-- BEGIN PAGE LEVEL JS-->
   <script src="<?php echo base_url() ?>assets/js/vendors/ui/breadcrumbs-with-stats.min.js" type="text/javascript"></script>
-
-  <script src="<?php echo base_url() ?>assets/js/vendors/datatables/datatable-rowreorder.min.js" type="text/javascript"></script><!-- datatable -->
-  <script src="<?php echo base_url() ?>assets/js/vendors/datatables/datatable-basic.min.js" type="text/javascript"></script><!-- datatable -->
-
+  <script src="<?php echo base_url() ?>assets/js/vendors/forms/form-login-register.min.js" type="text/javascript"></script><!-- login -->
   <script src="<?php echo base_url() ?>assets/js/vendors/forms/checkbox-radio.min.js" type="text/javascript"></script><!-- form -->
-  <script src="<?php echo base_url() ?>assets/js/vendors/forms/form-select2.min.js" type="text/javascript"></script><!-- form -->
   <!-- END PAGE LEVEL JS-->
-  
 </body>
 </html>

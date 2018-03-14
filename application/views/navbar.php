@@ -56,7 +56,7 @@
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/master-distributor" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-truck"></i>Master Distributor</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/master-subdist" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-shopping-basket"></i>Master Subdistributor</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/master-subdistributor" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-shopping-basket"></i>Master Subdistributor</a>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/master-detailer" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-at"></i>Master Detailer</a>
             </li>
@@ -72,7 +72,7 @@
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/master-outlet" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-building-o"></i>Master Outlet</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/master-produk" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-medkit"></i>Master Produk</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/master-product" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-medkit"></i>Master Produk</a>
             </li>
             <!-- <li data-menu=""><a href="<?php echo site_url() ?>/master-stok" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-tablet"></i>Master Stok</a>
             </li> -->
