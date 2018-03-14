@@ -200,11 +200,13 @@ $autoload['model'] = array(
   'transaction/ko-general/Ko_General' => 'kog',
   'transaction/ko-general/Ko_General_Detail' => 'kogd',
   'transaction/ko-general/Ko_General_Onoff' => 'kogo',
+  'transaction/ko-general/Ko_General_Onoff_Total' => 'kogot',
   'transaction/ko-general/Ko_General_Status' => 'kogs',
 
   'transaction/ko-tender/Ko_Tender' => 'kot',
   'transaction/ko-tender/Ko_Tender_Detail' => 'kotd',
   'transaction/ko-tender/Ko_Tender_Onoff' => 'koto',
+  'transaction/ko-tender/Ko_Tender_Onoff_Total' => 'kotot',
   'transaction/ko-tender/Ko_Tender_Status' => 'kots',
 
   'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus' => 'ppn', 

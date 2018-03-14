@@ -144,6 +144,12 @@ $route['detail-promo/(:any)/(:any)'] = 'transaction/C_Promo_Trial/show/$1/$2';
 $route['wpr'] = 'transaction/C_WPR/index';
 $route['store-wpr/(:any)'] = 'transaction/C_WPR/store/$1';
 
+$route['master-general'] = 'transaction/C_General/index';
+$route['store-general/(:any)'] = 'transaction/C_General/store/$1';
+
+$route['master-tender'] = 'transaction/C_Tender/index';
+$route['store-tender/(:any)'] = 'transaction/C_Tender/store/$1';
+
 /**
 |
 | Report 
@@ -182,4 +188,3 @@ $route['store-reward'] = 'report/C_Reward/store';
 $route['store-reward/(:any)'] = 'report/C_Reward/store/$1';
 
 $route['klm'] = 'report/C_Klm/index';
-
