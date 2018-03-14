@@ -10,7 +10,7 @@ class Permohonan_Produk_Nucleus extends CI_Model {
 
   public function store($data = array())
   {
-    $query = $this->db->set($data)->get_compiled_insert('ko_tender');
+    $query = $this->db->set($data)->get_compiled_insert('permohonan_produk_nucleus');
     $this->db->query($query);
   }
 
