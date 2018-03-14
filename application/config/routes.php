@@ -135,8 +135,11 @@ $route['detailer-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/show_intens/
 $route['store-intens'] = 'transaction/C_Pros_Inten_Eksten/store_intens';
 $route['store-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/store_intens/$1';
 
-$route['store-promo'] = 'transaction/C_Promo_Trial/index';
+$route['master-promo'] = 'transaction/C_Promo_Trial/index';
 $route['store-promo/(:any)'] = 'transaction/C_Promo_Trial/store/$1';
+
+$route['master-wpr'] = 'transaction/C_WPR/index';
+$route['store-wpr/(:any)'] = 'transaction/C_WPR/store/$1';
 
 /**
 |

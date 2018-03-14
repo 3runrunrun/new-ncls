@@ -11,8 +11,8 @@ class C_Promo_Trial extends CI_Controller {
 
   public function index()
   {
-    $data['promo_trial_wait'] = $this->Produk->get_produk_harga('a.id, a.no_promo, b.nama as detailer, c.nama as user, a.status');
-    $data['promo_trial_appr'] = $this->Produk->get_produk_harga('a.id, a.no_promo, b.nama as detailer, c.nama as user, a.status');
+    $data['promo_trial_wait'] = $this->pt->get_data('a.id, a.no_promo, b.nama as detailer, c.nama as user, a.status','waiting');
+    $data['promo_trial_appr'] = $this->pt->get_data('a.id, a.no_promo, b.nama as detailer, c.nama as user, a.status','approve');
     $data['id'] = $this->nsu->digit_id_generator(4,'prt');
 
     if ($data['promo_trial_wait']['status'] == 'error') {
@@ -31,6 +31,7 @@ class C_Promo_Trial extends CI_Controller {
 
   public function store($operation = null)
   {
+    $this->db->trans_begin();
     if ($operation == 'edit') {
       # code...
     } elseif ($operation == 'delete') {
@@ -41,6 +42,7 @@ class C_Promo_Trial extends CI_Controller {
       $input_var['id'] = $this->nsu->digit_id_generator(4,'prt');
       $input_var['no_promo'] = 'PFT-HL-'.date('d').'-'.date('Y');
       $input_var['tanggal'] = date('Y-m-d');
+      $input_var['tahun'] = date('Y');
 
       $promo_trial = array();
       $promo_trial_detail = array();
@@ -53,23 +55,23 @@ class C_Promo_Trial extends CI_Controller {
       $promo_trial['id_detailer'] = $input_var['id_detailer'];
       $promo_trial['tanggal'] = $input_var['tanggal'];
       $promo_trial['id_customer'] = $input_var['id_customer'];
-      $promo_trial['keteranagan'] = $input_var['keteranagan'];
+      $promo_trial['keterangan'] = $input_var['keterangan'];
       $promo_trial['status'] = $status;
-      $this->ppn->store($promo_trial);
+      $this->pt->store($promo_trial);
       
       foreach ($input_var['id_produk'] as $key => $value) {
         $promo_trial_detail['id_promo'] = $input_var['id'];
-        $promo_trial_detail['no_promo'] = $input_var['no_promo']
-        $promo_trial_detail['id_produk'] = $input_var['id_produk'];
+        $promo_trial_detail['no_promo'] = $input_var['no_promo'];
+        $promo_trial_detail['id_produk'] = $input_var['id_produk'][$key];
         $promo_trial_detail['jumlah'] = $input_var['jumlah'][$key];
-        $this->ppnd->store($promo_trial_detail);
+        $this->ptd->store($promo_trial_detail);
       }
       
       $promo_trial_status['id_promo'] = $input_var['id'];
       $promo_trial_status['no_promo'] = $input_var['no_promo'];
       $promo_trial_status['status'] = $status;
       $promo_trial_status['tanggal'] = date('Y-m-d H:i:s');
-      $this->ppns->store($promo_trial_status);
+      $this->pts->store($promo_trial_status);
 
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
@@ -80,7 +82,7 @@ class C_Promo_Trial extends CI_Controller {
       }
     }
    
-   redirect('/stock-product-nucleus'); 
+   redirect('/master-promo'); 
   }
 
 }

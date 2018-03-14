@@ -13,7 +13,7 @@ class Promo_Trial extends CI_Model {
     $this->db->from('promo_trial a');
     $this->db->join('detailer b', 'a.id_detailer = b.id');
     $this->db->join('v_user c', 'a.id_customer = c.id');
-    $this->db->where(array('hapus ='=> null,'status =' => "'$where'"));
+    $this->db->where(array('a.status =' => "$where"));
     $result = $this->db->get();
     if (!$result) {
       $ret_val = array(

@@ -210,4 +210,8 @@ $autoload['model'] = array(
   'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus' => 'ppn', 
   'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus_Detail' => 'ppnd', 
   'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus_Status' => 'ppns',
+
+  'transaction/promo-trial/Promo_Trial' => 'pt',
+  'transaction/promo-trial/Promo_Trial_Detail' => 'ptd',
+  'transaction/promo-trial/Promo_Trial_Status' => 'pts',
 );
