@@ -29,6 +29,7 @@ class C_Stock_Product_Nucleus extends CI_Controller {
 
   public function store($operation = null)
   {
+    $this->db->trans_begin();
     if ($operation == 'edit') {
       # code...
     } elseif ($operation == 'delete') {
