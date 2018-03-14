@@ -45,7 +45,6 @@ class C_Stock_Product_Nucleus extends CI_Controller {
     $pmh['status'] = $status;
     $this->ppn->store($pmh);
 
-// repopulate and store data permohonan
     foreach ($input_var['id_produk'] as $key => $value) {
       $pmh_detail['id_permohonan'] = $input_var['id'];
       $pmh_detail['id_produk'] = $value;
@@ -58,9 +57,6 @@ class C_Stock_Product_Nucleus extends CI_Controller {
     $pmh_status['status'] = $status;
     
     $this->ppns->store($pmh_status);
-
-// var_dump($input_var);
-// die();
 
     if ($this->db->trans_status() === FALSE) {
       $this->db->trans_rollback();

@@ -28,14 +28,24 @@ class Produk extends CI_Model
         }
         return $ret_val;
     }
-
-
-
-
-
-
-
-
+    public function get_produk_harga($value='')
+    {
+        $this->db->select($column);
+        $this->db->where('hapus', null);
+        $result = $this->db->get('v_produk_harga');
+        if (!$result) {
+            $ret_val = array(
+                'status' => 'error',
+                'data'   => $this->db->error(),
+            );
+        } else {
+            $ret_val = array(
+                'status' => 'success',
+                'data'   => $result,
+            );
+        }
+        return $ret_val;
+    }
     public function store($data = array())
     {
         $query = $this->db->set($data)->get_compiled_insert('produk');

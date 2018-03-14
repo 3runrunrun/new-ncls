@@ -9,8 +9,11 @@ class Aset extends CI_Model
     public function get_data($column = '*')
     {
         $this->db->select($column);
-        $this->db->where('hapus', null);
-        $result = $this->db->get('aset');
+        $this->db->from('aset a');
+        $this->db->join('aset_penyusutan b', 'a.id = b.id_aset');
+        $this->db->where('a.tahun', $this->session->userdata('tahun'));
+        $this->db->where('a.hapus', null);
+        $result = $this->db->get();
         if (!$result) {
             $ret_val = array(
                 'status' => 'error',

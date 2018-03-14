@@ -52,6 +52,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['login'] = 'Home/login';
+$route['auth'] = 'Home/auth';
 
 /**
 |
@@ -75,21 +77,39 @@ $route['store-operasional/(:any)'] = 'master/C_Operasional/store/$1';
 
 // aset
 $route['master-aset'] = 'master/C_Aset/index';
-$route['master-produk'] = 'master/C_Produk/index';
-$route['store-produk/(:any)'] = 'master/C_Produk/store/$1';
+$route['store-aset'] = 'master/C_Aset/store';
 $route['store-aset/(:any)'] = 'master/C_Aset/store/$1';
+
+// produk
+$route['master-product'] = 'master/C_Produk/index';
+$route['store-product'] = 'master/C_Produk/store';
+$route['store-product/(:any)'] = 'master/C_Produk/store/$1';
+
+// outlet
 $route['master-outlet'] = 'master/C_Outlet/index';
+$route['store-outlet'] = 'master/C_Outlet/store';
 $route['store-outlet/(:any)'] = 'master/C_Outlet/store/$1';
+
+// customer
 $route['master-customer'] = 'master/C_Customer/index';
+$route['store-customer'] = 'master/C_Customer/store';
 $route['store-customer/(:any)'] = 'master/C_Customer/store/$1';
+
+// customer non
+$route['master-customer-non'] = $route['master-outlet'];
 
 // distributor
 $route['master-distributor'] = 'master/C_Distributor/index';
 $route['store-distributor'] = 'master/C_Distributor/store';
 $route['store-distributor/(:any)'] = 'master/C_Distributor/store/$1';
+
+// subdist
 $route['master-subdistributor'] = 'master/C_Subdistributor/index';
+$route['store-subdistributor'] = 'master/C_Subdistributor/storeSubdist';
 $route['store-subdistributor/(:any)'] = 'master/C_Subdistributor/storeSubdist/$1';
+$route['store-subdistributorEkstern'] = 'master/C_Subdistributor/storeSubdistEkstern';
 $route['store-subdistributorEkstern/(:any)'] = 'master/C_Subdistributor/storeSubdistEkstern/$1';
+$route['store-subdistributorIntern'] = 'master/C_Subdistributor/storeSubdistIntern';
 $route['store-subdistributorIntern/(:any)'] = 'master/C_Subdistributor/storeSubdistIntern/$1';
 
 // cogm
@@ -97,7 +117,22 @@ $route['master-cogm'] = 'master/C_Cogm/index';
 $route['store-cogm'] = 'master/C_Cogm/store';
 $route['store-cogm/(:any)'] = 'master/C_Cogm/store/$1';
 
+/**
+|
+| Transaction 
+|
+ */
+// subdist
+$route['subdist'] = 'transaction/C_Subdist/index';
+$route['detail-subdist/(:any)'] = 'transaction/C_Subdist/show/$1';
 
+// ineks
+$route['prospek-ineks'] = 'transaction/C_Pros_Inten_Eksten/index';
+$route['store-eksten'] = 'transaction/C_Pros_Inten_Eksten/store_eksten';
+$route['store-eksten/(:any)'] = 'transaction/C_Pros_Inten_Eksten/store_eksten/$1';
+
+$route['store-intens'] = 'transaction/C_Pros_Inten_Eksten/store_intens';
+$route['store-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/store_intens/$1';
 
 /**
 |

@@ -145,21 +145,21 @@ $autoload['language'] = array();
 $autoload['model'] = array(
   // core
   'core/Master_Jabatan',
+  'master/Master_Jenis_Produk',
+  'master/Master_Distributor',
+  'master/Master_Cogm',
   'core/User_Account',
    
+  // master
   'master/Area',
   'master/Distributor',
-  'master/Master_Distributor',
   'master/Cogm',
-  'master/Master_Cogm',
-  
   'master/Operasional',
   'master/Subdist_distributor',
-
-  // report
   'master/Produk',
   'master/Outlet',
   'master/Aset',
+  'master/Aset_Penyusutan',
   'master/Customer',
   'master/Detailer',
   'master/Detailer_Keluarga',
@@ -167,14 +167,11 @@ $autoload['model'] = array(
   'master/Detailer_Fieldforce',
   'master/Detailer_Gaji',
   'master/Subdist',
-
   'master/Produk_Harga',
   'master/Produk_Jenis',
-  'master/Master_Jenis_Produk',
 
-  //aset
-  'aset/Aset',
-  'aset/Aset_Penyusutan',
+  // master - view
+  'master/User',
 
   // report
   'report/sales/Sales_Distributor' => 'salo',
