@@ -9,7 +9,7 @@ class C_Entry_Breakdown extends CI_Controller {
     error_reporting(0);
   }
 
-  public function index()
+  public function index() //id = slc
   {
     # code...
   }
@@ -26,7 +26,43 @@ class C_Entry_Breakdown extends CI_Controller {
 
   public function store($operation = null)
   {
-    # code...
+    $this->db->trans_begin();
+    if ($operation == 'edit') {
+      # code...
+    } elseif ($operation == 'delete') {
+      # code...
+    } else {
+      # code...
+      $input_var = $this->input->post();
+      $input_var['id'] = $this->nsu->letter_number_generator('slc');
+      $input_var['tahun'] = date('Y');
+
+      $slc = array();
+      $slc_detail = array();
+
+      $slc['id'] = $input_var['id'];
+      $slc['tahun'] = $input_var['tahun'];
+      $slc['tanggal'] = $input_var['tanggal'];
+      $slc['id_wpr'] = $input_var['id_wpr'];
+      $this->salcust->store($slc);
+      
+      foreach ($input_var['id_produk'] as $key => $value) {
+        $slc_detail['id_sc'] = $input_var['id'];
+        $slc_detail['id_produk'] = $input_var['id_produk'][$key];
+        $slc_detail['jumlah'] = $input_var['jumlah'][$key];
+        $this->salcustd->store($slc_detail);
+      }
+
+      if ($this->db->trans_status() === FALSE) {
+        $this->db->trans_rollback();
+        $this->session->set_flashdata('error_msg', 'Penambahan data promo trial <strong>gagal</strong>.');
+      } else {
+        $this->db->trans_commit();
+        $this->session->set_flashdata('success_msg', 'Data promo trial <strong>berhasil</strong> disimpan.');
+      }
+    }
+   
+   redirect('/master-promo'); 
   }
 
 }
