@@ -138,9 +138,9 @@
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/sales-distributor" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Data Sales Distributor dan Jenis Product (all area per year)</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/stock-produk-nucleus" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Data Stock Product (Nucleus)</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/stock-product-nucleus" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Data Stock Product (Nucleus)</a>
             </li>
-            <li data-menu=""><a href="<a href="<?php echo site_url() ?>/stock-produk-distributor" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Data Stock Product (Distributor)</a>
+            <li data-menu=""><a href="<?php echo site_url(); ?>/stock-product-distributor" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Data Stock Product (Distributor)</a>
             </li>
             <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-table"></i>Entry Breakdown Analisis Sales</a>
               <ul class="dropdown-menu">

@@ -6,6 +6,9 @@
       font-family: arial;
       font-size: 10pt;
   }
+  table{
+    font-size: 10pt;
+  }
   .tengah{
    position:absolute;
    margin-left:auto;
@@ -39,7 +42,7 @@
            <tr>
                <td>No. Promo</td>
                <td>:</td>
-               <td><?php echo str_replace('-', '/', $value->no_promo); ?></td>
+               <td><?php echo str_replace('-', '/', strtoupper($value->no_promo)); ?></td>
            </tr>
            <tr>
             <td>Nama Detailer</td>
@@ -61,11 +64,14 @@
 
        <table style="border: 1px; width: 100%; margin-top:20px;" border="1" cellspacing="0">
            <tr>
+               <th>No</th>
                <th>Produk</th>
                <th>Jumlah</th>
            </tr>
+           <?php $no = 0; ?>
            <?php foreach ($produk['data']->result() as $value): ?>
             <tr>
+                <td><center><?php echo $no += 1; ?></center></td>
                 <td><center><?php echo ucwords($value->nama); ?></center></td>
                 <td><center><?php echo $value->jumlah; ?></center></td>
             </tr>

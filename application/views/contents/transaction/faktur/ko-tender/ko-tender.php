@@ -37,7 +37,7 @@
         <div class="col-xs-12">
           <div class="card border-top-red">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Faktur KO General</h4>
+              <h4 class="card-title" id="horz-layout-basic">Faktur KO Tender</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
@@ -47,6 +47,10 @@
                       <div class="col-md-6 col-xs-12">
                         <h5 class="form-section">1. Identitas Faktur</h5>
                         <div class="form-group row">
+                          <div class="col-md-6 col-xs-12">
+                            <label class="label-control">SP</label>
+                            <input type="text" name="sp" class="form-control border-primary" required>
+                          </div>
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">No. Faktur</label><br />
                             <span class="tag tag-success tag-lg">faktur</span>
