@@ -18,6 +18,7 @@
           <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="fa fa-user-circle"></i></a></li>
         </ul>
       </div>
+      <?php var_dump($this->session->userdata()); ?>
       <div class="navbar-container content container-fluid">
         <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
           <ul class="nav navbar-nav float-xs-right">
@@ -45,7 +46,7 @@
       <ul id="main-menu-navigation" data-menu="menu-navigation" class="nav navbar-nav">
         <!-- dashboard -->
         <li class="nav-item">
-          <a href="<?php echo site_url() ?>/Admin" class="nav-link"><i class="fa fa-tachometer "></i>Dashboard</a>
+          <a href="<?php echo site_url() ?>/dashboard" class="nav-link"><i class="fa fa-tachometer "></i>Dashboard</a>
         </li>
         <!-- dashboard -->
 

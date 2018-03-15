@@ -49,11 +49,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Home';
+$route['default_controller'] = 'Home/login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['login'] = 'Home/login';
 $route['auth'] = 'Home/auth';
+
+$route['dashboard'] = 'Home/index';
 
 /**
 |
@@ -138,12 +140,16 @@ $route['store-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/store_intens/$1
 $route['promo-trial'] = 'transaction/C_Promo_Trial/index';
 $route['store-promo'] = 'transaction/C_Promo_Trial/store';
 $route['store-promo/(:any)'] = 'transaction/C_Promo_Trial/store/$1';
+$route['print-promo/(:any)'] = 'transaction/C_Promo_Trial/print/$1';
 $route['detail-promo/(:any)'] = 'transaction/C_Promo_Trial/show/$1';
 $route['detail-promo/(:any)/(:any)'] = 'transaction/C_Promo_Trial/show/$1/$2';
 
 $route['wpr'] = 'transaction/C_WPR/index';
 $route['store-wpr'] = 'transaction/C_WPR/store';
 $route['store-wpr/(:any)'] = 'transaction/C_WPR/store/$1';
+$route['print-wpr/(:any)'] = 'transaction/C_WPR/print/$1';
+$route['detail-wpr/(:any)'] = 'transaction/C_WPR/show/$1';
+$route['detail-wpr/(:any)/(:any)'] = 'transaction/C_WPR/show/$1/$2';
 
 $route['master-general'] = 'transaction/C_General/index';
 $route['store-general/(:any)'] = 'transaction/C_General/store/$1';

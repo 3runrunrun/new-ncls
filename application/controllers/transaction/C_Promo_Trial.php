@@ -122,5 +122,9 @@ class C_Promo_Trial extends CI_Controller {
     $val['tanggal'] = date('Y-m-d H:i:s');
     $this->pts->store($val);
   }
-
+  
+  public function print($id)
+  {
+    echo cetak;
+  }
 }

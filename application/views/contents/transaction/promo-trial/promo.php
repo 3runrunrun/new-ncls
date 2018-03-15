@@ -65,9 +65,10 @@
                         <td>
                           <div class="btn-group-vertical">
                             <?php if ($value->status != 'approved'): ?>
-                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->no_promo; ?>/approve" class="btn btn-warning">Approve</a>
+                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->id; ?>/approve" class="btn btn-warning">Approve</a>
                             <?php endif; ?>
-                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->no_promo; ?>" class="btn btn-info">Detail</a>
+                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->id; ?>" class="btn btn-info">Detail</a>
+                            <a href="<?php echo site_url(); ?>/print-promo/<?php echo $value->id; ?>" class="btn btn-primary">Print</a>
                           </div>
                         </td>
                       </tr>  
@@ -115,9 +116,10 @@
                         <td>
                           <div class="btn-group-vertical">
                             <?php if ($value->status != 'approved'): ?>
-                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->no_promo; ?>/approve" class="btn btn-warning">Approve</a>
+                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->id; ?>/approve" class="btn btn-warning">Approve</a>
                             <?php endif; ?>
-                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->no_promo; ?>" class="btn btn-info">Detail</a>
+                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->id; ?>" class="btn btn-info">Detail</a>
+                            <a href="<?php echo site_url(); ?>/print-promo/<?php echo $value->id; ?>" class="btn btn-primary">Print</a>
                           </div>
                         </td>
                       </tr>  

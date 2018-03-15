@@ -31,10 +31,11 @@ class Promo_Trial extends CI_Model {
   }
   public function get_waiting($column = '*')
   {
-    $this->db->select($column);
+    $this->db->select($column, FALSE);
     $this->db->from('promo_trial a');
     $this->db->join('detailer b', 'a.id_detailer = b.id');
     $this->db->join('v_user c', 'a.id_customer = c.id');
+    $this->db->group_by('a.id');
     $this->db->where('a.tahun', $this->session->userdata('tahun'));
     $this->db->where('a.status', 'waiting');
     $this->db->where('a.hapus', null);
@@ -54,10 +55,11 @@ class Promo_Trial extends CI_Model {
   }
   public function get_approved($column = '*')
   {
-    $this->db->select($column);
+    $this->db->select($column, FALSE);
     $this->db->from('promo_trial a');
     $this->db->join('detailer b', 'a.id_detailer = b.id');
     $this->db->join('v_user c', 'a.id_customer = c.id');
+    $this->db->group_by('a.id');
     $this->db->where('a.tahun', $this->session->userdata('tahun'));
     $this->db->where('a.status', 'approved');
     $this->db->where('a.hapus', null);
@@ -81,7 +83,7 @@ class Promo_Trial extends CI_Model {
     $this->db->from('promo_trial a');
     $this->db->join('detailer b', 'a.id_detailer = b.id');
     $this->db->join('v_user c', 'a.id_customer = c.id');
-    $this->db->where('a.no_promo', $id);
+    $this->db->where('a.id', $id);
     $this->db->where('a.hapus', null);
     $result = $this->db->get();
     if (!$result) {

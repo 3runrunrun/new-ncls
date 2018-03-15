@@ -28,7 +28,7 @@ class Home extends CI_Controller {
   {
     $input_var = $this->input->post();
     $this->session->set_userdata('tahun', $input_var['tahun']);
-    redirect('/');
+    redirect('/dashboard');
   }
 
 }

@@ -38,30 +38,78 @@
         <div class="col-md-6 col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Produk Promo</h4>
+              <h4 class="card-title" id="horz-layout-basic">Weekly Promotion Report</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
-                <div class="table-responsive height-350">
-                  <table class="table table-hover table-xs border-top-blue display nowrap" id="simple-table">
+                <div class="table-responsive">
+                  <table class="table table-hover table-xs display nowrap">
+                    <tbody>
+                      <?php foreach ($detail['data']->result() as $value): ?>
+                      <tr>
+                        <th width="10%">Nama</th>
+                        <th width="3%">:</th>
+                        <td><?php echo $value->detailer; ?></td>
+                      </tr>
+                      <tr>
+                        <th width="10%">Area</th>
+                        <th width="3%">:</th>
+                        <td>(<?php echo $value->alias_area; ?>) <?php echo $value->nama_area; ?></td>
+                      </tr>
+                      <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                  <div class="card-text mt-2">
+                    <p>Berikut merupakan daftar permintaan dana promosi yang diajukan:</p>
+                  </div>
+                  <table class="table table-hover table-xs border-top-blue display nowrap">
                     <thead>
                       <tr>
-                        <th>Kode</th>
-                        <th>Nama</th>
-                        <th>Jumlah<br />(unit)</th>
+                        <th>No.</th>
+                        <th>Nama Dokter</th>
+                        <th>SPS</th>
+                        <th colspan="2">Periode</th>
+                        <th>Value</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($produk['data']->result() as $value): ?>
+                      <?php foreach ($request['data']->result() as $value): ?>
                       <tr>
-                        <td><?php echo strtoupper($value->id_produk); ?></td>
-                        <td><?php echo strtoupper($value->nama); ?></td>
-                        <td><?php echo $value->jumlah; ?></td>
+                        <td><?php echo $value->nama_user; ?></td>
+                        <td><?php echo $value->nama_user; ?></td>
+                        <td><?php echo $value->spesialis; ?></td>
+                        <td><?php echo $value->dari; ?></td>
+                        <td><?php echo $value->sampai; ?></td>
+                        <td><?php echo $value->dana; ?></td>
                       </tr>
-                      <?php endforeach ?>
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                 </div>
+              </div>
+              <div class="card-block">
+                <form class="form">
+                  <?php foreach ($request['data']->result() as $value): ?>
+                  <div class="form-body">
+                    <div class="form-group row">
+                      <div class="col-md-6 col-xs-12">
+                        <label class="label-control">Bank</label>
+                        <input type="text" class="form-control border-primary" value="<?php echo $value->bank; ?>" disabled>
+                      </div>
+                      <div class="col-md-6 col-xs-12">
+                        <label class="label-control">No. Rekening</label>
+                        <input type="text" class="form-control border-primary" value="<?php echo $value->norek; ?>" disabled>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-md-6 col-xs-12">
+                        <label class="label-control">Atas Nama</label>
+                        <input type="text" class="form-control border-primary" value="<?php echo $value->atas_nama; ?>" disabled>
+                      </div>
+                    </div>
+                  </div>
+                  <?php endforeach; ?>
+                </form>
               </div>
             </div>
           </div>
@@ -77,23 +125,22 @@
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir verifikasi promo trial</p>
+                  <p>Formulir verifikasi WPR</p>
                 </div>
-                <form action="<?php echo site_url(); ?>/store-promo/approve" class="form" method="POST" role="form">
+                <form action="<?php echo site_url(); ?>/store-wpr/approve" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
                       <?php foreach ($detail['data']->result() as $value): ?>
                       <div class="col-xs-12">
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
-                            <label class="label-control">No. Promo</label><br />
+                            <label class="label-control">No. WPR</label><br />
                             <?php $status = $value->status; ?>
                             <?php if ($status != 'approved'): ?>
-                              <?php $this->session->set_userdata('no_promo', $value->no_promo); ?>
-                              <?php $this->session->set_userdata('id_promo', $value->id); ?>
+                            <?php $this->session->set_userdata('id_wpr', $value->id); ?>
                             <?php endif; ?>
-                            <?php $no_promo = str_replace('-', '/', $value->no_promo); ?>
-                            <span class="tag tag-xl tag-success"><?php echo strtoupper($no_promo); ?></span>
+                            <?php $no_wpr = str_replace('-', '/', $value->no_wpr); ?>
+                            <span class="tag tag-xl tag-success"><?php echo strtoupper($no_wpr); ?></span>
                           </div>
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Status</label><br />
@@ -101,21 +148,18 @@
                           </div>
                         </div>
                         <!-- /no-promo -->
-                        <div class="form-group">
-                          <label class="label-control">Detailer</label><br />
-                          <input type="text" class="form-control border-primary" value="<?php echo $value->nama_detailer; ?>" disabled>
+                        <div class="form-group row">
+                          <div class="col-md-6 col-xs-12">
+                            <label class="label-control">Supervisor</label>
+                            <input type="text" class="form-control border-primary" value="<?php echo $value->supervisor; ?>" disabled>
+                          </div>
+                          <div class="col-md-6 col-xs-12">
+                            <label class="label-control">Direktur</label>
+                            <input type="text" class="form-control border-primary" value="<?php echo $value->direktur; ?>" disabled>
+                            <input type="hidden" name="id_approver" value="<?php echo $value->id_approver; ?>">
+                          </div>
                         </div>
-                        <!-- /detailer -->
-                        <div class="form-group">
-                          <label class="label-control">Customer</label><br />
-                          <input type="text" class="form-control border-primary" value="<?php echo $value->nama_customer; ?>" disabled>
-                        </div>
-                        <!-- /customer -->
-                        <div class="form-group">
-                          <label class="label-control">Keterangan</label><br />
-                          <textarea rows="3" class="form-control border-primary" disabled><?php echo $value->keterangan; ?></textarea>
-                        </div>
-                        <!-- /keterangan -->
+                        <!-- /spv /direktur -->
                       </div>
                       <?php endforeach; ?>
                       <?php if ($status != 'approved'): ?>                        
@@ -132,7 +176,7 @@
                       <?php endif; ?>
                     </div>
                   </div>
-                  <?php if ($status != 'approved'): ?>                        
+                  <?php if ($status != 'approved'): ?>
                   <div class="form-actions center">
                     <button type="submit" class="btn btn-success">Simpan</button>
                     <button type="reset" class="btn btn-warning">Batal</button>
@@ -149,31 +193,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#simple-table th, #simple-table td').css({
-      'text-align': 'center',
-    });
-    $('#simple-table td').addClass('text-truncate');
-    $('#simple-table td:even').addClass('bg-table-blue');
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#simple-table').DataTable({
-        "paging": false,
-      });
-    $('#simple-table_filter').css({
-      'text-align': 'center',
-    });
-    $('#simple-table_wrapper').children(':first').children(':first').remove();
-    $('#simple-table_filter').parent().addClass('col-xs-12').removeClass('col-md-6');
-    $('#simple-table_filter > label > input').addClass('input-md').removeClass('input-sm').attr({
-        placeholder: 'Keyword',
-      });
-
-    $('#simple-table_wrapper').children(':last').remove();
-  });
-</script>
