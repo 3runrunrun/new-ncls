@@ -125,6 +125,10 @@ class C_Promo_Trial extends CI_Controller {
   
   public function print($id)
   {
-    echo cetak;
+    $data['produk'] = $this->ptd->show($id);
+    $data['detail'] = $this->pt->show($id, 'a.id, a.no_promo, b.nama as nama_detailer, c.nama as nama_customer, a.keterangan, a.status, c.nama_area');
+
+    // print_r($data['detail']->result());
+    $this->load->view('contents/transaction/promo-trial/print', $data);
   }
 }
