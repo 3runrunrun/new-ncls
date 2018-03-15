@@ -6,6 +6,7 @@
   <!-- build:js app-assets/js/vendors.min.js-->
   <script src="<?php echo base_url() ?>assets/js/vendors/ui/tether.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="<?php echo base_url(); ?>assets/js/vendors/datatables/ladda.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url() ?>assets/js/vendors/ui/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url() ?>assets/js/vendors/ui/unison.min.js" type="text/javascript"></script>
   <script src="<?php echo base_url() ?>assets/js/vendors/ui/blockUI.min.js" type="text/javascript"></script>

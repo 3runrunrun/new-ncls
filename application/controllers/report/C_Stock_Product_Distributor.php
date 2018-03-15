@@ -11,7 +11,18 @@ class C_Stock_Product_Distributor extends CI_Controller {
 
   public function index()
   {
-    # code...
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/stok-distributor/stok-produk');
+    $this->load->view('footers/footer-js-form-simple-table');
+  }
+
+  public function show($id, $approve = null)
+  {
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/stok-distributor/detail-produk');
+    $this->load->view('footers/footer-js-form-simple-table');
   }
 
   public function store($operation = null)

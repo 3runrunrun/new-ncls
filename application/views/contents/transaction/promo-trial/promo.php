@@ -68,7 +68,7 @@
                             <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->id; ?>/approve" class="btn btn-warning">Approve</a>
                             <?php endif; ?>
                             <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->id; ?>" class="btn btn-info">Detail</a>
-                            <a href="<?php echo site_url(); ?>/print-promo/<?php echo $value->id; ?>" class="btn btn-primary">Print</a>
+                            <a href="<?php echo site_url(); ?>/print-promo/<?php echo $value->id; ?>" class="btn btn-primary" target="_blank">Print</a>
                           </div>
                         </td>
                       </tr>  
@@ -119,7 +119,7 @@
                             <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->id; ?>/approve" class="btn btn-warning">Approve</a>
                             <?php endif; ?>
                             <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->id; ?>" class="btn btn-info">Detail</a>
-                            <a href="<?php echo site_url(); ?>/print-promo/<?php echo $value->id; ?>" class="btn btn-primary">Print</a>
+                            <a href="<?php echo site_url(); ?>/print-promo/<?php echo $value->id; ?>" class="btn btn-primary" target="_blank">Print</a>
                           </div>
                         </td>
                       </tr>  

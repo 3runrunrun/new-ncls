@@ -6,6 +6,9 @@
     font-family: arial;
     font-size: 10pt;
   }
+  table{
+    font-size: 10pt;
+  }
   .tengah{
    position:absolute;
    margin-left:auto;
@@ -62,14 +65,15 @@
     <th colspan="2">Periode</th>
     <th>Value</th>
   </tr>
+  <?php $no = 0; ?>
   <?php foreach ($request['data']->result() as $value): ?>
     <tr>
-      <td><?php echo $value->nama_user; ?></td>
-      <td><?php echo $value->nama_user; ?></td>
-      <td><?php echo $value->spesialis; ?></td>
-      <td><?php echo $value->dari; ?></td>
-      <td><?php echo $value->sampai; ?></td>
-      <td><?php echo $value->dana; ?></td>
+      <td><center><?php echo $no += 1; ?></center></td>
+      <td><center><?php echo $value->nama_user; ?></center></td>
+      <td><center><?php echo $value->spesialis; ?></center></td>
+      <td><center><?php echo $value->dari; ?></center></td>
+      <td><center><?php echo $value->sampai; ?></center></td>
+      <td><center>Rp <?php echo number_format($value->dana, 0, ',','.'); ?></center></td>
     </tr>
   <?php endforeach;?>
 </table>

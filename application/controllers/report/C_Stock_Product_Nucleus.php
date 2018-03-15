@@ -11,19 +11,9 @@ class C_Stock_Product_Nucleus extends CI_Controller {
 
   public function index()
   {
-    // $data['permohonan'] = $this->ppn->get_data('tahun, tanggal, tanggal_target, status');
-    // $row = $data['produk']['data']->num_rows();
-    // $data['id'] = $this->nsu->zerofill_generator(3, $row);
-
-    // if ($data['produk']['status'] == 'error') {
-    //   $this->session->set_flashdata('query_msg', $data['produk']['data']);
-    // }
-
-    // var_dump($data['produk']['data']->result());
-
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
-    // $this->load->view('contents/master/produk', $data);
+    $this->load->view('contents/report/stok-nucleus/stok-produk');
     $this->load->view('footers/footer-js-form-simple-table');
   }
 
