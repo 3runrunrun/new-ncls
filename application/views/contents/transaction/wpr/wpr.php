@@ -54,20 +54,21 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($promo_trial_appr['data']->result() as $value): ?>
+                      <?php foreach ($appr['data']->result() as $value): ?>
                       <tr>
-                        <?php $no_promo = str_replace('-', '/', $value->no_promo); ?>
-                        <td><?php echo strtoupper($no_promo); ?></td>
+                        <?php $no_wpr = str_replace('-', '/', $value->no_wpr); ?>
+                        <td><?php echo strtoupper($no_wpr); ?></td>
                         <td>(<?php echo $value->alias_area; ?>) - <?php echo $value->nama_area; ?></td>
                         <td><?php echo $value->detailer; ?></td>
-                        <td><?php echo $value->detailer; ?></td>
+                        <td><?php echo number_format($value->dana, 0, ',', '.'); ?></td>
                         <td><?php echo $value->status; ?></td>
                         <td>
                           <div class="btn-group-vertical">
                             <?php if ($value->status != 'approved'): ?>
-                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->no_promo; ?>/approve" class="btn btn-warning">Approve</a>
+                            <a href="<?php echo site_url(); ?>/detail-wpr/<?php echo $value->id; ?>/approve" class="btn btn-warning">Approve</a>
                             <?php endif; ?>
-                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->no_promo; ?>" class="btn btn-info">Detail</a>
+                            <a href="<?php echo site_url(); ?>/detail-wpr/<?php echo $value->id; ?>" class="btn btn-info">Detail</a>
+                            <a href="<?php echo site_url(); ?>/print-wpr/<?php echo $value->id; ?>" class="btn btn-primary">Print</a>
                           </div>
                         </td>
                       </tr>  
@@ -104,20 +105,21 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($promo_trial_wait['data']->result() as $value): ?>
+                      <?php foreach ($wait['data']->result() as $value): ?>
                       <tr>
-                        <?php $no_promo = str_replace('-', '/', $value->no_promo); ?>
-                        <td><?php echo strtoupper($no_promo); ?></td>
+                        <?php $no_wpr = str_replace('-', '/', $value->no_wpr); ?>
+                        <td><?php echo strtoupper($no_wpr); ?></td>
                         <td>(<?php echo $value->alias_area; ?>) - <?php echo $value->nama_area; ?></td>
                         <td><?php echo $value->detailer; ?></td>
-                        <td><?php echo $value->detailer; ?></td>
+                        <td><?php echo number_format($value->dana, 0, ',', '.'); ?></td>
                         <td><?php echo $value->status; ?></td>
                         <td>
                           <div class="btn-group-vertical">
                             <?php if ($value->status != 'approved'): ?>
-                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->no_promo; ?>/approve" class="btn btn-warning">Approve</a>
+                            <a href="<?php echo site_url(); ?>/detail-wpr/<?php echo $value->id; ?>/approve" class="btn btn-warning">Approve</a>
                             <?php endif; ?>
-                            <a href="<?php echo site_url(); ?>/detail-promo/<?php echo $value->no_promo; ?>" class="btn btn-info">Detail</a>
+                            <a href="<?php echo site_url(); ?>/detail-wpr/<?php echo $value->id; ?>" class="btn btn-info">Detail</a>
+                            <a href="<?php echo site_url(); ?>/print-wpr/<?php echo $value->id; ?>" class="btn btn-primary">Print</a>
                           </div>
                         </td>
                       </tr>  
@@ -148,7 +150,7 @@
                   <div class="form-body">
                     <div class="row">
                       <div class="col-md-6 col-xs-12">
-                        <h5 class="form-section">Infomasi WPR</h5>
+                        <h5 class="form-section">1. Infomasi WPR</h5>
                         <div class="form-group row">
                           <div class="col-sm-3 col-xs-12">
                             <label class="label-control">Kode</label><br />
@@ -196,7 +198,7 @@
                           </div>
                         </div>
                         <!-- /id-detailer /id-customer -->
-                        <h5 class="form-section">Approver</h5>
+                        <h5 class="form-section">2. Approver</h5>
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
                             <div class="form-group">
@@ -232,7 +234,7 @@
                         </div>
                       </div>
                       <div class="col-md-6 col-xs-12">
-                        <h5 class="form-section">Bank &amp; Rekening</h5>
+                        <h5 class="form-section">3. Bank &amp; Rekening</h5>
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Bank</label>
@@ -259,7 +261,7 @@
                           </div>
                         </div>
                         <!-- /bank /norek /atas-nama -->
-                        <h5 class="form-section">Periode</h5>
+                        <h5 class="form-section">4. Periode</h5>
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Dari</label>

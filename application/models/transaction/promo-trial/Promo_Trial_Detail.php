@@ -7,15 +7,10 @@ class Promo_Trial_Detail extends CI_Model {
     parent::__construct();
     date_default_timezone_set('Asia/Jakarta');
   }
-  public function store($data = array())
-  {
-    $query = $this->db->set($data)->get_compiled_insert('promo_trial_detail');
-    $this->db->query($query);
-  }
-  public function show($no_promo, $column = '*')
+  public function show($id, $column = '*')
   {
     $this->db->select($column);
-    $this->db->where('no_promo', $no_promo);
+    $this->db->where('id_promo', $id);
     $this->db->where('hapus', null);
     $result = $this->db->get('v_promo_detail');
     if (!$result) {
@@ -30,5 +25,10 @@ class Promo_Trial_Detail extends CI_Model {
       );
     }
     return $ret_val;
+  }
+  public function store($data = array())
+  {
+    $query = $this->db->set($data)->get_compiled_insert('promo_trial_detail');
+    $this->db->query($query);
   }
 }
