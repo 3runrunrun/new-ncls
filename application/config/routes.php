@@ -137,6 +137,10 @@ $route['detailer-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/show_intens/
 $route['store-intens'] = 'transaction/C_Pros_Inten_Eksten/store_intens';
 $route['store-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/store_intens/$1';
 
+// fixed cost
+$route['fixed-cost'] = 'transaction/C_Fixed_Cost_Ratio/index';
+
+// promo trial
 $route['promo-trial'] = 'transaction/C_Promo_Trial/index';
 $route['store-promo'] = 'transaction/C_Promo_Trial/store';
 $route['store-promo/(:any)'] = 'transaction/C_Promo_Trial/store/$1';
@@ -144,6 +148,7 @@ $route['print-promo/(:any)'] = 'transaction/C_Promo_Trial/print/$1';
 $route['detail-promo/(:any)'] = 'transaction/C_Promo_Trial/show/$1';
 $route['detail-promo/(:any)/(:any)'] = 'transaction/C_Promo_Trial/show/$1/$2';
 
+//  wpr
 $route['wpr'] = 'transaction/C_WPR/index';
 $route['store-wpr'] = 'transaction/C_WPR/store';
 $route['store-wpr/(:any)'] = 'transaction/C_WPR/store/$1';
@@ -151,10 +156,12 @@ $route['print-wpr/(:any)'] = 'transaction/C_WPR/print/$1';
 $route['detail-wpr/(:any)'] = 'transaction/C_WPR/show/$1';
 $route['detail-wpr/(:any)/(:any)'] = 'transaction/C_WPR/show/$1/$2';
 
-$route['master-general'] = 'transaction/C_General/index';
+// ko
+$route['daftar-faktur'] = 'transaction/C_Data_Faktur/index';
+$route['ko-general'] = 'transaction/C_General/index';
 $route['store-general/(:any)'] = 'transaction/C_General/store/$1';
 
-$route['master-tender'] = 'transaction/C_Tender/index';
+$route['ko-tender'] = 'transaction/C_Tender/index';
 $route['store-tender/(:any)'] = 'transaction/C_Tender/store/$1';
 
 /**

@@ -75,8 +75,6 @@
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/master-product" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-medkit"></i>Master Produk</a>
             </li>
-            <!-- <li data-menu=""><a href="<?php echo site_url() ?>/master-stok" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-tablet"></i>Master Stok</a>
-            </li> -->
           </ul>
         </li>
         <!-- /master -->
@@ -116,9 +114,9 @@
               <ul class="dropdown-menu">
                 <li data-menu="" ><a href="<?php echo site_url(); ?>/daftar-faktur" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Daftar Faktur</a>
                 </li>
-                <li data-menu="" ><a href="<?php echo site_url(); ?>/faktur-diskon-general" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>General</a>
+                <li data-menu="" ><a href="<?php echo site_url(); ?>/ko-general" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>General</a>
                 </li>
-                <li data-menu="" ><a href="<?php echo site_url(); ?>/faktur-diskon-tender" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Tender</a>
+                <li data-menu="" ><a href="<?php echo site_url(); ?>/ko-tender" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Tender</a>
                 </li>
               </ul>
             </li>

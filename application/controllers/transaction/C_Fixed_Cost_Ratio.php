@@ -11,7 +11,10 @@ class C_Fixed_Cost_Ratio extends CI_Controller {
 
   public function index()
   {
-    
-  }  
+    $this->load->view('heads/head-simple-form-table-chart');
+    $this->load->view('navbar');
+    $this->load->view('contents/transaction/fixed-cost/fixed-cost');
+    $this->load->view('footers/footer-js-simple-form-table-chart');
+  }
 
 }

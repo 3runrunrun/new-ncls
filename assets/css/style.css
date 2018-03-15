@@ -82,3 +82,20 @@ a {
 .without-after:after{
   content: none;
 }
+
+/*CSS for table*/
+#report-table-2 th, .rt-data{
+  text-align: center;
+  vertical-align: top;
+}
+#report-table-2 .rt-money{
+  text-align: right;
+}
+
+#total-table th{
+  text-align: center;
+  font-size: 1.3em;
+}
+#total-table .tt-money{
+  text-align: right;
+}
