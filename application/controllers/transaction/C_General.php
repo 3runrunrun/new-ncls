@@ -9,9 +9,12 @@ class C_General extends CI_Controller {
     error_reporting(0);
   }
 
-  public function index() //zerofill_generator('4', row).'HL'.date('d').date('Y')
+  public function index()
   {
-    
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/transaction/faktur/ko-general/ko-general');
+    $this->load->view('footers/footer-js-form-simple-table');
   }
 
   public function store($operation = null)
