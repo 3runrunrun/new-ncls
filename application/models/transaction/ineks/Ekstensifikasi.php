@@ -31,9 +31,15 @@ class Ekstensifikasi extends CI_Model {
   public function get_target_eksten($column = '*')
   {
     $this->db->select($column);
-    $this->db->where('tahun', $this->session->userdata('tahun'));
-    $this->db->where('hapus', null);
-    $result = $this->db->get('v_eksten');
+    $this->db->from('v_target_detailer a');
+    $this->db->join('detailer_fieldforce b', 'a.id_detailer = b.id_detailer');
+    $this->db->join('outlet c', 'a.id_outlet = c.id');
+    $this->db->join('v_user d', 'a.id_customer = d.id');
+    $this->db->join('area e', 'b.id_area = e.id');
+    $this->db->join('detailer f', 'a.id_detailer = f.id');
+    $this->db->where('a.tahun', $this->session->userdata('tahun'));
+    $this->db->where('a.hapus', null);
+    $result = $this->db->get();
     if ( ! $result) {
       $ret_val = array(
         'status' => 'error',

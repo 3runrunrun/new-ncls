@@ -177,8 +177,11 @@ $route['store-sales/(:any)'] = 'report/C_Daily_Sales/store/$1';
 $route['sales-distributor'] = 'report/C_Daily_Sales_Distributor/index';
 
 $route['stock-product-nucleus'] = 'report/C_Stock_Product_Nucleus/index';
+$route['detail-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/show/$1';
+$route['detail-product-nucleus/(:any)/(:any)'] = 'report/C_Stock_Product_Nucleus/show/$1/$2';
 $route['store-product-nucleus'] = 'report/C_Stock_Product_Nucleus/store';
 $route['store-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/store/$1';
+$route['print-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/print/$1';
 
 $route['stock-product-distributor'] = 'report/C_Stock_Product_Distributor/index';
 $route['detail-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/show/$1';
