@@ -11,9 +11,25 @@ class C_Stock_Product_Nucleus extends CI_Controller {
 
   public function index()
   {
+    $data['bsn'] = $this->bsn->get_data('a.id_produk, UPPER(b.nama) as nama_produk, UPPER(b.kemasan) as kemasan, a.stok');
+    $data['wait'] = $this->ppn->get_waiting();
+    $data['deliv'] = $this->ppn->get_delivered();
+    $data['produk'] = $this->Produk->get_produk_harga();
+
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
-    $this->load->view('contents/report/stok-nucleus/stok-produk');
+    $this->load->view('contents/report/stok-nucleus/stok-produk', $data);
+    $this->load->view('footers/footer-js-form-simple-table');
+  }
+
+  public function show($id, $approve = null)
+  {
+    $data['produk'] = $this->ppnd->show($id);
+    $data['detail'] = $this->ppn->show($id);
+
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/stok-nucleus/detail-produk', $data);
     $this->load->view('footers/footer-js-form-simple-table');
   }
 
@@ -24,36 +40,32 @@ class C_Stock_Product_Nucleus extends CI_Controller {
       # code...
     } elseif ($operation == 'delete') {
       # code...
+    } elseif ($operation == 'approve') {
+      $input_var = $this->input->post();
+      $input_var['tanggal'] = date('Y-m-d');
+
+      $this->update_pmhd($input_var);
+      $this->save_pmhs($input_var);
+      $this->save_barang_masuk($input_var);
+
+      if ($this->db->trans_status() === FALSE) {
+        $this->db->trans_rollback();
+        $this->session->set_flashdata('error_msg', 'Approval permohonan barang <strong>gagal</strong>.');
+      } else {
+        $this->db->trans_commit();
+        $this->session->set_flashdata('success_msg', 'Approval permohonan barang <strong>berhasil</strong> disimpan.');
+      }
     } else {
-      # code...
+      $status = strtolower('waiting');
       $input_var = $this->input->post();
       $input_var['id'] = $this->nsu->digit_id_generator(4,'pmhn');
       $input_var['tahun'] = date('Y');
+      $input_var['status'] = $status;
 
-      $pmh = array();
-      $pmh_detail = array();
-      $pmh_status = array();
-      $status = strtolower('waiting');
-
-      $pmh['id'] = $input_var['id'];
-      $pmh['tahun'] = $input_var['tahun'];
-      $pmh['tanggal'] = $input_var['tanggal'];
-      $pmh['tanggal_target'] = $input_var['tanggal_target'];
-      $pmh['status'] = $status;
-      $this->ppn->store($pmh);
+      $this->save_pmh($input_var);
+      $this->save_pmhd($input_var);
+      $this->save_pmhs($input_var);
       
-      foreach ($input_var['id_produk'] as $key => $value) {
-        $pmh_detail['id_permohonan'] = $input_var['id'];
-        $pmh_detail['id_produk'] = $value;
-        $pmh_detail['jumlah'] = $input_var['jumlah'][$key];
-        $this->ppnd->store($pmh_detail);
-      }
-      
-      $pmh_status['id_permohonan'] = $input_var['id'];
-      $pmh_status['tanggal'] = date('Y-m-d');
-      $pmh_status['status'] = $status;
-      $this->ppns->store($pmh_status);
-
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
         $this->session->set_flashdata('error_msg', 'Penambahan data permohonan barang <strong>gagal</strong>.');
@@ -64,6 +76,71 @@ class C_Stock_Product_Nucleus extends CI_Controller {
     }
    
    redirect('/stock-product-nucleus'); 
+  }
+
+  public function print($id)
+  {
+    $data['produk'] = $this->ppnd->show($id);
+    $data['detail'] = $this->ppn->show($id);
+
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/stok-nucleus/detail-produk', $data);
+    $this->load->view('footers/footer-js-form-simple-table');
+  }
+
+  /**
+   |
+   | Private method
+   |
+   */
+
+  private function save_pmh($data = array())
+  {
+    $val['id'] = $data['id'];
+    $val['tahun'] = $data['tahun'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['tanggal_target'] = $data['tanggal_target'];
+    $val['status'] = $data['status'];
+    $this->ppn->store($val);
+  }
+
+  private function save_pmhd($data = array())
+  {
+    foreach ($data['id_produk'] as $key => $value) {
+      $val['id_permohonan'] = $data['id'];
+      $val['id_produk'] = $value;
+      $val['jumlah'] = $data['jumlah'][$key];
+      $this->ppnd->store($val);
+    }
+  }
+
+  private function save_pmhs($data = array())
+  {
+    $val['id_permohonan'] = $data['id'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['status'] = $data['status'];
+    $this->ppns->store($val);
+  }
+
+  private function update_pmhd($data = array())
+  {
+    foreach ($data['id_produk'] as $key => $value) {
+      $val['batch_number'] = $data['batch_number'][$key];
+      $val['expired'] = $data['expired'][$key];
+      $this->ppnd->update($data['id'], $value, $val);
+    }
+  }
+
+  private function save_barang_masuk($data = array())
+  {
+    foreach ($data['id_produk'] as $key => $value) {
+      $val['id_produk'] = $value;
+      $val['tahun'] = date('Y');
+      $val['tanggal'] = $data['tanggal'];
+      $val['jumlah'] = $data['jumlah'][$key];
+      $this->bmn->store($val);
+    }
   }
 
 }

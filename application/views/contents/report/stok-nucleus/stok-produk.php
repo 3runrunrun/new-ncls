@@ -52,7 +52,14 @@
                       </tr>
                     </thead>
                     <tbody>
-
+                      <?php foreach ($bsn['data']->result() as $value): ?>
+                      <tr>
+                        <td><?php echo strtoupper($value->id_produk); ?></td>
+                        <td><?php echo $value->nama_produk; ?></td>
+                        <td><?php echo $value->kemasan; ?></td>
+                        <td><?php echo $value->stok; ?></td>
+                      </tr>
+                      <?php endforeach ?>
                     </tbody>
                   </table>
                 </div>
@@ -84,7 +91,25 @@
                       </tr>
                     </thead>
                     <tbody>
-
+                      <?php foreach ($deliv['data']->result() as $value): ?>
+                      <tr>
+                        <td><?php echo strtoupper($value->id); ?></td>
+                        <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
+                        <?php $tanggal_target = date('d-M-Y', strtotime($value->tanggal_target)); ?>
+                        <td><?php echo $tanggal; ?></td>
+                        <td><?php echo $tanggal_target; ?></td>
+                        <td><?php echo $value->status; ?></td>
+                        <td>
+                          <div class="btn-group-vertical">
+                            <?php if ($value->status !== 'delivered'): ?>
+                            <a href="<?php echo site_url(); ?>/detail-product-nucleus/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
+                            <?php endif; ?>
+                            <a href="<?php echo site_url(); ?>/detail-product-nucleus/<?php echo $value->id; ?>" class="btn btn-info" target="_blank">Detail</a>
+                            <a href="<?php echo site_url(); ?>/detail-product-nucleus/<?php echo $value->id; ?>" class="btn btn-primary" target="_blank">Print</a>
+                          </div>
+                        </td>
+                      </tr>
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                 </div>
@@ -116,7 +141,24 @@
                       </tr>
                     </thead>
                     <tbody>
-
+                      <?php foreach ($wait['data']->result() as $value): ?>
+                      <tr>
+                        <td><?php echo strtoupper($value->id); ?></td>
+                        <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
+                        <?php $tanggal_target = date('d-M-Y', strtotime($value->tanggal_target)); ?>
+                        <td><?php echo $tanggal; ?></td>
+                        <td><?php echo $tanggal_target; ?></td>
+                        <td><?php echo $value->status; ?></td>
+                        <td>
+                          <div class="btn-group-vertical">
+                            <?php if ($value->status !== 'delivered'): ?>
+                            <a href="<?php echo site_url(); ?>/detail-product-nucleus/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
+                            <?php endif; ?>
+                            <a href="<?php echo site_url(); ?>/detail-product-nucleus/<?php echo $value->id; ?>" class="btn btn-info" target="_blank">Detail</a>
+                          </div>
+                        </td>
+                      </tr>
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                 </div>
@@ -139,15 +181,11 @@
                 <div class="card-text">
                   <p>Formulir penyimpanan surat permohonan stok produk Nucleus ke Pabrik baru</p>
                 </div>
-                <form action="<?php echo site_url(); ?>/" class="form" method="POST" role="form">
+                <form action="<?php echo site_url(); ?>/store-product-nucleus" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-md-6 col-xs-12">
                         <h5 class="form-section">1. Identitas Surat Permohonan</h5>
-                        <div class="form-group">
-                          <label class="label-control">Nomor Surat</label><br />
-                          <span class="tag tag-success tag-lg">Surat</span>
-                        </div>
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Tanggal Permohonan</label>
@@ -166,7 +204,13 @@
                             <label class="label-control">Produk</label>
                             <select name="id_produk[]" class="form-control select2" required>
                               <option value="" selected disabled>Pilih produk</option>
-                              <option value=""></option>
+                              <?php if ($produk['data']->num_rows() < 1): ?>
+                              <option value="" disabled>Belum tersedia</option>
+                              <?php else: ?>
+                              <?php foreach ($produk['data']->result() as $value): ?>
+                              <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->nama); ?></option>
+                              <?php endforeach ?>
+                              <?php endif; ?>
                             </select>
                           </div>
                           <div class="col-md-4 col-xs-12">

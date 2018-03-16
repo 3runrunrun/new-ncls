@@ -216,4 +216,8 @@ $autoload['model'] = array(
   'transaction/promo-trial/Promo_Trial' => 'pt',
   'transaction/promo-trial/Promo_Trial_Detail' => 'ptd',
   'transaction/promo-trial/Promo_Trial_Status' => 'pts',
+
+  // report
+  'report/stock-nucleus/Barang_Masuk_Nucleus' => 'bmn',
+  'report/stock-nucleus/Barang_Stok_Nucleus' => 'bsn',
 );
