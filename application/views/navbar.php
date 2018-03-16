@@ -146,16 +146,16 @@
               <ul class="dropdown-menu">
                 <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-table"></i>per Outlet</a>
                   <ul class="dropdown-menu">
-                    <li data-menu="" ><a href="<?php echo site_url() ?>/analisis-sales-general" data-toggle="dropdown" class="dropdown-item">General</a>
+                    <li data-menu="" ><a href="<?php echo site_url() ?>/entry-breakdown-general" data-toggle="dropdown" class="dropdown-item">General</a>
                     </li>
-                    <li data-menu=""><a href="<?php echo site_url() ?>/analisis-sales-general" data-toggle="dropdown" class="dropdown-item">per Produk</a>
+                    <li data-menu=""><a href="<?php echo site_url() ?>/entry-breakdown-product" data-toggle="dropdown" class="dropdown-item">per Produk</a>
                   </ul>
                 </li>
               </ul>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Laporan Pemindahan Sales</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Laporan Actual Sales per Year</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/actual-sales" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Laporan Actual Sales per Year</a>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Reward</a>
             </li>

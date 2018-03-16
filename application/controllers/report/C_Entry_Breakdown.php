@@ -14,14 +14,20 @@ class C_Entry_Breakdown extends CI_Controller {
     # code...
   }
 
-  public function show_general($value='')
+  public function show_general()
   {
-    # code...
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/entry-breakdown/general');
+    $this->load->view('footers/footer-js-form-simple-table');
   }
 
-  public function show_product($value='')
+  public function show_product()
   {
-    # code...
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/entry-breakdown/per-product');
+    $this->load->view('footers/footer-js-form-simple-table');
   }
 
   public function store($operation = null)
