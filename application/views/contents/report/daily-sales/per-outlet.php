@@ -129,6 +129,20 @@
                             <option value="" selected disabled>Pilih distributor / subdistributor</option>
                             <option value=""></option>
                           </select>
+                          <fieldset>
+                            <label class="custom-control custom-radio mt-1">
+                              <input id="radioStacked1" name="dist_subdist" type="radio" class="custom-control-input" value="d" required>
+                              <span class="custom-control-indicator"></span>
+                              <span class="custom-control-description">Distributor</span>
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label class="custom-control custom-radio">
+                              <input id="radioStacked1" name="dist_subdist" type="radio" class="custom-control-input" value="s" required>
+                              <span class="custom-control-indicator"></span>
+                              <span class="custom-control-description">Subdistributor</span>
+                            </label>
+                          </fieldset>
                         </div>
                       </div>
                       <div class="col-md-3 col-xs-12">

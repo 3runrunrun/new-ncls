@@ -105,6 +105,20 @@
                             <option value="" selected disabled>Pilih distributor / subdistributor</option>
                             <option value=""></option>
                           </select>
+                          <fieldset>
+                            <label class="custom-control custom-radio mt-1">
+                              <input id="radioStacked1" name="dist_subdist" type="radio" class="custom-control-input" value="d" required>
+                              <span class="custom-control-indicator"></span>
+                              <span class="custom-control-description">Distributor</span>
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label class="custom-control custom-radio">
+                              <input id="radioStacked1" name="dist_subdist" type="radio" class="custom-control-input" value="s" required>
+                              <span class="custom-control-indicator"></span>
+                              <span class="custom-control-description">Subdistributor</span>
+                            </label>
+                          </fieldset>
                         </div>
                       </div>
                       <div class="col-md-3 col-xs-12">
@@ -145,12 +159,31 @@
                       </div>
                       <div class="col-md-6 col-xs-12">
                         <h5 class="form-section">3. Informasi Diskon</h5>
-                        <div class="form-group">
-                          <label class="label-control">Faktur Diskon</label>
-                          <select name="id_ko" class="form-control select2">
-                            <option value="" selected disabled>Pilih diskon</option>
-                            <option value=""></option>
-                          </select>
+                        <div class="form-group row">
+                          <div class="col-md-8 col-xs-12">
+                            <label class="label-control">Faktur Diskon</label>
+                            <select name="id_ko" class="form-control select2">
+                              <option value="" selected disabled>Pilih diskon</option>
+                              <option value=""></option>
+                            </select>
+                          </div>
+                          <div class="col-md-4 col-xs-12">
+                            <label class="label-control">Jenis KO</label>
+                            <fieldset>
+                              <label class="custom-control custom-radio">
+                                <input id="radioStacked1" name="general_tender" type="radio" class="custom-control-input" value="d" required>
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">General</span>
+                              </label>
+                            </fieldset>
+                            <fieldset>
+                              <label class="custom-control custom-radio">
+                                <input id="radioStacked1" name="general_tender" type="radio" class="custom-control-input" value="s" required>
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Tender</span>
+                              </label>
+                            </fieldset>
+                          </div>
                           <p>*) Anda dapat melihat informasi faktur yang tersedia pada tabel di bawah</p>
                         </div>
                         <div class="table-responsive">
