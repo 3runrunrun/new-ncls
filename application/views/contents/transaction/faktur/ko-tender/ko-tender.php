@@ -62,7 +62,7 @@
                         <div class="form-group">
                           <label class="label-control">Detailer</label>
                           <select name="id_detailer" class="form-control select2" required>
-                            <option value="" selected disabled>Pilih detalier</option>
+                            <option value="" selected disabled>Pilih detailer</option>
                             <option value=""></option>
                           </select>
                         </div>

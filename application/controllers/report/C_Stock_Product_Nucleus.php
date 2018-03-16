@@ -91,7 +91,7 @@ class C_Stock_Product_Nucleus extends CI_Controller {
 
   /**
    |
-   | Private method
+   | Private function
    |
    */
 
