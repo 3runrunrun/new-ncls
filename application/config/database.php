@@ -75,6 +75,15 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
+	
+	// server
+	// 'hostname' => 'localhost',
+	// 'username' => 'root',
+	// 'password' => 'nucleus2018',
+	// 'database' => 'nucleus_db',
+	// 'dbdriver' => 'mysqli',
+
+	// local
 	'hostname' => 'localhost',
 	'username' => 'root',
 	'password' => '',

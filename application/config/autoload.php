@@ -149,6 +149,7 @@ $autoload['model'] = array(
   'master/Master_Distributor',
   'master/Master_Cogm',
   'core/User_Account',
+  'core/Dist_Subdist',
    
   // master
   'master/Area',
@@ -212,6 +213,14 @@ $autoload['model'] = array(
   'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus' => 'ppn', 
   'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus_Detail' => 'ppnd', 
   'transaction/permohonan-produk/nucleus/Permohonan_Produk_Nucleus_Status' => 'ppns',
+
+  'transaction/permohonan-produk/distributor/Permohonan_Produk_Distributor' => 'ppd', 
+  'transaction/permohonan-produk/distributor/Permohonan_Produk_Distributor_Detail' => 'ppdd', 
+  'transaction/permohonan-produk/distributor/Permohonan_Produk_Distributor_Status' => 'ppds',
+
+  'transaction/permohonan-produk/subdist/Permohonan_Produk_Subdist' => 'pps', 
+  'transaction/permohonan-produk/subdist/Permohonan_Produk_Subdist_Detail' => 'ppsd', 
+  'transaction/permohonan-produk/subdist/Permohonan_Produk_Subdist_Status' => 'ppss',
 
   'transaction/promo-trial/Promo_Trial' => 'pt',
   'transaction/promo-trial/Promo_Trial_Detail' => 'ptd',

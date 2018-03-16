@@ -26,7 +26,7 @@ class Outlet extends CI_Model
     }
     public function get_outlet_aktif($column = '*')
     {
-        $this->db->select($column);
+        $this->db->select($column, FALSE);
         $this->db->where('hapus', null);
         $result = $this->db->get('v_outlet');
         if (!$result) {

@@ -11,10 +11,23 @@ class C_General extends CI_Controller {
 
   public function index()
   {
+    $row = $this->get_total_row();
+    $data['detailer'] = $this->Detailer->get_detailer_aktif('id, UPPER(nama_detailer) as nama_detailer, UPPER(alias_area) as alias_area');
+    $data['dist_subdist'] = $this->Dist_Subdist->get_data('id, UPPER(alias_distributor) as alias_distributor, UPPER(nama) as nama, UPPER(alias_area) as alias_area');
+    $data['outlet'] = $this->Outlet->get_outlet_aktif('id, UPPER(alias_area) as alias_area, UPPER(nama_outlet) as nama_outlet');
+    $data['produk'] = $this->Produk->get_produk_harga('id, UPPER(nama) as nama, UPPER(kemasan) as kemasan, harga_master, harga_hna');
+    $data['prefix'] = $this->nsu->zerofill_generator(4, $row);
+
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
-    $this->load->view('contents/transaction/faktur/ko-general/ko-general');
+    $this->load->view('contents/transaction/faktur/ko-general/ko-general', $data);
     $this->load->view('footers/footer-js-form-simple-table');
+  }
+
+  public function get_total_row()
+  {
+    $data = $this->kog->all();
+    return $data['data']->num_rows();
   }
 
   public function store($operation = null)
@@ -25,63 +38,25 @@ class C_General extends CI_Controller {
     } elseif ($operation == 'delete') {
       # code...
     } else {
-      # code...
-      $row = $this->kog->get_data();
-      $input_var = $this->input->post();
-      $input_var['id'] = $this->nsu->zerofill_generator(4, $row['data']->num_rows()).'-HL-'.date('d').'-'.date('Y');
-      $input_var['tahun'] = date('Y');
-
-      $kog = array();
-      $kogd = array();
-      $kogo = array();
-      $kogot = array();
-      $kogs = array();
       $status = strtolower('waiting');
+      $input_var = $this->input->post();
+      $input_var['id'] = $this->session->userdata('no_faktur');
+      $input_var['tahun'] = date('Y');
+      $input_var['status'] = $status;
 
-      $kog['id'] = $input_var['id'];
-      $kog['tahun'] = $input_var['tahun'];
-      $kog['id_detailer'] = $input_var['id_detailer'];
-      $kog['tanggal'] = $input_var['tanggal'];
-      $kog['id_distributor'] = $input_var['id_distributor'];
-      $kog['id_rm'] = $input_var['id_rm'];
-      $kog['id_direktur'] = $input_var['id_direktur'];
-      $kog['tgl_spv'] = $input_var['tgl_spv'];
-      $kog['tgl_rm'] = $input_var['tgl_rm'];
-      $kog['tgl_direktur'] = $input_var['tgl_direktur'];
-      $kog['status'] = $status;
-      $kog['subdist'] = $input_var['subdist'];
-      $this->kog->store($kog);
-      
-      foreach ($input_var['id_outlet'] as $key => $value) {
-        $kogd['id_ko'] = $input_var['id'];
-        $kogd['id_outlet'] = $input_var['id_outlet'][$key];
-        $kogd['id_produk'] = $input_var['id_produk'][$key];
-        $kogd['jumlah'] = $input_var['jumlah'][$key];
-        $kogd['on_diskon_distributor'] = $input_var['on_diskon_distributor'][$key];
-        $kogd['on_nf'] = $input_var['on_nf'][$key];
-        $kogd['on_total'] = $input_var['on_total'][$key];
-        $kogd['off_diskon_distributor'] = $input_var['off_diskon_distributor'][$key];
-        $kogd['off_nf'] = $input_var['off_nf'][$key];
-        $kogd['off_total'] = $input_var['off_total'][$key];
-        $kogd['keterangan'] = $input_var['keterangan'][$key];
-        $kogd['klaim'] = $input_var['klaim'][$key];
-        $this->kogd->store($kogd);
+      $this->save_kog($input_var);
+      $this->save_kogd($input_var);
+      $this->save_kogo($input_var);
+      $this->save_kogot($input_var);
+      $this->save_kogs($input_var);
+
+      if ($input_var['dist_subdist'] == 'd') {
+        $input_var['id_permohonan'] = $this->nsu->digit_id_generator(4, 'pmhd');
+        $this->save_ppd($input_var);
+      } elseif ($input_var['dist_subdist'] == 's') {
+        $input_var['id_permohonan'] = $this->nsu->digit_id_generator(4, 'pmhs');
+        $this->save_pps($input_var);
       }
-      
-      $kogo['id_ko'] = $input_var['id'];
-      $kogo['cn'] = $input_var['cn'];
-      $kogo['diskon'] = $input_var['diskon'];
-      $this->kogo->store($kogo);
-
-      $kogot['id_ko'] = $input_var['id'];
-      $kogot['total'] = $input_var['total'];
-      $this->kogot->store($kogot);
-
-      $kogs['id_ko'] = $input_var['id'];
-      $kogs['tanggal'] = date('Y-m-d H:i:s');
-      $kogs['status'] = $status;
-      $kogs['id_rilis'] = $input_var['id_rilis'];
-      $this->kogs->store($kogs);
 
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
@@ -90,8 +65,140 @@ class C_General extends CI_Controller {
         $this->db->trans_commit();
         $this->session->set_flashdata('success_msg', 'Data promo trial <strong>berhasil</strong> disimpan.');
       }
+      $this->session->unset_userdata('no_faktur');
     }
    
-   redirect('/master-promo'); 
+   redirect('/ko-general'); 
   }
+
+  /**
+   |
+   | Private function
+   |
+   */
+  
+  private function save_kog($data = array())
+  {
+    $val['id'] = $data['id'];
+    $val['tahun'] = $data['tahun'];
+    $val['id_detailer'] = $data['id_detailer'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['id_distributor'] = $data['id_distributor'];
+    $val['id_rm'] = $data['id_rm'];
+    $val['id_direktur'] = $data['id_direktur'];
+    $val['status'] = $data['status'];
+    if ($data['dist_subdist'] == 's') {
+      $val['subdist'] = 'y';
+    }
+    $this->kog->store($val);
+  }
+
+  private function save_kogd($data = array())
+  {     
+    foreach ($data['id_outlet'] as $key => $value) {
+      $val['id_ko'] = $data['id'];
+      $val['id_outlet'] = $value;
+      $val['id_produk'] = $data['id_produk'][$key];
+      $val['jumlah'] = $data['jumlah'][$key];
+      $val['on_diskon_distributor'] = $data['on_diskon_distributor'][$key];
+      $val['on_nf'] = $data['on_nf'][$key];
+      $val['on_total'] = $data['on_total'][$key];
+      $val['off_diskon_distributor'] = $data['off_diskon_distributor'][$key];
+      $val['off_nf'] = $data['off_nf'][$key];
+      $val['off_total'] = $data['off_total'][$key];
+      $val['keterangan'] = $data['keterangan'][$key];
+      $this->kogd->store($val);
+    }
+  }
+
+  private function save_kogo($data = array())
+  {
+    foreach ($data['cn'] as $key => $value) {
+      $val['id_ko'] = $data['id'];
+      $val['cn'] = $value;
+      $val['diskon'] = $data['diskon'][$key];
+      $this->kogo->store($val);
+    }
+  }
+
+  private function save_kogot($data = array())
+  {
+    $val['id_ko'] = $data['id'];
+    $val['total'] = $data['total'];
+    $this->kogot->store($val);
+  }
+
+  private function save_kogs($data = array())
+  {
+    $val['id_ko'] = $data['id'];
+    $val['tanggal'] = date('Y-m-d H:i:s');
+    $val['status'] = $data['status'];
+    $this->kogs->store($val);
+  }
+  
+  // permohonan produk distributor
+  private function save_ppd($data = array())
+  {
+    $val['id'] = $data['id_permohonan'];
+    $val['tahun'] = $data['tahun'];
+    $val['id_distributor'] = $data['id_distributor'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['status'] = $data['status'];
+    $this->ppd->store($val);
+    $this->save_ppdd($data);
+    $this->save_ppds($data);
+  }
+  
+  private function save_ppdd($data = array())
+  {
+    foreach ($data['id_produk'] as $key => $value) {
+      $val['id_permohonan'] = $data['id_permohonan'];
+      $val['id_produk'] = $value;
+      $val['jumlah'] = $data['jumlah'][$key];
+      $this->ppdd->store($val);
+    }
+  }
+
+  private function save_ppds($data = array())
+  {
+    $val['id_permohonan'] = $data['id_permohonan'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['status'] = $data['status'];
+    $this->ppds->store($val);
+  }
+  // end of - permohonan produk distributor
+  
+  // permohonan produk subdist
+  private function save_pps($data = array())
+  {
+    $val['id'] = $data['id_permohonan'];
+    $val['tahun'] = $data['tahun'];
+    $val['id_subdist'] = $data['id_distributor'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['status'] = $data['status'];
+    $this->pps->store($val);
+    $this->save_ppsd($data);
+    $this->save_ppss($data);
+  }
+  
+  private function save_ppsd($data = array())
+  {
+    foreach ($data['id_produk'] as $key => $value) {
+      $val['id_permohonan'] = $data['id_permohonan'];
+      $val['id_produk'] = $value;
+      $val['jumlah'] = $data['jumlah'][$key];
+      $this->ppsd->store($val);
+    }
+  }
+
+  private function save_ppss($data = array())
+  {
+    $val['id_permohonan'] = $data['id_permohonan'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['status'] = $data['status'];
+    $this->ppds->store($val);
+  }
+  // end of permohonan produk subdist
+
+
 }

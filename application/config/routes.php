@@ -159,6 +159,7 @@ $route['detail-wpr/(:any)/(:any)'] = 'transaction/C_WPR/show/$1/$2';
 // ko
 $route['daftar-faktur'] = 'transaction/C_Data_Faktur/index';
 $route['ko-general'] = 'transaction/C_General/index';
+$route['store-general'] = 'transaction/C_General/store';
 $route['store-general/(:any)'] = 'transaction/C_General/store/$1';
 
 $route['ko-tender'] = 'transaction/C_Tender/index';
