@@ -174,9 +174,7 @@ $route['daily-sales-outlet'] = 'report/C_Daily_Sales/show_outlet';
 $route['store-sales'] = 'report/C_Daily_Sales/store';
 $route['store-sales/(:any)'] = 'report/C_Daily_Sales/store/$1';
 
-$route['daily-sales-distributor'] = 'report/C_Daily_Sales_Distributor/index';
-$route['store-sales-distributor'] = 'report/C_Daily_Sales_Distributor/store';
-$route['store-sales-distributor/(:any)'] = 'report/C_Daily_Sales_Distributor/store/$1';
+$route['sales-distributor'] = 'report/C_Daily_Sales_Distributor/index';
 
 $route['stock-product-nucleus'] = 'report/C_Stock_Product_Nucleus/index';
 $route['store-product-nucleus'] = 'report/C_Stock_Product_Nucleus/store';

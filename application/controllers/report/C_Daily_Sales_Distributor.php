@@ -11,7 +11,10 @@ class C_Daily_Sales_Distributor extends CI_Controller {
 
   public function index()
   {
-    # code...
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/sales-distributor/sales-distributor');
+    $this->load->view('footers/footer-js-form-simple-table');
   }
 
   public function store($operation = null)

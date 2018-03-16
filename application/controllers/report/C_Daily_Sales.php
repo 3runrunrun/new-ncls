@@ -9,19 +9,25 @@ class C_Daily_Sales extends CI_Controller {
     error_reporting(0);
   }
 
-  public function index() // letter_number_generator('sal')
+  public function index()
   {
     # code...
   }
 
-  public function show_product($value='')
+  public function show_product()
   {
-    # code...
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/daily-sales/per-product');
+    $this->load->view('footers/footer-js-form-simple-table');
   }
 
-  public function show_outlet($value='')
+  public function show_outlet()
   {
-    # code...
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/daily-sales/per-outlet');
+    $this->load->view('footers/footer-js-form-simple-table');
   }
 
   public function store($operation = null)

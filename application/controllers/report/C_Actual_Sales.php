@@ -11,7 +11,10 @@ class C_Actual_Sales extends CI_Controller {
 
   public function index()
   {
-    # code...
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/sales-actual/sales-actual');
+    $this->load->view('footers/footer-js-form-simple-table');
   }
 
 }
