@@ -57,21 +57,30 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($general['data']->result() as $value): ?>
                       <tr>
-                        <td>No. Faktur</td>
-                        <td>Spv/RM<br />(yang mengajukan)</td>
-                        <td>Tanggal</td>
-                        <td>Jenis Diskon</td>
-                        <td>Status</td>
-                        <td>Tanggal<br/>SPV</td>
-                        <td>Tanggal<br/>RM</td>
-                        <td>Tanggal<br/>Direktur</td>
+                        <td><?php echo str_replace('-', '/', strtoupper($value->id)); ?></td>
+                        <td><?php echo $value->nama_detailer; ?></td>
+                        <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
+                        <td><?php echo $tanggal; ?></td>
+                        <td><?php echo $value->jenis_ko; ?></td>
+                        <td><?php echo $value->status; ?></td>
+                        <td><?php echo $tanggal; ?></td>
+                        <?php $tgl_rm = ($value->tgl_rm === null) ? null : date('d-M-Y H:i:s', strtotime($value->tgl_rm)) ; ?>
+                        <td><?php echo $tgl_rm; ?></td>
+                        <?php $tgl_direktur = ($value->tgl_direktur === null) ? null : date('d-M-Y H:i:s', strtotime($value->tgl_direktur)) ; ?>
+                        <td><?php echo $tgl_direktur; ?></td>
                         <td>
                           <div class="btn-group-vertical">
-                            <a href="#" class="btn btn-info">Detail</a>
+                            <?php if ($value->status !== 'rilis'): ?>
+                            <a href="<?php echo site_url(); ?>/detail-ko-general/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
+                            <?php endif ?>
+                            <a href="<?php echo site_url(); ?>/detail-ko-general/<?php echo $value->id; ?>" target="_blank" class="btn btn-info">Detail</a>
+                            <a href="#" class="btn btn-primary">Print</a>
                           </div>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                 </div>
@@ -108,22 +117,31 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($tender['data']->result() as $value): ?>
                       <tr>
-                        <td>SP</td>
-                        <td>No. Faktur</td>
-                        <td>Spv/RM<br />(yang mengajukan)</td>
-                        <td>Tanggal</td>
-                        <td>Jenis Diskon</td>
-                        <td>Status</td>
-                        <td>Tanggal<br/>SPV</td>
-                        <td>Tanggal<br/>RM</td>
-                        <td>Tanggal<br/>Direktur</td>
+                        <td><?php echo strtoupper($value->sp); ?></td>
+                        <td><?php echo str_replace('-', '/', strtoupper($value->id)); ?></td>
+                        <td><?php echo $value->nama_detailer; ?></td>
+                        <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
+                        <td><?php echo $tanggal; ?></td>
+                        <td><?php echo $value->jenis_ko; ?></td>
+                        <td><?php echo $value->status; ?></td>
+                        <td><?php echo $tanggal; ?></td>
+                        <?php $tgl_rm = ($value->tgl_rm === null) ? null : date('d-M-Y H:i:s', strtotime($value->tgl_rm)) ; ?>
+                        <td><?php echo $tgl_rm; ?></td>
+                        <?php $tgl_direktur = ($value->tgl_direktur === null) ? null : date('d-M-Y H:i:s', strtotime($value->tgl_direktur)) ; ?>
+                        <td><?php echo $tgl_direktur; ?></td>
                         <td>
                           <div class="btn-group-vertical">
-                            <a href="#" class="btn btn-info">Detail</a>
+                            <?php if ($value->status !== 'rilis'): ?>
+                            <a href="<?php echo site_url(); ?>/detail-ko-tender/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
+                            <?php endif; ?>
+                            <a href="<?php echo site_url(); ?>/detail-ko-tender/<?php echo $value->id; ?>" target="_blank" class="btn btn-info">Detail</a>
+                            <a href="#" class="btn btn-primary">Print</a>
                           </div>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                 </div>

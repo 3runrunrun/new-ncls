@@ -1,3 +1,8 @@
+<?php 
+  $status = null; 
+  $distributor = null; 
+  $count = 0; 
+?>
 <div class="app-content content container-fluid">
   <div class="content-wrapper">
     <div class="content-header row">
@@ -41,34 +46,38 @@
             </div>
             <div class="card-body">
               <div class="card-block">
-                <form action="<?php echo site_url(); ?>/store-general" method="POST" class="form" role="form">
+                <form action="<?php echo site_url(); ?>/store-general/approve" method="POST" class="form" role="form">
                   <div class="form-body">
+                    <?php foreach ($detail['data']->result() as $value): ?>
+                      <?php $status = $value->status; ?>
+                      <?php $distributor = $value->nama_distributor; ?>
                     <div class="row">
                       <div class="col-md-6 col-xs-12">
                         <h5 class="form-section">1. Identitas Faktur</h5>
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">No. Faktur</label><br />
-                            <?php $no_faktur = $prefix . '-hl-' . date('d-Y'); ?>
-                            <?php $this->session->set_userdata('no_faktur', $no_faktur); ?>
-                            <span class="tag tag-success tag-lg"><?php echo str_replace('-', '/', strtoupper($no_faktur)); ?></span>
+                            <?php if ($status !== 'rilis'): ?>
+                            <input type="hidden" name="id" value="<?php echo $value->id; ?>">
+                            <?php endif; ?>
+                            <span class="tag tag-success tag-lg"><?php echo str_replace('-', '/', strtoupper($value->id)); ?></span>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6 col-xs-12">
                         <h5 class="form-section">2. Pemohon</h5>
-                        <div class="form-group">
-                          <label class="label-control">SPV / RM</label>
-                          <select name="id_detailer" class="form-control select2" required>
-                            <option value="" selected disabled>Pilih SPV / RM</option>
-                            <?php if ($detailer['data']->num_rows() < 1): ?>
-                            <option value="" disabled>Belum tersedia</option>
-                            <?php else: ?>
-                            <?php foreach ($detailer['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
-                            <?php endforeach; ?>
+                        <div class="form-group row">
+                          <div class="col-md-6 col-xs-12">
+                            <label class="label-control">SPV / RM</label><br />
+                            <?php if ($status !== 'rilis'): ?>
+                            <input type="hidden" name="id_detailer" value="<?php echo $value->id_detailer; ?>">
                             <?php endif; ?>
-                          </select>
+                              <span class="tag tag-info tag-lg"><?php echo strtoupper($value->nama); ?></span>
+                          </div>
+                          <div class="col-md-6 col-xs-12">
+                            <label class="label-control">Status</label><br />
+                              <span class="tag tag-warning tag-lg"><?php echo strtoupper($value->status); ?></span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -79,69 +88,51 @@
                       <div class="col-md-3 col-xs-12">
                         <div class="form-group">
                           <label class="label-control">Tanggal</label>
-                          <input type="date" name="tanggal" class="form-control border-primary" value="<?php echo date('Y-m-d'); ?>" required>
+                          <input type="text" name="tanggal" class="form-control border-primary" value="<?php echo date('d-M-Y', strtotime($value->tanggal)); ?>" disabled>
                         </div>
                       </div>
                       <div class="col-md-3 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Distributor</label>
-                          <select name="id_distributor" class="form-control select2" onchange="print_dist(this)" required>
-                            <option value="" selected disabled>Pilih Distributor</option>
-                            <?php if ($dist_subdist['data']->num_rows() < 1): ?>
-                            <option value="" disabled>Belum tersedia</option>
-                            <?php else: ?>
-                            <?php foreach ($dist_subdist['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo $value->alias_distributor; ?> -  <?php echo $value->nama; ?></option>
-                            <?php endforeach; ?>
-                            <?php endif; ?>
-                          </select>
-                          <fieldset>
-                            <label class="custom-control custom-radio mt-1">
-                              <input id="radioStacked1" name="dist_subdist" type="radio" class="custom-control-input" value="d" required>
-                              <span class="custom-control-indicator"></span>
-                              <span class="custom-control-description">Distributor</span>
-                            </label>
+                          <label class="label-control">Distributor</label><br />
+                          <?php if ($status !== 'rilis'): ?>
+                          <input type="hidden" name="id_distributor" value="<?php echo $value->id_distributor; ?>">
+                          <?php endif; ?>
+                          <span class="tag tag-primary tag-lg"><?php echo strtoupper($value->nama_distributor); ?></span>
+                          <?php if ($value->subdist == 'y'): ?>
+                          <br /><input type="hidden" name="dist_subdist" value="s">
+                          <fieldset class="mt-1">
+                            <div class="state icheckbox_flat-blue checked mr-1"></div>
+                            <label>Subdistributor</label>
                           </fieldset>
-                          <fieldset>
-                            <label class="custom-control custom-radio">
-                              <input id="radioStacked1" name="dist_subdist" type="radio" class="custom-control-input" value="s" required>
-                              <span class="custom-control-indicator"></span>
-                              <span class="custom-control-description">Subdistributor</span>
-                            </label>
+                          <?php else: ?>
+                          <br /><input type="hidden" name="dist_subdist" value="d">
+                          <fieldset class="mt-1">
+                            <div class="state icheckbox_flat-blue checked mr-1"></div>
+                            <label>Distributor</label>
                           </fieldset>
+                          <?php endif; ?>
                         </div>
                       </div>
                       <div class="col-md-3 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control"><strong>Menyetujui</strong></label>
-                          <select name="id_rm" class="form-control select2" required>
-                            <option value="" selected disabled>Pilih</option>
-                            <?php if ($detailer['data']->num_rows() < 1): ?>
-                            <option value="" disabled>Belum tersedia</option>
-                            <?php else: ?>
-                            <?php foreach ($detailer['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
-                            <?php endforeach; ?>
-                            <?php endif; ?>
-                          </select>
+                          <label class="label-control"><strong>Menyetujui</strong></label><br />
+                          <?php if ($status !== 'rilis'): ?>
+                          <input type="hidden" name="id_rm" value="<?php echo $value->id_rm; ?>">
+                          <?php endif; ?>
+                          <span class="tag tag-primary tag-lg"><?php echo strtoupper($value->nama_rm); ?></span>
                         </div>
                       </div>
                       <div class="col-md-3 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control"><strong>Approver</strong> (Direktur)</label>
-                          <select name="id_direktur" class="form-control select2" required>
-                            <option value="" selected disabled>Pilih Direktur</option>
-                            <?php if ($detailer['data']->num_rows() < 1): ?>
-                            <option value="" disabled>Belum tersedia</option>
-                            <?php else: ?>
-                            <?php foreach ($detailer['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
-                            <?php endforeach; ?>
-                            <?php endif; ?> 
-                          </select>
+                          <label class="label-control"><strong>Approver</strong> (Direktur)</label><br />
+                          <?php if ($status !== 'rilis'): ?>
+                          <input type="hidden" name="id_direktur" value="<?php echo $value->id_direktur; ?>">
+                          <?php endif; ?>
+                          <span class="tag tag-primary tag-lg"><?php echo strtoupper($value->nama_direktur); ?></span>
                         </div>
                       </div>
                     </div>
+                    <?php endforeach; ?>
                     <div class="card-text">
                       <p>Dengan hormat,<br />melalui surat ini kami bermaksud untuk mengajukan permohonan diskon untuk outlet:</p>
                     </div>
@@ -156,57 +147,49 @@
                                 <th rowspan="2">Jumlah</th>
                                 <th colspan="3">Kondisi On Faktur</th>
                                 <th colspan="3">Kondisi Off Faktur</th>
-                                <th rowspan="2" colspan="2">Keterangan</th>
+                                <th rowspan="2">Keterangan</th>
                               </tr>
                               <tr>
-                                <th class="dist-out">Distributor</th>
+                                <th class="dist-out"><?php echo strtoupper($distributor); ?></th>
                                 <th>NF</th>
                                 <th>Total</th>
-                                <th class="dist-out">Distributor</th>
+                                <th class="dist-out"><?php echo strtoupper($distributor); ?></th>
                                 <th>NF</th>
                                 <th>Total</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr class="div-repeat">
+                              <?php foreach ($produk['data']->result() as $value): ?>
+                              <tr>
                                 <td>
                                   <div class="card-block width-300">
-                                    <select name="id_outlet[]" class="form-control select2" required>
-                                      <option value="" selected disabled>Pilih Outlet</option>
-                                      <?php if ($outlet['data']->num_rows() < 1): ?>
-                                      <option value="" disabled>Belum tersedia</option>
-                                      <?php else: ?>
-                                      <?php foreach ($outlet['data']->result() as $value): ?>
-                                      <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_outlet; ?></option>
-                                      <?php endforeach; ?>
-                                      <?php endif; ?>
-                                    </select>
+                                    <?php if ($status !== 'rilis'): ?>
+                                    <input type="hidden" name="id_outlet[]" value="<?php echo $value->id_outlet; ?>">
+                                    <?php endif; ?>
+                                    <?php echo strtoupper($value->nama_outlet); ?>
                                   </div>
                                 </td>
                                 <td>
                                   <div class="card-block width-300">
-                                    <select name="id_produk[]" class="form-control select2" required>
-                                      <option value="" selected disabled>Pilih Produk</option>
-                                      <?php if ($produk['data']->num_rows() < 1): ?>
-                                      <option value="" disabled>Belum tersedia</option>
-                                      <?php else: ?>
-                                      <?php foreach ($produk['data']->result() as $value): ?>
-                                      <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->nama); ?></option>
-                                      <?php endforeach; ?>
-                                      <?php endif; ?>
-                                    </select>
+                                    <?php if ($status !== 'rilis'): ?>
+                                    <input type="hidden" name="id_produk[]" value="<?php echo $value->id_produk; ?>">
+                                    <?php endif; ?>
+                                    <?php echo strtoupper($value->nama_produk); ?>
                                   </div>
                                 </td>
                                 <td>
                                   <div class="card-block width-200">
-                                    <input type="number" name="jumlah[]" class="form-control border-primary" min="0" required>
+                                    <?php if ($status !== 'rilis'): ?>
+                                    <input type="hidden" name="jumlah[]" value="<?php echo $value->jumlah; ?>">
+                                    <?php echo $value->jumlah; ?>
+                                    <?php endif; ?>
                                   </div>
                                 </td>
                                 <td>
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="on_diskon_distributor[]" class="form-control border-primary" min="0" value="0" required>
+                                        <input type="text" name="on_diskon_distributor[]" class="form-control border-primary" min="0" value="<?php echo $value->on_diskon_distributor; ?>" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -216,7 +199,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="on_nf[]" class="form-control border-primary" min="0" value="0" required>
+                                        <input type="text" name="on_nf[]" value="<?php echo $value->on_nf; ?>" class="form-control border-primary" min="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -226,7 +209,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="on_total[]" class="form-control border-primary" min="0" value="0" required>
+                                        <input type="text" name="on_total[]" value="<?php echo $value->on_total; ?>" class="form-control border-primary" min="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -236,7 +219,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="off_diskon_distributor[]" class="form-control border-primary" min="0" value="0" required>
+                                        <input type="text" name="off_diskon_distributor[]" class="form-control border-primary" value="<?php echo $value->off_diskon_distributor; ?>" min="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -246,7 +229,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="off_nf[]" class="form-control border-primary" min="0" value="0" required>
+                                        <input type="text" name="off_nf[]" class="form-control border-primary" value="<?php echo $value->off_nf; ?>" min="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -256,7 +239,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="off_total[]" class="form-control border-primary" min="0" value="0" required>
+                                        <input type="text" name="off_total[]" class="form-control border-primary" value="<?php echo $value->off_total; ?>" min="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -264,25 +247,13 @@
                                 </td>
                                 <td>
                                   <div class="card-block width-200">
-                                    <textarea name="keterangan[]"  rows="3" class="form-control border-primary"></textarea>
-                                  </div>
-                                </td>
-                                <td class="del-repeater">
-                                  <div class="card-block width-100">
-                                    <button class="btn btn-danger btn-lg" type="button" onclick="$(this).parent().parent().parent().remove()"><i class="fa fa-times"></i></button>
+                                    <textarea name="keterangan[]" value="<?php echo $value->keterangan; ?>" rows="3" class="form-control border-primary"></textarea>
                                   </div>
                                 </td>
                               </tr>
+                              <?php endforeach; ?>
                             </tbody>
-                            <tbody id="repeater-out"></tbody>
                           </table>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row mt-1">
-                      <div class="col-md-2 col-xs-12">
-                        <div class="form-group">
-                          <button type="button" id="add-repeater" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;Tambah</button>
                         </div>
                       </div>
                     </div>
@@ -297,40 +268,44 @@
                               <tr>
                                 <th>No.</th>
                                 <th>CN</th>
-                                <th colspan="2">%</th>
+                                <th>%</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr class="div-repeat-2">
+                              <?php foreach ($onoff['data']->result() as $value): ?>
+                              <tr>
                                 <td>
-                                  <div class="card-block width-50 count-repeater">1</div>
+                                  <div class="card-block width-50 count-repeater"><?php echo $count += 1; ?></div>
                                 </td>
                                 <td>
                                   <div class="card-block">
-                                    <input type="text" name="cn[]" id="" class="form-control border-primary" required>
+                                    <?php if ($status !== 'rilis'): ?>
+                                    <input type="hidden" name="cn[]" value="<?php echo $value->cn; ?>" min="0" class="form-control border-primary">
+                                    <?php endif; ?>
+                                    <?php echo $value->cn; ?>
                                   </div>
                                 </td>
                                 <td>
                                   <div class="card-block">
                                     <div class="input-group">
-                                      <input type="text" name="diskon[]" id="" class="form-control border-primary" min="0" required>
+                                      <?php if ($status !== 'rilis'): ?>
+                                      <input type="text" name="diskon[]" id="" class="form-control border-primary" value="<?php echo $value->diskon; ?>" min="0" required>
                                       <span class="input-group-addon">%</span>
+                                      <?php else: ?>
+                                      <?php echo $value->diskon; ?>
+                                      <?php endif; ?>
                                     </div>
                                   </div>
                                 </td>
-                                <td class="del-repeater-2">
-                                  <div class="card-block width-100">
-                                    <button class="btn btn-danger" type="button" onclick="$(this).parent().parent().parent().remove()"><i class="fa fa-times"></i></button>
-                                  </div>
-                                </td>
                               </tr>
+                              <?php endforeach; ?>
                             </tbody>
-                            <tbody id="repeater-out-2"></tbody>
                           </table>
                         </div>
                         <div class="table-responsive">
                           <table class="table table-xs">
                             <tfoot>
+                              <?php foreach ($total['data']->result() as $value): ?>
                               <tr>
                                 <td>
                                   <div class="card-block width-200"><strong>Total</strong></div>
@@ -339,37 +314,61 @@
                                   <div class="card-block width-200 pull-right">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="number" name="total" class="form-control border-primary" min="0" placeholder="Total" required>
+                                        <?php if ($status !== 'rilis'): ?>
+                                        <input type="number" name="total" class="form-control border-primary" value="<?php echo $value->total; ?>" min="0" required>
                                         <span class="input-group-addon">%</span>
+                                        <?php else: ?>
+                                        <strong><?php echo $value->total; ?></strong>
+                                        <?php endif; ?>
                                       </div>
                                     </fieldset>
                                   </div>
                                 </td>
                               </tr>
+                              <?php endforeach; ?>
                             </tfoot>
                           </table>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-2 col-xs-12">
-                            <div class="form-group">
-                              <button type="button" id="add-repeater-2" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;Tambah</button>
-                            </div>
-                          </div>
                         </div>
                       </div>
                       <div class="col-md-4 col-xs-12">
                         <div class="card-text">
-                          <p>Demikian surat ini kami sampaikan. Bila surat ini sudah disetujui harap fax ke pihak <strong class="dist-out">distributor</strong>.</p>
+                          <p>Demikian surat ini kami sampaikan. Bila surat ini sudah disetujui harap fax ke pihak <strong class="dist-out"><?php echo strtoupper($distributor); ?></strong>.</p>
                           <p>Atas perhatian Bapak, kami sampaikan terima kasih.</p>
                         </div>
+                        <?php if ($status !== 'rilis'): ?>
+                        <div class="form-group">
+                          <label class="label-control">Approver</label>
+                          <select name="id_rilis" class="form-control select2">
+                            <option value="" selected disabled>Pilih SPV / RM / Direktur</option>
+                            <?php if ($detailer['data']->num_rows() < 1): ?>
+                            <option value="" disabled>Belum tersedia</option>
+                            <?php else: ?>
+                            <?php foreach ($detailer['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                          </select>
+                          *) Pilih SPV/RM/Direktur sesuai dengan status faktur yang akan disimpan di dalam sistem (Mengetaui Pemohon / Menyetujui / Rilis)
+                        </div>
+                        <div class="form-group">
+                          <label class="label-control">Status</label>
+                          <select name="status" class="form-control border-primary">
+                            <option value="" selected disabled>Pilih status</option>
+                            <option value="waiting">Waiting</option>
+                            <option value="spv">Mengetahui Pemohon (RM / SPV)</option>
+                            <option value="rm">Menyetujui</option>
+                            <option value="rilis">Rilis</option>
+                          </select>
+                        </div>
+                        <div class="form-actions center">
+                          <button type="submit" class="btn btn-success">Simpan</button>
+                          <button type="reset" class="btn btn-warning">Batal</button>
+                        </div>
+                        <?php endif ?>
                       </div>
                     </div>
                     <div class="row mt-1">
                     </div>
-                  </div>
-                  <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
                   </div>
                 </form>
               </div>
@@ -400,38 +399,6 @@
     });
     $('#simple-table-2 td').addClass('text-truncate');
     $('#simple-table-2 td:even').addClass('bg-table-blue');
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.del-repeater:first').hide();
-
-    $('#add-repeater').click(function(){
-      $('.div-repeat:first select').select2('destroy');
-      $('.div-repeat:first').clone().appendTo('#repeater-out');
-      $('.div-repeat .select2').select2();
-      $('#repeater-out .del-repeater').show();
-    });
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.del-repeater-2:first').hide();
-
-    $('#add-repeater-2').click(function(){
-      var count = parseInt($('.div-repeat-2:last .count-repeater').text());
-
-      $('.div-repeat-2:first select').select2('destroy');
-      $('.div-repeat-2:first').clone().appendTo('#repeater-out-2');
-      $('.div-repeat-2 .select2').select2();
-      $('#repeater-out-2 .del-repeater-2').show();
-
-      console.log($('.div-repeat-2:last > .count-repeater').text());
-
-      $('.div-repeat-2:last .count-repeater').text(count + 1);
-    });
   });
 </script>
 

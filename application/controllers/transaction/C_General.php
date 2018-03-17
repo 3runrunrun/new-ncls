@@ -30,6 +30,26 @@ class C_General extends CI_Controller {
     return $data['data']->num_rows();
   }
 
+  public function show($id, $approve = null)
+  {
+    $data['detailer'] = $this->Detailer->get_detailer_aktif('id, UPPER(nama_detailer) as nama_detailer, UPPER(alias_area) as alias_area');
+    $data['detail'] = $this->kog->show($id);
+    $data['produk'] = $this->kogd->show($id);
+    $data['onoff'] = $this->kogo->show($id);
+    $data['total'] = $this->kogot->show($id);
+
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+
+    if ($approve !== null) {
+      $this->load->view('contents/transaction/faktur/ko-general/verifikasi', $data);
+    } else {
+      $this->load->view('contents/transaction/faktur/ko-general/detail', $data);
+    }
+    
+    $this->load->view('footers/footer-js-form-simple-table');
+  }
+
   public function store($operation = null)
   {
   	$this->db->trans_begin();
@@ -37,6 +57,35 @@ class C_General extends CI_Controller {
       # code...
     } elseif ($operation == 'delete') {
       # code...
+    } elseif ($operation == 'approve') {
+      $input_var = $this->input->post();
+      $input_var['tahun'] = date('Y');
+      $input_var['tanggal'] = date('Y-m-d');
+
+      $this->update_kogd($input_var);
+      $this->udpate_kogo($input_var);
+      $this->update_kogot($input_var);
+      $this->update_tanggal_faktur($input_var);
+      $this->save_kogs($input_var);
+
+      // jika status rilis, maka lakukan operasi update stok (nucleus, distributor / subdist)
+      if ($input_var['status'] === 'rilis') {
+        if ($input_var['dist_subdist'] == 'd') {
+          $this->save_bmd($input_var);
+        } elseif ($input_var['dist_subdist'] == 's') {
+          $this->save_bms($input_var);
+        }
+        $this->save_bkn($input_var);
+      }
+      
+      if ($this->db->trans_status() === FALSE) {
+        $this->db->trans_rollback();
+        $this->session->set_flashdata('error_msg', 'Approval faktur KO General <strong>gagal</strong>.');
+      } else {
+        $this->db->trans_commit();
+        $this->session->set_flashdata('success_msg', 'Approval faktur KO General <strong>berhasil</strong> disimpan.');
+      }
+      redirect('/daftar-faktur'); 
     } else {
       $status = strtolower('waiting');
       $input_var = $this->input->post();
@@ -60,10 +109,10 @@ class C_General extends CI_Controller {
 
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan data promo trial <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', 'Penyimpanan Faktur KO General <strong>gagal</strong>.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data promo trial <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'Faktur KO General <strong>berhasil</strong> disimpan.');
       }
       $this->session->unset_userdata('no_faktur');
     }
@@ -94,7 +143,7 @@ class C_General extends CI_Controller {
   }
 
   private function save_kogd($data = array())
-  {     
+  {
     foreach ($data['id_outlet'] as $key => $value) {
       $val['id_ko'] = $data['id'];
       $val['id_outlet'] = $value;
@@ -130,10 +179,71 @@ class C_General extends CI_Controller {
 
   private function save_kogs($data = array())
   {
+    $val['id_rilis'] = $data['id_direktur'];
+    switch ($data['status']) {
+      case 'waiting':
+        $val['id_rilis'] = $data['id_detailer'];
+        break;
+      case 'spv':
+      case 'rm':
+      case 'rilis':
+        $val['id_rilis'] = $data['id_rilis'];
+        break;
+      default:
+        $val['id_rilis'] = $data['id_direktur'];
+        break;
+    }
+    
     $val['id_ko'] = $data['id'];
     $val['tanggal'] = date('Y-m-d H:i:s');
     $val['status'] = $data['status'];
     $this->kogs->store($val);
+  }
+
+  private function update_tanggal_faktur($data = array())
+  {
+    switch ($data['status']) {
+      case 'spv':
+        $val['tgl_spv'] = date('Y-m-d H:i:s');
+        break;
+      case 'rm':
+        $val['tgl_rm'] = date('Y-m-d H:i:s');
+        break;
+      case 'rilis':
+        $val['tgl_direktur'] = date('Y-m-d H:i:s');
+        break;
+    }
+    $this->kog->update($data['id'], $val);
+  }
+
+  private function update_kogd($data = array())
+  {
+    foreach ($data['id_outlet'] as $key => $value) {
+      $val['jumlah'] = $data['jumlah'][$key];
+      $val['on_diskon_distributor'] = $data['on_diskon_distributor'][$key];
+      $val['on_nf'] = $data['on_nf'][$key];
+      $val['on_total'] = $data['on_total'][$key];
+      $val['off_diskon_distributor'] = $data['off_diskon_distributor'][$key];
+      $val['off_nf'] = $data['off_nf'][$key];
+      $val['off_total'] = $data['off_total'][$key];
+      $val['keterangan'] = $data['keterangan'][$key];
+      $this->kogd->update_detail($data['id'], $value, $data['id_produk'][$key], $val);
+    }
+  }
+
+  private function udpate_kogo($data = array())
+  {
+    foreach ($data['cn'] as $key => $value) {
+      $val['cn'] = $value;
+      $val['diskon'] = $data['diskon'][$key];
+      $this->kogo->update_cn($data['id'], $value, $val);
+    }
+  }
+
+  private function update_kogot($data = array())
+  {
+    $val['total'] = $data['total'];
+    $this->kogot->update($data['id'], $val);
   }
   
   // permohonan produk distributor
@@ -200,5 +310,45 @@ class C_General extends CI_Controller {
   }
   // end of permohonan produk subdist
 
+  // barang masuk distributor
+  private function save_bmd($data = array())
+  {
+    foreach ($data['id_produk'] as $key => $value) {
+      $val['id_produk'] = $value;
+      $val['id_distributor'] = $data['id_distributor'];
+      $val['tahun'] = $data['tahun'];
+      $val['tanggal'] = $data['tanggal'];
+      $val['jumlah'] = $data['jumlah'][$key];
+      $this->bmd->store($val);
+    }
+  }
+  // end of barang masuk distributor
+  
+  // barang masuk subdist
+  private function save_bms($data = array())
+  {
+    foreach ($data['id_produk'] as $key => $value) {
+      $val['id_produk'] = $value;
+      $val['id_subdist'] = $data['id_distributor'];
+      $val['tahun'] = $data['tahun'];
+      $val['tanggal'] = $data['tanggal'];
+      $val['jumlah'] = $data['jumlah'][$key];
+      $this->bms->store($val);
+    }
+  }
+  // end of barang masuk subdist
+  
+  // barang keluar nucleus
+  private function save_bkn($data = array())
+  {
+    foreach ($data['id_produk'] as $key => $value) {
+      $val['id_produk'] = $value;
+      $val['tahun'] = $data['tahun'];
+      $val['tanggal'] = $data['tanggal'];
+      $val['jumlah'] = $data['jumlah'][$key];
+      $this->bkn->store($val);
+    }
+  }
+  // end of barang keluar nucleus
 
 }
