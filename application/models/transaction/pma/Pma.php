@@ -1,6 +1,6 @@
 <?php 
 
-class Permohonan_Produk_Distributor_Detail extends CI_Model {
+class Pma extends CI_Model {
 
   function __construct()
   {
@@ -8,12 +8,12 @@ class Permohonan_Produk_Distributor_Detail extends CI_Model {
     date_default_timezone_set('Asia/Jakarta');
   }
 
-  public function show($id, $column = '*')
+  public function get_data($column = '*')
   {
     $this->db->select($column);
-    $this->db->where('id_permohonan', $id);
+    $this->db->where('tahun', $this->session->userdata('tahun'));
     $this->db->where('hapus', null);
-    $result = $this->db->get('v_ppdd');
+    $result = $this->db->get('v_pma');
     if (!$result) {
       $ret_val = array(
         'status' => 'error',
@@ -30,16 +30,15 @@ class Permohonan_Produk_Distributor_Detail extends CI_Model {
 
   public function store($data = array())
   {
-    $query = $this->db->set($data)->get_compiled_insert('permohonan_produk_distributor_detail');
+    $query = $this->db->set($data)->get_compiled_insert('pma');
     $this->db->query($query);
   }
 
-  public function update($id, $id_produk, $data = array())
+  public function update($id, $data = array())
   {
     $this->db->set($data);
-    $this->db->where('id_permohonan', $id);
-    $this->db->where('id_produk', $id_produk);
-    $query = $this->db->get_compiled_update('permohonan_produk_distributor_detail');
+    $this->db->where('id', $data);
+    $query = $this->db->get_compiled_update('pma');
     $this->db->query($query);
   }
 

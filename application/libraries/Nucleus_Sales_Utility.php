@@ -92,4 +92,13 @@ class Nucleus_Sales_Utility
 
     return $zerofill . $incremented_val;
   }
+
+  public function add_date_by_days($from, $duration)
+  {
+    $date = date_create($from);
+    date_add($date, date_interval_create_from_date_string("$duration days"));
+    $result = date_format($date, 'Y-m-d');
+    
+    return $result;
+  }
 }

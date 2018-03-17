@@ -35,72 +35,138 @@
   
       <div class="row">
         <!-- table -->
-        <div class="col-md-8 col-xs-12">
+        <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
               <h4 class="card-title" id="horz-layout-basic">Permohonan Produk</h4>
             </div>
-            <div class="card-body">
-              <div class="card-block">
-                <div class="table-responsive height-300">
-                  <table class="table table-hover table-xs border-top-blue display nowrap">
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Kode</th>
-                        <th>Nama</th>
-                        <th>Jumlah</th>
-                        <th>Batch Number</th>
-                        <th>Expired</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>No.</td>
-                        <td>Kode</td>
-                        <td>Nama</td>
-                        <td>Jumlah</td>
-                        <td>Batch Number</td>
-                        <td>Expired</td>
-                      </tr>
-                    </tbody>
-                  </table>
+            <form action="<?php echo site_url(); ?>/store-product-distributor/approve" class="form" method="POST" role="form">
+              <div class="card-body">
+                <div class="card-block">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-xs border-top-blue display nowrap">
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>Batch Number</th>
+                          <th>Expired</th>
+                          <th>Kode</th>
+                          <th>Nama</th>
+                          <th>Jumlah</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php $count = 0; ?>
+                        <?php foreach ($produk['data']->result() as $value): ?>
+                        <tr>
+                          <td><?php echo $count += 1; ?></td>
+                          <td>
+                            <?php if ($value->batch_number === null && $approve !== null): ?>
+                            <div class="card-block width-200">
+                              <input type="text" name="batch_number[]" class="form-control border-primary" placeholder="Batch Number" required>
+                            </div>
+                            <?php else: ?>
+                              <?php echo $value->batch_number; ?>
+                            <?php endif ?>
+                          </td>
+                          <td>
+                            <?php if ($value->expired === null && $approve !== null): ?>
+                            <div class="card-block width-200">
+                              <input type="date" name="expired[]" class="form-control border-primary" placeholder="Expired" required>
+                            </div>
+                            <?php else: ?>
+                              <?php echo $value->expired; ?>
+                            <?php endif ?>
+                          </td>
+                          <td>
+                            <?php echo strtoupper($value->id_produk); ?>  
+                            <input type="hidden" name="id_produk[]" value="<?php echo $value->id_produk; ?>">
+                          </td>
+                          <td><?php echo strtoupper($value->nama); ?></td>
+                          <td>
+                            <?php echo $value->jumlah; ?>
+                            <input type="hidden" name="jumlah[]" value="<?php echo $value->jumlah; ?>">
+                          </td>
+                        </tr>
+                        <?php endforeach ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <!-- /table -->
 
-        <!-- /form -->
-        <div class="col-md-4 col-xs-12">
-          <div class="card border-top-blue">
-            <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Approval Form</h4>
-            </div>
-            <div class="card-body">
-              <div class="card-block">
-                <div class="card-text">
-                  <p>Formulir verifikasi pengiriman barang Nucleus - Distributor</p>
-                </div>
-                <form action="<?php echo site_url(); ?>" class="form" method="POST" role="form">
-                  <div class="form-body">
-                    <div class="row">
-                      
-                    </div>
+              <div class="card-header">
+                <h4 class="card-title" id="horz-layout-basic">Information Form</h4>
+              </div>
+              <div class="card-body">
+                <div class="card-block">
+                  <div class="card-text">
+                    <p>Informasi permohonan barang Nucleus - Distributor</p>
                   </div>
+                  <div class="form-body">
+                    <?php $status = null; ?>
+                    <?php foreach ($detail['data']->result() as $value): ?>    
+                    <input type="hidden" name="id" value="<?php echo $value->id; ?>" >
+                    <div class="row">
+                      <div class="col-md-3 col-xs-12">
+                        <div class="form-group">
+                          <label class="label-control">Tanggal Permohonan</label>
+                          <input type="text" class="form-control border-primary" value="<?php echo date('d-M-Y', strtotime($value->tanggal)); ?>" disabled>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-xs-12">
+                        <div class="form-group">
+                          <label class="label-control">Distributor</label><br />
+                          <?php if ($value->status_permohonan !== 'delivered' && $approve !== null): ?>
+                          <input type="hidden" name="id_distributor" value="<?php echo $value->id_distributor; ?>">
+                          <?php endif ?>
+                          <span class="tag tag-lg tag-primary">(<?php echo strtoupper($value->alias_area); ?>) - <?php echo strtoupper($value->alias_distributor); ?> - <?php echo strtoupper($value->nama_distributor); ?></span>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-xs-12">
+                        <div class="form-group">
+                          <label class="label-control">Status</label><br />
+                          <span class="tag tag-lg tag-warning"><?php echo strtoupper($value->status_permohonan); ?></span>                          
+                        </div>
+                      </div>
+                      <?php if ($value->status_permohonan !== 'delivered' && $approve !== null): ?>
+                      <div class="col-md-3 col-xs-12">
+                        <div class="form-group">
+                          <label class="label-control">Status</label>
+                          <select name="status" class="form-control border-primary">
+                            <option value="" selected disabled>Pilih status</option>
+                            <option value="waiting">Waiting</option>
+                            <option value="delivered">Delivered</option>
+                          </select>
+                        </div>
+                      </div>
+                      <?php endif; ?>
+                    </div>
+                    <?php endforeach; ?>
+                  </div>
+                  <?php if ($value->status_permohonan !== 'delivered' && $approve !== null): ?>
                   <div class="form-actions center">
                     <button type="submit" class="btn btn-success">Simpan</button>
                     <button type="reset" class="btn btn-warning">Batal</button>
                   </div>
-                </form>
+                  <?php endif; ?>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
-        <!-- /form -->
-      </div>
+        <!-- /table -->
 
+      </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('table th, table td').css({
+      'text-align': 'center',
+      'vertical-align': 'middle',
+    });
+  });
+</script>

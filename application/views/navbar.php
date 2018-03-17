@@ -88,9 +88,9 @@
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/fixed-cost" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Fixed Cost &amp; Ratio</a>
             </li>
-            <li data-menu=""><a href="#" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Prospect RTD</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/rtd" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Prospect RTD</a>
             </li>
-            <li data-menu=""><a href="#" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Prospect Marketing Activity</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/pma" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Prospect Marketing Activity</a>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/evaluasi-target-customer" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Evaluasi Target Customer</a>
             </li>

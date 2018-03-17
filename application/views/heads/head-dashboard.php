@@ -60,5 +60,6 @@
 
   <!-- BEGIN VENDOR JS-->
   <script src="<?php echo base_url(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>process-js/def-path.js"></script>
   <!-- END VENDOR JS-->
 </head>

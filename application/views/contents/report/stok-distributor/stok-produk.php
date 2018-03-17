@@ -53,7 +53,15 @@
                       </tr>
                     </thead>
                     <tbody>
-
+                      <?php foreach ($bsd['data']->result() as $key => $value): ?>
+                      <tr>
+                        <td>(<?php echo $value->alias_area; ?>) <?php echo $value->nama_area; ?></td>
+                        <td>(<?php echo $value->alias_distributor; ?>) <?php echo $value->nama_distributor; ?></td>
+                        <td>(<?php echo strtoupper($value->id_produk); ?>) <?php echo $value->nama_produk; ?></td>
+                        <td><?php echo $value->kemasan; ?></td>
+                        <td><?php echo $value->stok; ?></td>
+                      </tr>
+                      <?php endforeach ?>
                     </tbody>
                   </table>
                 </div>
@@ -86,20 +94,25 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($deliv['data']->result() as $value): ?>
                       <tr>
-                        <td>Nomor Surat</td>
-                        <td>Area</td>
-                        <td>Distributor</td>
-                        <td>Tanggal Permohonan</td>
-                        <td>Status</td>
+                        <td><?php echo strtoupper($value->id); ?></td>
+                        <td>(<?php echo $value->alias_area; ?>) <?php echo $value->nama_area; ?></td>
+                        <td>(<?php echo $value->alias_distributor; ?>) <?php echo $value->nama_distributor; ?></td>
+                        <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
+                        <td><?php echo $tanggal; ?></td>
+                        <td><?php echo $value->status_permohonan; ?></td>
                         <td>
                           <div class="btn-group-vertical">
-                            <a href="#" class="btn btn-warning">Verifikasi</a>
-                            <a href="<?php echo site_url(); ?>/detail-product-distributor/as" class="btn btn-info">Detail</a>
+                            <?php if ($value->status_permohonan !== 'delivered'): ?>
+                            <a href="<?php echo site_url(); ?>/detail-product-distributor/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
+                            <?php endif; ?>
+                            <a href="<?php echo site_url(); ?>/detail-product-distributor/<?php echo $value->id; ?>" class="btn btn-info">Detail</a>
                             <a href="#" class="btn btn-primary">Print</a>
                           </div>
                         </td>
                       </tr>
+                      <?php endforeach ?>
                     </tbody>
                   </table>
                 </div>
@@ -132,20 +145,25 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($wait['data']->result() as $value): ?>
                       <tr>
-                        <td>Nomor Surat</td>
-                        <td>Area</td>
-                        <td>Distributor</td>
-                        <td>Tanggal Permohonan</td>
-                        <td>Status</td>
+                        <td><?php echo strtoupper($value->id); ?></td>
+                        <td>(<?php echo $value->alias_area; ?>) <?php echo $value->nama_area; ?></td>
+                        <td>(<?php echo $value->alias_distributor; ?>) <?php echo $value->nama_distributor; ?></td>
+                        <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
+                        <td><?php echo $tanggal; ?></td>
+                        <td><?php echo $value->status_permohonan; ?></td>
                         <td>
                           <div class="btn-group-vertical">
-                            <a href="#" class="btn btn-warning">Verifikasi</a>
-                            <a href="<?php echo site_url(); ?>/detail-product-distributor/as" class="btn btn-info">Detail</a>
+                            <?php if ($value->status_permohonan !== 'delivered'): ?>
+                            <a href="<?php echo site_url(); ?>/detail-product-distributor/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
+                            <?php endif; ?>
+                            <a href="<?php echo site_url(); ?>/detail-product-distributor/<?php echo $value->id; ?>" target="_blank" class="btn btn-info">Detail</a>
                             <a href="#" class="btn btn-primary">Print</a>
                           </div>
                         </td>
                       </tr>
+                      <?php endforeach ?>
                     </tbody>
                   </table>
                 </div>

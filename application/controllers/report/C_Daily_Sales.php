@@ -79,4 +79,23 @@ class C_Daily_Sales extends CI_Controller {
     redirect('/master-area');
   }
 
+  // sales
+  public function save_sales($data = array())
+  {
+    $val['id'] = $data['id'];
+    $val['tahun'] = $data['tahun'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['id_detailer'] = $data['id_detailer'];
+    $val['id_outlet'] = $data['id_outlet'];
+    $val['id_produk'] = $data['id_produk'];
+    
+    if ($data['dist_subdist'] === 's') {
+      $val['id_distributor'] = 0;
+    } else {
+      $val['id_distributor'] = $data['id_distributor'];
+    }
+    
+  }
+  // end of sales
+
 }
