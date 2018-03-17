@@ -68,6 +68,7 @@
   <script src="<?php echo base_url() ?>assets/js/vendors/forms/checkbox-radio.min.js" type="text/javascript"></script><!-- form -->
   <script src="<?php echo base_url() ?>assets/js/vendors/forms/form-select2.min.js" type="text/javascript"></script><!-- form -->
   <script src="<?php echo base_url() ?>assets/js/dashboard-fitness.min.js" type="text/javascript"></script><!-- dashboard -->
+  <script src="<?php echo base_url() ?>assets/js/vendors/modals/components-modal.min.js" type="text/javascript"></script><!-- modal -->
   <!-- END PAGE LEVEL JS-->
 </body>
 </html>

@@ -61,7 +61,7 @@
                         <tr>
                           <td><?php echo $count += 1; ?></td>
                           <td>
-                            <?php if ($value->batch_number === null): ?>
+                            <?php if ($value->batch_number === null && $approve !== null): ?>
                             <div class="card-block width-200">
                               <input type="text" name="batch_number[]" class="form-control border-primary" placeholder="Batch Number" required>
                             </div>
@@ -70,7 +70,7 @@
                             <?php endif ?>
                           </td>
                           <td>
-                            <?php if ($value->expired === null): ?>
+                            <?php if ($value->expired === null && $approve !== null): ?>
                             <div class="card-block width-200">
                               <input type="date" name="expired[]" class="form-control border-primary" placeholder="Expired" required>
                             </div>
@@ -108,21 +108,27 @@
                     <?php foreach ($detail['data']->result() as $value): ?>    
                     <input type="hidden" name="id" value="<?php echo $value->id; ?>" >
                     <div class="row">
-                      <div class="col-md-4 col-xs-12">
+                      <div class="col-md-3 col-xs-12">
                         <div class="form-group">
                           <label class="label-control">Tanggal Permohonan</label>
                           <input type="text" class="form-control border-primary" value="<?php echo date('d-M-Y', strtotime($value->tanggal)); ?>" disabled>
                         </div>
                       </div>
-                      <div class="col-md-4 col-xs-12">
+                      <div class="col-md-3 col-xs-12">
                         <div class="form-group">
                           <label class="label-control">Tanggal Target</label>
                           <input type="text" class="form-control border-primary" value="<?php echo date('d-M-Y', strtotime($value->tanggal_target)); ?>" disabled>
                         </div>
                       </div>
+                      <div class="col-md-3 col-xs-12">
+                        <div class="form-group">
+                          <label class="label-control">Status</label><br />
+                          <span class="tag tag-lg tag-warning"><?php echo $value->status; ?></span>
+                        </div>
+                      </div>
                       <?php $status = $value->status; ?>
-                      <?php if ($status !== 'delivered'): ?>
-                      <div class="col-md-4 col-xs-12">
+                      <?php if ($status !== 'delivered' && $approve !== null): ?>
+                      <div class="col-md-3 col-xs-12">
                         <div class="form-group">
                           <label class="label-control">Status</label>
                           <select name="status" class="form-control border-primary">
@@ -136,7 +142,7 @@
                     </div>
                     <?php endforeach; ?>
                   </div>
-                  <?php if ($status !== 'delivered'): ?>
+                  <?php if ($status !== 'delivered' && $approve !== null): ?>
                   <div class="form-actions center">
                     <button type="submit" class="btn btn-success">Simpan</button>
                     <button type="reset" class="btn btn-warning">Batal</button>

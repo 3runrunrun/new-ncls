@@ -24,6 +24,7 @@ class C_Stock_Product_Nucleus extends CI_Controller {
 
   public function show($id, $approve = null)
   {
+    $data['approve'] = $approve;
     $data['produk'] = $this->ppnd->show($id);
     $data['detail'] = $this->ppn->show($id);
 

@@ -140,6 +140,17 @@ $route['store-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/store_intens/$1
 // fixed cost
 $route['fixed-cost'] = 'transaction/C_Fixed_Cost_Ratio/index';
 
+// rtd
+$route['rtd'] = 'transaction/C_Prospect_RTD/index';
+$route['store-rtd'] = 'transaction/C_Prospect_RTD/store';
+$route['store-rtd/(:any)'] = 'transaction/C_Prospect_RTD/store/$1';
+
+// pma
+$route['pma'] = 'transaction/C_Pros_Marketing_Act/index';
+$route['store-pma'] = 'transaction/C_Pros_Marketing_Act/store';
+$route['store-pma/(:any)'] = 'transaction/C_Pros_Marketing_Act/store/$1';
+$route['store-pma-expense'] = 'transaction/C_Pros_Marketing_Act/store_expense';
+
 // promo trial
 $route['promo-trial'] = 'transaction/C_Promo_Trial/index';
 $route['store-promo'] = 'transaction/C_Promo_Trial/store';

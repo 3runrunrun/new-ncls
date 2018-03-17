@@ -183,6 +183,13 @@ $autoload['model'] = array(
   'transaction/ineks/Subdist_Eksten' => 'subeks',
   'transaction/ineks/Subdist_Intensifikasi' => 'subins',
 
+  'transaction/rtd/Rtd',
+  'transaction/rtd/Rtd_Status',
+
+  'transaction/pma/Pma',
+  'transaction/pma/Pma_Detail',
+  'transaction/pma/Pma_Status',
+
   'transaction/wpr/Wpr',
   'transaction/wpr/Wpr_Detail',
   'transaction/wpr/Wpr_Status',
@@ -232,6 +239,7 @@ $autoload['model'] = array(
   'report/stock-nucleus/Barang_Stok_Nucleus' => 'bsn',
 
   'report/stock-distributor/Barang_Masuk_Distributor' => 'bmd',
+  'report/stock-distributor/Barang_Stok_Distributor' => 'bsd',
 
   'report/stock-subdist/Barang_Masuk_Subdist' => 'bms',
 
