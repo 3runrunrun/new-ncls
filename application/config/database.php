@@ -80,7 +80,7 @@ $db['default'] = array(
 	// 'hostname' => 'localhost',
 	// 'username' => 'root',
 	// 'password' => 'nucleus2018',
-	// 'database' => 'nucleus_db',
+	// 'database' => 'db_nucleus',
 	// 'dbdriver' => 'mysqli',
 
 	// local
