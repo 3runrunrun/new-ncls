@@ -41,7 +41,7 @@
             </div>
             <div class="card-body">
               <div class="card-block">
-                <form action="#" method="POST" class="form" role="form">
+                <form action="<?php echo site_url(); ?>/store-tender" method="POST" class="form" role="form">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-md-6 col-xs-12">
@@ -53,17 +53,25 @@
                           </div>
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">No. Faktur</label><br />
-                            <span class="tag tag-success tag-lg">faktur</span>
+                            <?php $no_tender = $prefix . '-hl-' . date('d-Y'); ?>
+                            <?php $this->session->set_userdata('no_tender', $no_tender); ?>
+                            <span class="tag tag-success tag-lg"><?php echo str_replace('-', '/', strtoupper($no_tender)); ?></span>
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6 col-xs-12">
                         <h5 class="form-section">2. Pemohon</h5>
                         <div class="form-group">
-                          <label class="label-control">Detailer</label>
+                          <label class="label-control">SPV / RM</label>
                           <select name="id_detailer" class="form-control select2" required>
-                            <option value="" selected disabled>Pilih detailer</option>
-                            <option value=""></option>
+                            <option value="" selected disabled>Pilih SPV / RM</option>
+                            <?php if ($detailer['data']->num_rows() < 1): ?>
+                            <option value="" disabled>Belum tersedia</option>
+                            <?php else: ?>
+                            <?php foreach ($detailer['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
                           </select>
                         </div>
                       </div>
@@ -81,35 +89,59 @@
                       <div class="col-md-3 col-xs-12">
                         <div class="form-group">
                           <label class="label-control">Distributor</label>
-                          <select name="id_distributor" class="form-control select2" required>
+                          <select name="id_distributor" class="form-control select2" onchange="print_dist(this)" required>
                             <option value="" selected disabled>Pilih Distributor</option>
-                            <option value=""></option>
+                            <?php if ($dist_subdist['data']->num_rows() < 1): ?>
+                            <option value="" disabled>Belum tersedia</option>
+                            <?php else: ?>
+                            <?php foreach ($dist_subdist['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo $value->alias_distributor; ?> -  <?php echo $value->nama; ?></option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
                           </select>
-                          <fieldset class="mt-1">
-                            <label class="custom-control custom-checkbox">
-                              <input type="checkbox" name="subdist" class="custom-control-input" value="y">
+                          <fieldset>
+                            <label class="custom-control custom-radio mt-1">
+                              <input id="radioStacked1" name="dist_subdist" type="radio" class="custom-control-input" value="d" required>
+                              <span class="custom-control-indicator"></span>
+                              <span class="custom-control-description">Distributor</span>
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label class="custom-control custom-radio">
+                              <input id="radioStacked1" name="dist_subdist" type="radio" class="custom-control-input" value="s" required>
                               <span class="custom-control-indicator"></span>
                               <span class="custom-control-description">Subdistributor</span>
                             </label>
                           </fieldset>
-                          <p>Centang kolom diatas apabila KO diajukan oleh subdistributor</p>
                         </div>
                       </div>
                       <div class="col-md-3 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">RM (Mengetahui)</label>
+                          <label class="label-control"><strong>Menyetujui</strong></label>
                           <select name="id_rm" class="form-control select2" required>
-                            <option value="" selected disabled>Pilih RM</option>
-                            <option value=""></option>
+                            <option value="" selected disabled>Pilih</option>
+                            <?php if ($detailer['data']->num_rows() < 1): ?>
+                            <option value="" disabled>Belum tersedia</option>
+                            <?php else: ?>
+                            <?php foreach ($detailer['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
                           </select>
                         </div>
                       </div>
                       <div class="col-md-3 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Direktur (Menyetujui)</label>
+                          <label class="label-control"><strong>Approver</strong> (Direktur)</label>
                           <select name="id_direktur" class="form-control select2" required>
                             <option value="" selected disabled>Pilih Direktur</option>
-                            <option value=""></option>
+                            <?php if ($detailer['data']->num_rows() < 1): ?>
+                            <option value="" disabled>Belum tersedia</option>
+                            <?php else: ?>
+                            <?php foreach ($detailer['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
+                            <?php endforeach; ?>
+                            <?php endif; ?> 
                           </select>
                         </div>
                       </div>
@@ -131,10 +163,10 @@
                                 <th rowspan="2" colspan="2">Keterangan</th>
                               </tr>
                               <tr>
-                                <th>Distributor</th>
+                                <th class="dist-out">Distributor</th>
                                 <th>NF</th>
                                 <th>Total</th>
-                                <th>Distributor</th>
+                                <th class="dist-out">Distributor</th>
                                 <th>NF</th>
                                 <th>Total</th>
                               </tr>
@@ -145,7 +177,13 @@
                                   <div class="card-block width-300">
                                     <select name="id_outlet[]" class="form-control select2" required>
                                       <option value="" selected disabled>Pilih Outlet</option>
-                                      <option value=""></option>
+                                      <?php if ($outlet['data']->num_rows() < 1): ?>
+                                      <option value="" disabled>Belum tersedia</option>
+                                      <?php else: ?>
+                                      <?php foreach ($outlet['data']->result() as $value): ?>
+                                      <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_outlet; ?></option>
+                                      <?php endforeach; ?>
+                                      <?php endif; ?>
                                     </select>
                                   </div>
                                 </td>
@@ -153,20 +191,26 @@
                                   <div class="card-block width-300">
                                     <select name="id_produk[]" class="form-control select2" required>
                                       <option value="" selected disabled>Pilih Produk</option>
-                                      <option value=""></option>
+                                      <?php if ($produk['data']->num_rows() < 1): ?>
+                                      <option value="" disabled>Belum tersedia</option>
+                                      <?php else: ?>
+                                      <?php foreach ($produk['data']->result() as $value): ?>
+                                      <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->nama); ?></option>
+                                      <?php endforeach; ?>
+                                      <?php endif; ?>
                                     </select>
                                   </div>
                                 </td>
                                 <td>
                                   <div class="card-block width-200">
-                                    <input type="text" name="jumlah[]" class="form-control border-primary" required>
+                                    <input type="number" name="jumlah[]" class="form-control border-primary" min="0" required>
                                   </div>
                                 </td>
                                 <td>
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="on_diskon_distributor[]" class="form-control border-primary" required>
+                                        <input type="text" name="on_diskon_distributor[]" class="form-control border-primary" min="0" value="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -176,7 +220,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="on_nf[]" class="form-control border-primary" required>
+                                        <input type="text" name="on_nf[]" class="form-control border-primary" min="0" value="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -186,7 +230,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="on_total[]" class="form-control border-primary" required>
+                                        <input type="text" name="on_total[]" class="form-control border-primary" min="0" value="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -196,7 +240,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="off_diskon_distributor[]" class="form-control border-primary" required>
+                                        <input type="text" name="off_diskon_distributor[]" class="form-control border-primary" min="0" value="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -206,7 +250,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="off_nf[]" class="form-control border-primary" required>
+                                        <input type="text" name="off_nf[]" class="form-control border-primary" min="0" value="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -216,7 +260,7 @@
                                   <div class="card-block width-150">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="text" name="off_total[]" class="form-control border-primary" required>
+                                        <input type="text" name="off_total[]" class="form-control border-primary" min="0" value="0" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -224,7 +268,7 @@
                                 </td>
                                 <td>
                                   <div class="card-block width-200">
-                                    <textarea name="keterangan[]"  rows="3" class="form-control border-primary" required></textarea>
+                                    <textarea name="keterangan[]"  rows="3" class="form-control border-primary"></textarea>
                                   </div>
                                 </td>
                                 <td class="del-repeater">
@@ -273,7 +317,7 @@
                                 <td>
                                   <div class="card-block">
                                     <div class="input-group">
-                                      <input type="text" name="diskon[]" id="" class="form-control border-primary" required>
+                                      <input type="text" name="diskon[]" id="" class="form-control border-primary" min="0" required>
                                       <span class="input-group-addon">%</span>
                                     </div>
                                   </div>
@@ -299,7 +343,7 @@
                                   <div class="card-block width-200 pull-right">
                                     <fieldset>
                                       <div class="input-group">
-                                        <input type="number" name="total" class="form-control border-primary" placeholder="Total" required>
+                                        <input type="number" name="total" class="form-control border-primary" min="0" placeholder="Total" required>
                                         <span class="input-group-addon">%</span>
                                       </div>
                                     </fieldset>
@@ -319,7 +363,7 @@
                       </div>
                       <div class="col-md-4 col-xs-12">
                         <div class="card-text">
-                          <p>Demikian surat ini kami sampaikan. Bila surat ini sudah disetujui harap fax ke pihak <strong>distributor</strong>.</p>
+                          <p>Demikian surat ini kami sampaikan. Bila surat ini sudah disetujui harap fax ke pihak <strong class="dist-out">distributor</strong>.</p>
                           <p>Atas perhatian Bapak, kami sampaikan terima kasih.</p>
                         </div>
                       </div>
@@ -393,4 +437,14 @@
       $('.div-repeat-2:last .count-repeater').text(count + 1);
     });
   });
+</script>
+
+<script type="text/javascript">
+  function print_dist(selector){
+    var text = $(selector).children().filter(':selected').text();
+    var splitted = text.split('-');
+    var clear_text = $.trim(splitted[splitted.length - 1]);
+    console.log(clear_text);
+    $('.dist-out').text(clear_text);
+  }
 </script>

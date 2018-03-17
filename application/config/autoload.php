@@ -228,5 +228,11 @@ $autoload['model'] = array(
 
   // report
   'report/stock-nucleus/Barang_Masuk_Nucleus' => 'bmn',
+  'report/stock-nucleus/Barang_Keluar_Nucleus' => 'bkn',
   'report/stock-nucleus/Barang_Stok_Nucleus' => 'bsn',
+
+  'report/stock-distributor/Barang_Masuk_Distributor' => 'bmd',
+
+  'report/stock-subdist/Barang_Masuk_Subdist' => 'bms',
+
 );
