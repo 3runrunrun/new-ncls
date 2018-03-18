@@ -45,15 +45,38 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="report-table">
                     <thead>
                       <tr>
-                        <th>TANGGAL</th>
+                        <th>Bulan</th>
                         <?php foreach ($jenis['data']->result() as $value): ?>
-                        <th><?php echo $value->nama; ?><br />(Rp)</th>
+                        <th><?php echo ucwords(strtolower($value->nama)); ?><br />(Rp)</th>
                         <?php endforeach; ?>
                       </tr>
                     </thead>
                     <tbody>
-                      
+                      <?php foreach ($laporan['data']->result() as $value): ?>
+                      <tr>
+                        <td><?php echo $value->tanggal; ?></td>
+                        <td><?php echo number_format($value->bahan_baku, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->bahan_tambahan, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->pengemas, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->pekerja, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->jasa_lab, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->jasa_research, 0, ',', '.'); ?></td>
+                      </tr>
+                      <?php endforeach; ?>
                     </tbody>
+                    <tfoot class="border-top-green">
+                      <?php foreach ($laporan_tahun['data']->result() as $value): ?>
+                      <tr>
+                        <th>Total</th>
+                        <th><?php echo number_format($value->bahan_baku, 0, ',', '.'); ?></th>
+                        <th><?php echo number_format($value->bahan_tambahan, 0, ',', '.'); ?></th>
+                        <th><?php echo number_format($value->pengemas, 0, ',', '.'); ?></th>
+                        <th><?php echo number_format($value->pekerja, 0, ',', '.'); ?></th>
+                        <th><?php echo number_format($value->jasa_lab, 0, ',', '.'); ?></th>
+                        <th><?php echo number_format($value->jasa_research, 0, ',', '.'); ?></th>
+                      </tr>
+                      <?php endforeach; ?>
+                    </tfoot>
                   </table>
                 </div>
               </div>

@@ -92,16 +92,23 @@
                 <div class="card-text">
                   <p>Formulir penyimpanan sales medical representative</p>
                 </div>
-                <form action="<?php echo site_url(); ?>/" class="form" method="POST" role="form">
+                <form action="<?php echo site_url(); ?>/store-entry-breakdown" class="form" method="POST" role="form">
+                  <input type="hidden" name="halaman" value="general">
                   <div class="form-body">
                     <h5 class="form-section">1. Informasi Med Rep</h5>
                     <div class="row">
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Kode Wpr</label>
+                          <label class="label-control">Kode Wpr - Dokter</label>
                           <select name="id_wpr" class="form-control select2" required>
-                            <option value="" selected disabled>Pilih kode WPR</option>
-                            <option value=""></option>
+                            <option value="" selected disabled>Pilih kode WPR - Dokter</option>
+                            <?php if ($wpr['data']->num_rows() < 1): ?>
+                            <option value="" selected disabled>Belum tersedia</option>
+                            <?php else: ?>
+                            <?php foreach ($wpr['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id_wpr; ?>"><?php echo str_replace('-', '/', strtoupper($value->no_wpr)); ?> - <?php echo strtoupper($value->nama_user); ?></option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
                           </select>
                         </div>
                         <div class="form-group">
@@ -115,7 +122,13 @@
                             <label class="label-control">Produk</label>
                             <select name="id_produk[]" class="form-control select2" required>
                               <option value="" selected disabled>Pilih produk</option>
-                              <option value=""></option>
+                              <?php if ($produk['data']->num_rows() < 1): ?>
+                              <option value="" selected disabled>Belum tersedia</option>
+                              <?php else: ?>
+                              <?php foreach ($produk['data']->result() as $value): ?>
+                              <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->id); ?> - <?php echo strtoupper($value->nama); ?></option>
+                              <?php endforeach; ?>
+                              <?php endif; ?>
                             </select>
                           </div>
                           <div class="col-md-4 col-xs-12">

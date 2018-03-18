@@ -128,7 +128,7 @@ class C_WPR extends CI_Controller {
     $this->Wpr_Status->store($val);
   }
 
-  public function print($id)
+  public function cetak($id)
   {
     $data['detail'] = $this->Wpr->show($id, 'a.id, a.no_wpr, UPPER(b.nama_detailer) as detailer, UPPER(d.nama) as supervisor, e.id as id_approver, UPPER(e.nama) as direktur, a.status, UPPER(b.nama_area) as nama_area, UPPER(b.alias_area) as alias_area');
     $data['request'] = $this->Wpr_Detail->show($id, 'UPPER(nama_user) AS nama_user, UPPER(spesialis) AS spesialis, dari, sampai, dana, UPPER(bank) AS bank, UPPER(norek) as norek, UPPER(atas_nama) as atas_nama, no_wpr, id_wpr');

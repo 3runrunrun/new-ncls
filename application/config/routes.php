@@ -155,7 +155,7 @@ $route['store-pma-expense'] = 'transaction/C_Pros_Marketing_Act/store_expense';
 $route['promo-trial'] = 'transaction/C_Promo_Trial/index';
 $route['store-promo'] = 'transaction/C_Promo_Trial/store';
 $route['store-promo/(:any)'] = 'transaction/C_Promo_Trial/store/$1';
-$route['print-promo/(:any)'] = 'transaction/C_Promo_Trial/print/$1';
+$route['print-promo/(:any)'] = 'transaction/C_Promo_Trial/cetak/$1';
 $route['detail-promo/(:any)'] = 'transaction/C_Promo_Trial/show/$1';
 $route['detail-promo/(:any)/(:any)'] = 'transaction/C_Promo_Trial/show/$1/$2';
 
@@ -163,7 +163,7 @@ $route['detail-promo/(:any)/(:any)'] = 'transaction/C_Promo_Trial/show/$1/$2';
 $route['wpr'] = 'transaction/C_WPR/index';
 $route['store-wpr'] = 'transaction/C_WPR/store';
 $route['store-wpr/(:any)'] = 'transaction/C_WPR/store/$1';
-$route['print-wpr/(:any)'] = 'transaction/C_WPR/print/$1';
+$route['print-wpr/(:any)'] = 'transaction/C_WPR/cetak/$1';
 $route['detail-wpr/(:any)'] = 'transaction/C_WPR/show/$1';
 $route['detail-wpr/(:any)/(:any)'] = 'transaction/C_WPR/show/$1/$2';
 
@@ -188,6 +188,7 @@ $route['store-tender/(:any)'] = 'transaction/C_Tender/store/$1';
  */
 $route['daily-sales-product'] = 'report/C_Daily_Sales/show_product';
 $route['daily-sales-outlet'] = 'report/C_Daily_Sales/show_outlet';
+$route['detail-sales-outlet/(:any)'] = 'report/C_Daily_Sales/detail_outlet/$1';
 $route['store-sales'] = 'report/C_Daily_Sales/store';
 $route['store-sales/(:any)'] = 'report/C_Daily_Sales/store/$1';
 
@@ -198,7 +199,7 @@ $route['detail-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/show/$
 $route['detail-product-nucleus/(:any)/(:any)'] = 'report/C_Stock_Product_Nucleus/show/$1/$2';
 $route['store-product-nucleus'] = 'report/C_Stock_Product_Nucleus/store';
 $route['store-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/store/$1';
-$route['print-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/print/$1';
+$route['print-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/cetak/$1';
 
 $route['stock-product-distributor'] = 'report/C_Stock_Product_Distributor/index';
 $route['detail-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/show/$1';

@@ -123,7 +123,7 @@ class C_Promo_Trial extends CI_Controller {
     $this->pts->store($val);
   }
   
-  public function print($id)
+  public function cetak($id)
   {
     $data['produk'] = $this->ptd->show($id);
     $data['detail'] = $this->pt->show($id, 'a.id, a.no_promo, b.nama as nama_detailer, c.nama as nama_customer, a.keterangan, a.status, c.nama_area');

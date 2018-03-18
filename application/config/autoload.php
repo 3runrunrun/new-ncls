@@ -150,6 +150,8 @@ $autoload['model'] = array(
   'master/Master_Cogm',
   'core/User_Account',
   'core/Dist_Subdist',
+  'core/Target_Detailer',
+  'core/Kog_Kot',
    
   // master
   'master/Area',
@@ -176,6 +178,7 @@ $autoload['model'] = array(
 
   // report
   'report/sales/Sales_Distributor' => 'salo',
+  'report/sales/Sales_Actual' => 'sala',
 
   // transaction
   'transaction/ineks/Ekstensifikasi' => 'eks',
@@ -197,6 +200,10 @@ $autoload['model'] = array(
   'transaction/sales/Sales' => 'sal',
   'transaction/sales/Sales_Diskon' => 'sald',
   'transaction/sales/Sales_Subdist' => 'salsub',
+
+  'transaction/sales-tender/Sales_Tender' => 'salt',
+  'transaction/sales-tender/Sales_Tender_Diskon' => 'saltd',
+  'transaction/sales-tender/Sales_Tender_Subdist' => 'saltsub',
 
   'transaction/sales-customer/Sales_Customer' => 'salcust',
   'transaction/sales-customer/Sales_Customer_Detail' => 'salcustd',
@@ -234,13 +241,16 @@ $autoload['model'] = array(
   'transaction/promo-trial/Promo_Trial_Status' => 'pts',
 
   // report
+  'report/sales/Sales_Daily' => 'gsal',
   'report/stock-nucleus/Barang_Masuk_Nucleus' => 'bmn',
   'report/stock-nucleus/Barang_Keluar_Nucleus' => 'bkn',
   'report/stock-nucleus/Barang_Stok_Nucleus' => 'bsn',
 
   'report/stock-distributor/Barang_Masuk_Distributor' => 'bmd',
+  'report/stock-distributor/Barang_Keluar_Distributor' => 'bkd',
   'report/stock-distributor/Barang_Stok_Distributor' => 'bsd',
 
   'report/stock-subdist/Barang_Masuk_Subdist' => 'bms',
+  'report/stock-subdist/Barang_Keluar_Subdist' => 'bks',
 
 );

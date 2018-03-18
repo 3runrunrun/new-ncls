@@ -187,7 +187,7 @@
         </button>
         <h4 class="modal-title" id="expensePlanning">Expense Planning</h4>
       </div>
-      <form class="form" method="POST" id="modal-save-expense">
+      <form class="form" method="POST" action="<?php echo site_url(); ?>/store-pma-expense">
         <div class="modal-body">
           <div class="row">
             <div class="col-md-6 col-xs-12">
@@ -347,40 +347,4 @@
     $('.modal-id-span').text(decorated_id);
   }
 </script>
-
-<script type="text/javascript">
-  $('#modal-save-expense').submit(function(event) {
-    var hostname = window.location.origin;
-    var path_array = window.location.pathname.split( '/' );
-    var def_path = hostname;
-    console.log(def_path);
-
-    $.ajax({
-      type: 'POST',
-      url: def_path + '/index.php/store-pma-expense',
-      // data: {'id': id},
-      dataType: "json",
-      success:  function(data) {
-        // location.reload();
-        console.log(def_path);
-        console.log(data);
-      },
-      error: function(x, t, m) {
-
-      },  
-    })
-    .done(function() {
-      console.log("success");
-    })
-    .fail(function() {
-      console.log("error");
-    })
-    .always(function() {
-      console.log("complete");
-    });
-
-    event.preventDefault();
-  });
-</script>
-
 

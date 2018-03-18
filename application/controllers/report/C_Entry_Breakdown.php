@@ -16,17 +16,23 @@ class C_Entry_Breakdown extends CI_Controller {
 
   public function show_general()
   {
+    $data['wpr'] = $this->Wpr_Detail->get_approved();
+    $data['produk'] = $this->Produk->get_produk_harga('id, UPPER(nama) as nama, UPPER(kemasan) as kemasan, harga_master, harga_hna');
+
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
-    $this->load->view('contents/report/entry-breakdown/general');
+    $this->load->view('contents/report/entry-breakdown/general', $data);
     $this->load->view('footers/footer-js-form-simple-table');
   }
 
   public function show_product()
   {
+    $data['wpr'] = $this->Wpr_Detail->get_approved();
+    $data['produk'] = $this->Produk->get_produk_harga('id, UPPER(nama) as nama, UPPER(kemasan) as kemasan, harga_master, harga_hna');
+
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
-    $this->load->view('contents/report/entry-breakdown/per-product');
+    $this->load->view('contents/report/entry-breakdown/per-product', $data);
     $this->load->view('footers/footer-js-form-simple-table');
   }
 
@@ -38,37 +44,45 @@ class C_Entry_Breakdown extends CI_Controller {
     } elseif ($operation == 'delete') {
       # code...
     } else {
-      # code...
       $input_var = $this->input->post();
       $input_var['id'] = $this->nsu->letter_number_generator('slc');
       $input_var['tahun'] = date('Y');
 
-      $slc = array();
-      $slc_detail = array();
-
-      $slc['id'] = $input_var['id'];
-      $slc['tahun'] = $input_var['tahun'];
-      $slc['tanggal'] = $input_var['tanggal'];
-      $slc['id_wpr'] = $input_var['id_wpr'];
-      $this->salcust->store($slc);
-      
-      foreach ($input_var['id_produk'] as $key => $value) {
-        $slc_detail['id_sc'] = $input_var['id'];
-        $slc_detail['id_produk'] = $input_var['id_produk'][$key];
-        $slc_detail['jumlah'] = $input_var['jumlah'][$key];
-        $this->salcustd->store($slc_detail);
-      }
+      $this->save_salcust($input_var);
+      $this->save_salcustd($input_var);
 
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan data promo trial <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', 'Penambahan data penjualan sales med rep <strong>gagal</strong>.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data promo trial <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'Data penjualan sales med rep <strong>berhasil</strong> disimpan.');
+      }
+      if ($input_var['halaman'] === 'general') {
+        redirect('/entry-breakdown-general'); 
       }
     }
    
-   redirect('/master-promo'); 
+   redirect('/entry-breakdown-product'); 
+  }
+
+  public function save_salcust($data = array())
+  {
+    $val['id'] = $data['id'];
+    $val['tahun'] = $data['tahun'];
+    $val['tanggal'] = $data['tanggal'];
+    $val['id_wpr'] = $data['id_wpr'];
+    $this->salcust->store($val);
+  }
+
+  public function save_salcustd($data = array())
+  {
+    foreach ($data['id_produk'] as $key => $value) {
+      $val['id_sc'] = $data['id'];
+      $val['id_produk'] = $value;
+      $val['jumlah'] = $data['jumlah'][$key];
+      $this->salcustd->store($val);
+    }
   }
 
 }

@@ -59,16 +59,17 @@ class C_Pros_Marketing_Act extends CI_Controller {
 
     $input_var = $this->input->post();
     $this->save_pmad($input_var);
+    $this->update_pma($input_var);
 
     if ($this->db->trans_status() === FALSE) {
       $this->db->trans_rollback();
       $this->session->set_flashdata('error_msg', 'Penambahan expense planning <strong>gagal</strong>.');
     } else {
-      $this->db->trans_rollback();
-      // $this->db->trans_commit();
+      // $this->db->trans_rollback();
+      $this->db->trans_commit();
       $this->session->set_flashdata('success_msg', 'Expense planning <strong>berhasil</strong> disimpan.');
     }
-    echo json_encode(array('asd' => 'yeah'));
+    redirect('/pma');
   }
 
   // pma

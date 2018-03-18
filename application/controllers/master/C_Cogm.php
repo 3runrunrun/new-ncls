@@ -11,6 +11,8 @@ class C_Cogm extends CI_Controller {
 
   public function index()
   {
+    $data['laporan'] = $this->Cogm->get_cogm();
+    $data['laporan_tahun'] = $this->Cogm->get_cogm_year();
     $data['jenis'] = $this->Master_Cogm->get_data('id, UPPER(nama) as nama');
     $data['cogm'] = $this->Cogm->get_data('a.id, b.nama as jenis, a.tanggal, a.biaya');
 
