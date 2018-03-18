@@ -37,7 +37,7 @@ class Pma extends CI_Model {
   public function update($id, $data = array())
   {
     $this->db->set($data);
-    $this->db->where('id', $data);
+    $this->db->where('id', $id);
     $query = $this->db->get_compiled_update('pma');
     $this->db->query($query);
   }

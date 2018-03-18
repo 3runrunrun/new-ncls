@@ -11,9 +11,13 @@ class C_Actual_Sales extends CI_Controller {
 
   public function index()
   {
+    $data['sales'] = $this->sala->get_data();
+    $data['total'] = $this->sala->get_total();
+    $data['sales_bawah'] = $this->sala->get_data_lower();
+
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
-    $this->load->view('contents/report/sales-actual/sales-actual');
+    $this->load->view('contents/report/sales-actual/sales-actual', $data);
     $this->load->view('footers/footer-js-form-simple-table');
   }
 

@@ -15,6 +15,7 @@ class Wpr extends CI_Model {
     $this->db->join('detailer b', 'a.id_detailer = b.id');
     $this->db->join('detailer c', 'a.id_spv = c.id');
     $this->db->join('wpr_detail d', 'a.id = d.id_wpr');
+    $this->db->where('a.tahun', $this->session->userdata('tahun'));
     $this->db->where('a.hapus', null);
     $this->db->group_by('d.id_wpr');
     $result = $this->db->get();

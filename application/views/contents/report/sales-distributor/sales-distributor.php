@@ -1,3 +1,4 @@
+<?php $area = null; ?>
 <div class="app-content content container-fluid">
   <div class="content-wrapper">
     <div class="content-header row">
@@ -61,7 +62,31 @@
                       </tr>
                     </thead>
                     <tbody>
-
+                      <?php foreach ($sales_area['data']->result() as $value): ?>
+                      <?php if ($value->nama_area != $area): ?>
+                      <?php $area = $value->nama_area; ?>
+                      <?php echo $area; ?>
+                      <tr>
+                        <td><strong>(<?php echo $value->id_area; ?>) - <?php echo strtoupper($area); ?></strong></td>
+                        <td colspan="11">&nbsp;</td>
+                      </tr>
+                      <?php endif; ?>
+                      <tr>
+                        <td><?php echo strtoupper($value->alias_distributor); ?></td>
+                        <td><?php echo number_format($value->januari, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->februari, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->maret, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->april, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->mei, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->juni, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->juli, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->agustus, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->september, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->oktober, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->november, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->desember, 0, ',', '.'); ?></td>
+                      </tr>
+                      <?php endforeach ?>
                     </tbody>
                   </table>
                 </div>
@@ -82,7 +107,7 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue">
                     <thead>
                       <tr>
-                        <th>Area</th>
+                        <th>&nbsp;</th>
                         <th>January</th>
                         <th>February</th>
                         <th>March</th>
@@ -98,7 +123,24 @@
                       </tr>
                     </thead>
                     <tbody>
-
+                      <?php foreach ($sales_total['data']->result() as $value): ?>
+                      <tr>
+                        <td><?php echo strtoupper($value->alias_distributor); ?></td>
+                        <td><?php echo number_format($value->januari, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->februari, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->maret, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->april, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->mei, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->juni, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->juli, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->agustus, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->september, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->oktober, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->november, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->desember, 0, ',', '.'); ?></td>
+                      </tr>
+                      <?php endforeach; ?>
+                    </tbody>
                   </table>
                 </div>
               </div>

@@ -42,6 +42,25 @@ class Outlet extends CI_Model
         }
         return $ret_val;
     }
+    public function show($id, $column = '*')
+    {
+        $this->db->select($column, FALSE);
+        $this->db->where('id', $id);
+        $this->db->where('hapus', null);
+        $result = $this->db->get('v_outlet');
+        if (!$result) {
+            $ret_val = array(
+                'status' => 'error',
+                'data'   => $this->db->error(),
+            );
+        } else {
+            $ret_val = array(
+                'status' => 'success',
+                'data'   => $result,
+            );
+        }
+        return $ret_val;
+    }
     public function store($data = array())
     {
         $query = $this->db->set($data)->get_compiled_insert('outlet');
