@@ -153,6 +153,7 @@ $autoload['model'] = array(
   'core/Target_Detailer',
   'core/Kog_Kot',
   'core/Achievement',
+  'core/M_Dashboard',
    
   // master
   'master/Area',

@@ -16,7 +16,10 @@ class Achievement extends CI_Model {
         b.nama_area,
         b.alias_area,
         a.jumlah_diskon as total_sales,
+        a.target,
         a.nominal_target,
+        a.jumlah,
+        a.jumlah / a.target * 100 as achievement_unit,
         a.jumlah_diskon / a.nominal_target * 100 as achievement
       FROM
       (SELECT 

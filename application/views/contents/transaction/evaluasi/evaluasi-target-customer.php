@@ -3,34 +3,6 @@
     <div class="content-header row">
     </div>
     <div class="content-body">
-      
-      <div class="row">
-        <div class="col-xs-12">
-          <?php if ( ! is_null($this->session->flashdata())): ?>
-          <?php if ( ! is_null($this->session->flashdata('error_msg'))): ?>  
-          <div class="alert alert-danger alert-dismissible fade in" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <?php echo $this->session->flashdata('error_msg'); ?>
-          </div>
-          <?php elseif ( ! is_null($this->session->flashdata('success_msg'))): ?>
-          <div class="alert alert-success alert-dismissible fade in" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <?php echo $this->session->flashdata('success_msg'); ?>
-          </div>
-          <?php elseif ( ! is_null($this->session->flashdata('query_msg'))): ?>
-          <div class="bs-callout-danger callout-border-left">
-            <strong>Database Error!</strong>
-            <p><?php echo $this->session->flashdata('query_msg')['message']; ?> <strong><?php echo $this->session->flashdata('query_msg')['code']; ?></strong></p>
-          </div><br />
-          <?php endif; ?>
-          <?php endif; ?>
-        </div>
-      </div>
-      <!-- /alert -->
 
       <!-- table -->
       <div class="row">
@@ -50,22 +22,26 @@
                         <th>Detailer</th>
                         <th>Target<br />(unit)</th>
                         <th>Aktual<br />(unit)</th>
+                        <th>Achievement<br />(%)</th>
                         <th>Tools</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($achievement['data']->result() as $value): ?>
                       <tr>
-                        <td class="rt-data">Area</td>
-                        <td class="rt-data">Kode Detailer</td>
-                        <td class="rt-data">Detailer</td>
-                        <td class="rt-money">Target<br />(unit)</td>
-                        <td class="rt-money">Aktual<br />(unit)</td>
+                        <td class="rt-data"><?php echo ucwords($value->nama_area); ?></td>
+                        <td class="rt-data"><?php echo strtoupper($value->id_detailer); ?></td>
+                        <td class="rt-data"><?php echo ucwords($value->nama_detailer); ?></td>
+                        <td class="rt-money"><?php echo $value->target; ?></td>
+                        <td class="rt-money"><?php echo $value->jumlah; ?></td>
+                        <td class="rt-money"><?php echo number_format($value->achievement_unit, 2, ',', '.'); ?>%</td>
                         <td class="rt-data">
                           <div class="btn-group-vertical">
                             <a href="<?php echo site_url(); ?>/detail-target-customer/as" target="_blank" class="btn btn-info">Detail</a>
                           </div>
                         </td>
                       </tr>
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                 </div>
