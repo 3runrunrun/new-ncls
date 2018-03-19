@@ -21,10 +21,13 @@ class C_Fixed_Cost_Ratio extends CI_Controller {
 
   public function show($id)
   {
-    $this->load->view('heads/head-simple-form-table-chart');
+    $data['detail'] = $this->Detailer->show($id);
+    $data['produk'] = $this->Achievement->show($id);
+
+    $this->load->view('heads/head-form-table-print');
     $this->load->view('navbar');
-    $this->load->view('contents/transaction/fixed-cost/detail');
-    $this->load->view('footers/footer-js-simple-form-table-chart');
+    $this->load->view('contents/transaction/fixed-cost/detail', $data);
+    $this->load->view('footers/footer-js-form-table-print');
   }
 
 }
