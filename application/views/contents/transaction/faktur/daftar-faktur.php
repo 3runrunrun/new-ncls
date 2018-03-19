@@ -76,7 +76,7 @@
                             <a href="<?php echo site_url(); ?>/detail-ko-general/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
                             <?php endif ?>
                             <a href="<?php echo site_url(); ?>/detail-ko-general/<?php echo $value->id; ?>" target="_blank" class="btn btn-info">Detail</a>
-                            <a href="#" class="btn btn-primary">Print</a>
+                            <a href="<?php echo site_url(); ?>/print-ko-general/<?php echo $value->id; ?>" class="btn btn-primary" target="_blank">Print</a>
                           </div>
                         </td>
                       </tr>
@@ -137,7 +137,7 @@
                             <a href="<?php echo site_url(); ?>/detail-ko-tender/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
                             <?php endif; ?>
                             <a href="<?php echo site_url(); ?>/detail-ko-tender/<?php echo $value->id; ?>" target="_blank" class="btn btn-info">Detail</a>
-                            <a href="#" class="btn btn-primary">Print</a>
+                            <a href="<?php echo site_url(); ?>/print-ko-tender/<?php echo $value->id; ?>" class="btn btn-primary" target="_blank">Print</a>
                           </div>
                         </td>
                       </tr>

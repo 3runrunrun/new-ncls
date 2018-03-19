@@ -116,8 +116,8 @@ class C_General extends CI_Controller {
       }
       $this->session->unset_userdata('no_faktur');
     }
-   
-   redirect('/ko-general'); 
+
+    redirect('/ko-general'); 
   }
 
   /**
@@ -125,9 +125,9 @@ class C_General extends CI_Controller {
    | Private function
    |
    */
-  
-  private function save_kog($data = array())
-  {
+
+   private function save_kog($data = array())
+   {
     $val['id'] = $data['id'];
     $val['tahun'] = $data['tahun'];
     $val['id_detailer'] = $data['id_detailer'];
@@ -182,16 +182,16 @@ class C_General extends CI_Controller {
     $val['id_rilis'] = $data['id_direktur'];
     switch ($data['status']) {
       case 'waiting':
-        $val['id_rilis'] = $data['id_detailer'];
-        break;
+      $val['id_rilis'] = $data['id_detailer'];
+      break;
       case 'spv':
       case 'rm':
       case 'rilis':
-        $val['id_rilis'] = $data['id_rilis'];
-        break;
+      $val['id_rilis'] = $data['id_rilis'];
+      break;
       default:
-        $val['id_rilis'] = $data['id_direktur'];
-        break;
+      $val['id_rilis'] = $data['id_direktur'];
+      break;
     }
     
     $val['id_ko'] = $data['id'];
@@ -204,14 +204,14 @@ class C_General extends CI_Controller {
   {
     switch ($data['status']) {
       case 'spv':
-        $val['tgl_spv'] = date('Y-m-d H:i:s');
-        break;
+      $val['tgl_spv'] = date('Y-m-d H:i:s');
+      break;
       case 'rm':
-        $val['tgl_rm'] = date('Y-m-d H:i:s');
-        break;
+      $val['tgl_rm'] = date('Y-m-d H:i:s');
+      break;
       case 'rilis':
-        $val['tgl_direktur'] = date('Y-m-d H:i:s');
-        break;
+      $val['tgl_direktur'] = date('Y-m-d H:i:s');
+      break;
     }
     $this->kog->update($data['id'], $val);
   }
@@ -350,5 +350,15 @@ class C_General extends CI_Controller {
     }
   }
   // end of barang keluar nucleus
+  public function cetak($id)
+  {
+    $data['detailer'] = $this->Detailer->get_detailer_aktif('id, UPPER(nama_detailer) as nama_detailer, UPPER(alias_area) as alias_area');
+    $data['detail'] = $this->kog->show($id);
+    $data['produk'] = $this->kogd->show($id);
+    $data['onoff'] = $this->kogo->show($id);
+    $data['total'] = $this->kogot->show($id);
+    
+    $this->load->view('contents/transaction/faktur/ko-general/cetak',$data);
+  }
 
 }
