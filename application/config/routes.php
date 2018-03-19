@@ -183,12 +183,14 @@ $route['daftar-faktur'] = 'transaction/C_Data_Faktur/index';
 $route['ko-general'] = 'transaction/C_General/index';
 $route['detail-ko-general/(:any)'] = 'transaction/C_General/show/$1';
 $route['detail-ko-general/(:any)/(:any)'] = 'transaction/C_General/show/$1/$2';
+$route['print-ko-general/(:any)'] = 'transaction/C_General/cetak/$1';
 $route['store-general'] = 'transaction/C_General/store';
 $route['store-general/(:any)'] = 'transaction/C_General/store/$1';
 
 $route['ko-tender'] = 'transaction/C_Tender/index';
 $route['detail-ko-tender/(:any)'] = 'transaction/C_Tender/show/$1';
 $route['detail-ko-tender/(:any)/(:any)'] = 'transaction/C_Tender/show/$1/$2';
+$route['print-ko-tender/(:any)'] = 'transaction/C_Tender/cetak/$1';
 $route['store-tender'] = 'transaction/C_Tender/store';
 $route['store-tender/(:any)'] = 'transaction/C_Tender/store/$1';
 

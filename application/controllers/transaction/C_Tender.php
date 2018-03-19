@@ -354,5 +354,15 @@ class C_Tender extends CI_Controller {
     }
   }
   // end of barang keluar nucleus
+  public function cetak($id)
+  {
+    $data['detailer'] = $this->Detailer->get_detailer_aktif('id, UPPER(nama_detailer) as nama_detailer, UPPER(alias_area) as alias_area');
+    $data['detail'] = $this->kot->show($id);
+    $data['produk'] = $this->kotd->show($id);
+    $data['onoff'] = $this->koto->show($id);
+    $data['total'] = $this->kotot->show($id);
+    
+    $this->load->view('contents/transaction/faktur/ko-tender/cetak',$data);
+  }
 
 }
