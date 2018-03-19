@@ -88,16 +88,28 @@
             </div>
             <div class="card-body collapse in">
               <div class="table-responsive height-250">
-                <table class="table table-hover mb-0" id="daily-sales-activity">
+                <table class="table table-hover mb-0" id="daily-sales-activity" id="report-table-2">
                   <thead>
                     <tr>
                       <th>Kode Area</th>
                       <th>Kota / Area</th>
-                      <th>Sales Reg</th>
+                      <th>Sales PPG</th>
+                      <th>Sales PENTA</th>
+                      <th>Sales PTKP</th>
+                      <th>Sales JKI</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- isi -->
+                    <?php foreach ($dsa['data']->result() as $value): ?>
+                    <tr>
+                      <td class="rt-data"><?php echo $value->id_area; ?></td>
+                      <td class="rt-data"><?php echo ucwords($value->nama_area); ?></td>
+                      <td class="rt-data"><?php echo number_format($value->ppg, 0, ',', '.'); ?></td>
+                      <td><?php echo number_format($value->penta, 0, ',', '.'); ?></td>
+                      <td><?php echo number_format($value->ptkp, 0, ',', '.'); ?></td>
+                      <td><?php echo number_format($value->jki, 0, ',', '.'); ?></td>
+                    </tr>
+                    <?php endforeach ?>
                   </tbody>
                 </table>
               </div>
