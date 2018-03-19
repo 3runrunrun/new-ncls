@@ -65,7 +65,6 @@
                       <?php foreach ($sales_area['data']->result() as $value): ?>
                       <?php if ($value->nama_area != $area): ?>
                       <?php $area = $value->nama_area; ?>
-                      <?php echo $area; ?>
                       <tr>
                         <td><strong>(<?php echo $value->id_area; ?>) - <?php echo strtoupper($area); ?></strong></td>
                         <td colspan="11">&nbsp;</td>

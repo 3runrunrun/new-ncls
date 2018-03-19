@@ -153,7 +153,7 @@
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/actual-sales" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Laporan Actual Sales per Year</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Reward</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/reward" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Reward</a>
             </li>
             <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-table"></i>Key Loyalty Management (KLM)</a>
               <ul class="dropdown-menu">
