@@ -267,7 +267,7 @@
                           </div>
                         </div>
                         <div class="table-responsive">
-                          <table class="table table-xs table-bordered table-hover nowrap display border-top-blue" id="simple-table-2">
+                          <table class="table dataex-html5-export table-xs table-bordered table-hover nowrap display border-top-blue" id="simple-table">
                             <thead>
                               <tr>
                                 <th>No. Faktur</th>
@@ -313,52 +313,6 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#simple-table').DataTable({
-        "paging": false,
-      });
-    $('#simple-table_filter').css({
-      'text-align': 'center',
-    });
-    $('#simple-table_wrapper').children(':first').children(':first').remove();
-    $('#simple-table_filter').parent().addClass('col-xs-12').removeClass('col-md-6');
-    $('#simple-table_filter > label > input').addClass('input-md').removeClass('input-sm').attr({
-        placeholder: 'Keyword',
-      });
-
-    $('#simple-table_wrapper').children(':last').remove();
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#simple-table-2 th, #simple-table-2 td').css({
-      'text-align': 'center',
-    });
-    $('#simple-table-2 td').addClass('text-truncate');
-    $('#simple-table-2 td:even').addClass('bg-table-blue');
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#simple-table-2').DataTable({
-        "paging": false,
-      });
-    $('#simple-table-2_filter').css({
-      'text-align': 'center',
-    });
-    $('#simple-table-2_wrapper').children(':first').children(':first').remove();
-    $('#simple-table-2_filter').parent().addClass('col-xs-12').removeClass('col-md-6');
-    $('#simple-table-2_filter > label > input').addClass('input-md').removeClass('input-sm').attr({
-        placeholder: 'Keyword',
-      });
-
-    $('#simple-table-2_wrapper').children(':last').remove();
-  });
-</script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
     $('.diskon-toggle').change(function(){
       if ($('.diskon-toggle').is(':checked')) {
         $('[name=id_ko], [name=general_tender], [name=diskon_on], [name=diskon_off]').prop({
@@ -372,5 +326,21 @@
         });
       }
     });
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#simple-table').DataTable({
+        "paging": false,
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
+      });
+    $('#simple-table_info').remove();
   });
 </script>
