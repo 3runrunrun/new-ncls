@@ -105,7 +105,7 @@
                             <a href="<?php echo site_url(); ?>/detail-product-nucleus/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
                             <?php endif; ?>
                             <a href="<?php echo site_url(); ?>/detail-product-nucleus/<?php echo $value->id; ?>" class="btn btn-info" target="_blank">Detail</a>
-                            <a href="<?php echo site_url(); ?>/detail-product-nucleus/<?php echo $value->id; ?>" class="btn btn-primary" target="_blank">Print</a>
+                            <a href="<?php echo site_url(); ?>/print-product-nucleus/<?php echo $value->id; ?>" class="btn btn-primary" target="_blank">Print</a>
                           </div>
                         </td>
                       </tr>
