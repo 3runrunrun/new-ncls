@@ -50,7 +50,7 @@
                   </div>
                 </div>
                 <div class="table-responsive height-400">
-                  <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
+                  <table class="table dataex-html5-export table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
                         <th>Kode Produk</th>
@@ -120,16 +120,14 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ]
       });
-    $('#simple-table_filter').css({
-      'text-align': 'center',
-    });
-    $('#simple-table_wrapper').children(':first').children(':first').remove();
-    $('#simple-table_filter').parent().addClass('col-xs-12').removeClass('col-md-6');
-    $('#simple-table_filter > label > input').addClass('input-md').removeClass('input-sm').attr({
-        placeholder: 'Keyword',
-      });
-
-    $('#simple-table_wrapper').children(':last').remove();
+    $('#simple-table_info').remove();
   });
 </script>
