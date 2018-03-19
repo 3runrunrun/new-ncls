@@ -1,9 +1,27 @@
+<?php 
+  $sp = null;
+  $sl = null;
+  $p = null;
+ ?>
+
+ <?php 
+    foreach ($sales_person['data']->result() as $value) {
+      $sp = $value->jml;
+    }
+    foreach ($sales_counter['data']->result() as $value) {
+      $sl = $value->jml;
+    }
+    foreach ($profit['data']->result() as $value) {
+      $p = number_format($value->profit, 0, ',', '.');
+    }
+  ?>
 <div class="app-content content container-fluid">
   <div class="content-wrapper">
     <div class="content-header row">
     </div>
     <div class="content-body">
-      
+
+
       <!-- summary -->
       <div class="row">
         <div class="col-xs-12">
@@ -25,7 +43,7 @@
                       <span class="fa fa-user fa-5x color-tosca"></span>
                     </div>
                     <div class="float-xs-left ml-1">
-                      <span class="font-large-3 line-height-1 text-bold-300">25</span>
+                      <span class="font-large-3 line-height-1 text-bold-300"><?php echo $sp; ?></span>
                       <span class="grey darken-1 block">Sales person</span>
                     </div>
                   </div>
@@ -34,7 +52,7 @@
                       <span class="fa fa-share-square-o fa-5x color-blue"></span>
                     </div>
                     <div class="float-xs-left ml-1">
-                      <span class="font-large-3 line-height-1 text-bold-300">25.000</span>
+                      <span class="font-large-3 line-height-1 text-bold-300"><?php echo $sl; ?></span>
                       <span class="grey darken-1 block">Sales</span>
                     </div>
                   </div>
@@ -43,7 +61,7 @@
                         <span class="fa fa-money fa-5x color-red"></span>
                       </div>
                       <div class="float-xs-left ml-1 mt-1">
-                        <span class="line-height-1 text-bold-400">25.000.000.000</span>
+                        <span class="line-height-1 text-bold-800"><?php echo $p; ?></span>
                         <span class="grey darken-1 block">Rupiah</span>
                       </div>
                   </div>
