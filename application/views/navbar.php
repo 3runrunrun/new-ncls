@@ -94,15 +94,11 @@
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/evaluasi-target-customer" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Evaluasi Target Customer</a>
             </li>
-            <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-money"></i>Monthly call plan</a>
+            <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-money"></i>Monthly Call Plan</a>
               <ul class="dropdown-menu">
-                <li data-menu="" ><a href="#" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Target Call Plan Supervisor</a>
+                <li data-menu="" ><a href="<?php echo site_url(); ?>/target-call-plan" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Target Call Plan</a>
                 </li>
-                <li data-menu="" ><a href="#" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Evaluasi Call Plan Supervisor</a>
-                </li>
-                <li data-menu="" ><a href="#" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Target Call Plan RM</a>
-                </li>
-                <li data-menu="" ><a href="#" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Evaluasi Call Plan RM</a>
+                <li data-menu="" ><a href="<?php echo site_url(); ?>/evaluasi-call-plan" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Evaluasi Call Plan</a>
                 </li>
               </ul>
             </li>

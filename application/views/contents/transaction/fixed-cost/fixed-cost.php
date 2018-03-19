@@ -70,22 +70,28 @@
                             <th>Area</th>
                             <th>Total Sales</th>
                             <th>Target</th>
+                            <th>Achievement</th>
                             <th>Tools</th>
                           </tr>
                         </thead>
                         <tbody>
+                          <?php foreach ($performa['data']->result() as $value): ?>
+                            <?php if ($value->achievement < 50): ?>
                           <tr>
-                            <td>Kode Detailer</td>
-                            <td>Detailer</td>
-                            <td>Area</td>
-                            <td>Total Sales</td>
-                            <td>Target</td>
+                            <td><?php echo strtoupper($value->id_detailer); ?></td>
+                            <td><?php echo ucwords($value->nama_detailer); ?></td>
+                            <td><?php echo ucwords($value->nama_area); ?></td>
+                            <td><?php echo number_format($value->total_sales, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->achievement, 2, ',', '.'); ?>%</td>
                             <td>
                               <div class="btn-group-vertical">
-                                <a href="#" class="btn btn-info">Detail</a>
+                                <a href="<?php echo site_url(); ?>/detail-fixed-cost/<?php echo $value->id_detailer; ?>" target="_blank" class="btn btn-info">Detail</a>
                               </div>
                             </td>
                           </tr>
+                            <?php endif; ?>
+                          <?php endforeach; ?>
                         </tbody>
                       </table>
                     </div>
@@ -137,18 +143,23 @@
                           </tr>
                         </thead>
                         <tbody>
+                          <?php foreach ($performa['data']->result() as $value): ?>
+                            <?php if ($value->achievement >= 80 && $value->achievement <= 100): ?>
                           <tr>
-                            <td>Kode Detailer</td>
-                            <td>Detailer</td>
-                            <td>Area</td>
-                            <td>Total Sales</td>
-                            <td>Target</td>
+                            <td><?php echo strtoupper($value->id_detailer); ?></td>
+                            <td><?php echo ucwords($value->nama_detailer); ?></td>
+                            <td><?php echo ucwords($value->nama_area); ?></td>
+                            <td><?php echo number_format($value->total_sales, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->achievement, 2, ',', '.'); ?>%</td>
                             <td>
                               <div class="btn-group-vertical">
-                                <a href="#" class="btn btn-info">Detail</a>
+                                <a href="<?php echo site_url(); ?>/detail-fixed-cost/<?php echo $value->id_detailer; ?>" target="_blank" class="btn btn-info">Detail</a>
                               </div>
                             </td>
                           </tr>
+                            <?php endif; ?>
+                          <?php endforeach; ?>
                         </tbody>
                       </table>
                     </div>
@@ -200,18 +211,23 @@
                           </tr>
                         </thead>
                         <tbody>
+                          <?php foreach ($performa['data']->result() as $value): ?>
+                            <?php if ($value->achievement > 110): ?>
                           <tr>
-                            <td>Kode Detailer</td>
-                            <td>Detailer</td>
-                            <td>Area</td>
-                            <td>Total Sales</td>
-                            <td>Target</td>
+                            <td><?php echo strtoupper($value->id_detailer); ?></td>
+                            <td><?php echo ucwords($value->nama_detailer); ?></td>
+                            <td><?php echo ucwords($value->nama_area); ?></td>
+                            <td><?php echo number_format($value->total_sales, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->achievement, 2, ',', '.'); ?>%</td>
                             <td>
                               <div class="btn-group-vertical">
-                                <a href="#" class="btn btn-info">Detail</a>
+                                <a href="<?php echo site_url(); ?>/detail-fixed-cost/<?php echo $value->id_detailer; ?>" target="_blank" class="btn btn-info">Detail</a>
                               </div>
                             </td>
                           </tr>
+                            <?php endif; ?>
+                          <?php endforeach; ?>
                         </tbody>
                       </table>
                     </div>

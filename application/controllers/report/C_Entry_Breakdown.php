@@ -16,6 +16,7 @@ class C_Entry_Breakdown extends CI_Controller {
 
   public function show_general()
   {
+    $data['entry_breakdown'] = $this->Entry_Breakdown->get_general();
     $data['wpr'] = $this->Wpr_Detail->get_approved();
     $data['produk'] = $this->Produk->get_produk_harga('id, UPPER(nama) as nama, UPPER(kemasan) as kemasan, harga_master, harga_hna');
 
@@ -27,12 +28,24 @@ class C_Entry_Breakdown extends CI_Controller {
 
   public function show_product()
   {
+    $data['entry_breakdown'] = $this->Entry_Breakdown->get_per_product();
     $data['wpr'] = $this->Wpr_Detail->get_approved();
     $data['produk'] = $this->Produk->get_produk_harga('id, UPPER(nama) as nama, UPPER(kemasan) as kemasan, harga_master, harga_hna');
 
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
     $this->load->view('contents/report/entry-breakdown/per-product', $data);
+    $this->load->view('footers/footer-js-form-simple-table');
+  }
+
+  public function show($id)
+  {
+    $data['detail'] = $this->Entry_Breakdown->show_detail($id);
+    $data['produk'] = $this->Entry_Breakdown->show_general($id);
+
+    $this->load->view('heads/head-form-simple-table');
+    $this->load->view('navbar');
+    $this->load->view('contents/report/entry-breakdown/detail-breakdown', $data);
     $this->load->view('footers/footer-js-form-simple-table');
   }
 

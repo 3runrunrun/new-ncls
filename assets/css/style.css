@@ -99,3 +99,12 @@ a {
 #total-table .tt-money{
   text-align: right;
 }
+
+#simple-table .rt-data{
+  text-align: center;
+  vertical-align: middle;
+}
+#simple-table .rt-money{
+  text-align: right;
+  vertical-align: middle;
+}
