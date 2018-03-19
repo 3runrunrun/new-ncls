@@ -68,10 +68,10 @@
                       <?php foreach ($sales['data']->result() as $value): ?>
                       <tr>
                         <td><?php echo strtoupper($value->nama_area); ?></td>
-                        <td><?php echo strtoupper($value->id_produk); ?></td>
+                        <td><?php echo strtoupper($value->kode_produk); ?></td>
                         <td><?php echo strtoupper($value->nama_produk); ?></td>
-                        <td><?php echo $value->target; ?></td>
-                        <td><?php echo number_format($value->total, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->target_rp, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->total_sales, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->januari, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->februari, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->maret, 0, ',', '.'); ?></td>
