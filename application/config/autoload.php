@@ -152,6 +152,7 @@ $autoload['model'] = array(
   'core/Dist_Subdist',
   'core/Target_Detailer',
   'core/Kog_Kot',
+  'core/Achievement',
    
   // master
   'master/Area',
@@ -192,6 +193,9 @@ $autoload['model'] = array(
   'transaction/pma/Pma',
   'transaction/pma/Pma_Detail',
   'transaction/pma/Pma_Status',
+
+  'transaction/call-plan/Call_Plan',
+  'transaction/call-plan/Call_Plan_Masuk',
 
   'transaction/wpr/Wpr',
   'transaction/wpr/Wpr_Detail',
@@ -252,5 +256,7 @@ $autoload['model'] = array(
 
   'report/stock-subdist/Barang_Masuk_Subdist' => 'bms',
   'report/stock-subdist/Barang_Keluar_Subdist' => 'bks',
+
+  'report/entry-breakdown/Entry_Breakdown',
 
 );

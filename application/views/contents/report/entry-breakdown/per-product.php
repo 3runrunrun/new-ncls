@@ -49,21 +49,17 @@
                         <th>Produk</th>
                         <th>Jumlah</th>
                         <th>Value</th>
-                        <th>Tools</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <?php foreach ($entry_breakdown['data']->result() as $key => $value): ?>
                       <tr>
-                        <td>Kode</td>
-                        <td>Produk</td>
-                        <td>Jumlah</td>
-                        <td>Value</td>
-                        <td>
-                          <div class="btn-group-vertical">
-                            <a href="#" class="btn btn-info">Detail</a>
-                          </div>
-                        </td>
+                        <td class="rt-data"><?php echo strtoupper($value->id_produk); ?></td>
+                        <td class="rt-data"><?php echo strtoupper($value->nama_produk); ?></td>
+                        <td class="rt-data"><?php echo $value->jumlah; ?></td>
+                        <td class="rt-money"><?php echo number_format($value->value, 0, ',', '.'); ?></td>
                       </tr>
+                      <?php endforeach ?>
                     </tbody>
                   </table>
                 </div>
@@ -162,7 +158,7 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#simple-table th, #simple-table td').css({
+    $('#simple-table th').css({
       'text-align': 'center',
     });
     $('#simple-table td').addClass('text-truncate');

@@ -139,6 +139,7 @@ $route['store-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/store_intens/$1
 
 // fixed cost
 $route['fixed-cost'] = 'transaction/C_Fixed_Cost_Ratio/index';
+$route['detail-fixed-cost/(:any)'] = 'transaction/C_Fixed_Cost_Ratio/show/$1';
 
 // rtd
 $route['rtd'] = 'transaction/C_Prospect_RTD/index';
@@ -150,6 +151,16 @@ $route['pma'] = 'transaction/C_Pros_Marketing_Act/index';
 $route['store-pma'] = 'transaction/C_Pros_Marketing_Act/store';
 $route['store-pma/(:any)'] = 'transaction/C_Pros_Marketing_Act/store/$1';
 $route['store-pma-expense'] = 'transaction/C_Pros_Marketing_Act/store_expense';
+
+// evaluasi
+$route['evaluasi-target-customer'] = 'transaction/C_Evaluasi_Target_Customer/index';
+$route['detail-target-customer/(:any)'] = 'transaction/C_Evaluasi_Target_Customer/show/$1';
+
+// call plan
+$route['target-call-plan'] = 'transaction/C_Evaluasi_CP_SPV/index';
+$route['store-target-call-plan'] = 'transaction/C_Evaluasi_CP_SPV/store';
+$route['store-target-call-plan/(:any)'] = 'transaction/C_Evaluasi_CP_SPV/store/$1';
+$route['evaluasi-call-plan'] = 'transaction/C_Evaluasi_CP_SPV/evaluasi';
 
 // promo trial
 $route['promo-trial'] = 'transaction/C_Promo_Trial/index';
@@ -208,6 +219,7 @@ $route['store-product-distributor'] = 'report/C_Stock_Product_Distributor/store'
 $route['store-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/store/$1';
 
 $route['entry-breakdown-general'] = 'report/C_Entry_Breakdown/show_general';
+$route['detail-breakdown-general/(:any)'] = 'report/C_Entry_Breakdown/show/$1';
 $route['entry-breakdown-product'] = 'report/C_Entry_Breakdown/show_product';
 $route['store-entry-breakdown'] = 'report/C_Entry_Breakdown/store';
 $route['store-entry-breakdown/(:any)'] = 'report/C_Entry_Breakdown/store/$1';
