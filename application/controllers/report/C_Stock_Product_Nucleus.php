@@ -83,11 +83,7 @@ class C_Stock_Product_Nucleus extends CI_Controller {
   {
     $data['produk'] = $this->ppnd->show($id);
     $data['detail'] = $this->ppn->show($id);
-
-    $this->load->view('heads/head-form-simple-table');
-    $this->load->view('navbar');
-    $this->load->view('contents/report/stok-nucleus/detail-produk', $data);
-    $this->load->view('footers/footer-js-form-simple-table');
+    $this->load->view('contents/report/stok-nucleus/cetak',$data);
   }
 
   /**
@@ -142,6 +138,6 @@ class C_Stock_Product_Nucleus extends CI_Controller {
       $val['jumlah'] = $data['jumlah'][$key];
       $this->bmn->store($val);
     }
-  }
+  } 
 
 }
