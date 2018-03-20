@@ -38,9 +38,8 @@
   <script src="<?php echo base_url() ?>assets/js/vendors/datatables/dataTables.colVis.js" type="text/javascript"></script><!-- datatable > use in export -->
 
   <script src="<?php echo base_url() ?>assets/js/vendors/forms/icheck.min.js" type="text/javascript"></script><!-- form -->
-  <script src="<?php echo base_url() ?>assets/js/vendors/charts/echarts.js" type="text/javascript"></script><!-- chart -->
-  <script src="<?php echo base_url() ?>assets/js/vendors/forms/select2.full.min.js" type="text/javascript"></script><!-- form -->
   <script src="<?php echo base_url() ?>assets/js/vendors/forms/jqBootstrapValidation.js" type="text/javascript"></script><!-- login -->
+  <script src="<?php echo base_url() ?>assets/js/vendors/forms/select2.full.min.js" type="text/javascript"></script><!-- form -->
   <!-- END PAGE VENDOR JS-->
   <!-- BEGIN ROBUST JS-->
   <!-- build:js app-assets/js/app.min.js-->
@@ -60,9 +59,9 @@
   <script src="<?php echo base_url() ?>assets/js/vendors/datatables/datatable-basic.min.js" type="text/javascript"></script><!-- datatable -->
 
   <script src="<?php echo base_url() ?>assets/js/vendors/forms/checkbox-radio.min.js" type="text/javascript"></script><!-- form -->
-  <script src="<?php echo base_url() ?>assets/js/vendors/forms/form-select2.min.js" type="text/javascript"></script><!-- form -->
   <script src="<?php echo base_url() ?>assets/js/vendors/modals/components-modal.min.js" type="text/javascript"></script><!-- modal -->
   <script src="<?php echo base_url() ?>assets/js/vendors/datatables/datatable-html5.min.js" type="text/javascript"></script><!-- datatable > use in export -->
+  <script src="<?php echo base_url() ?>assets/js/vendors/forms/form-select2.min.js" type="text/javascript"></script><!-- form -->
   <!-- END PAGE LEVEL JS-->
 </body>
 </html>

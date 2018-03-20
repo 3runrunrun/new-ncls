@@ -287,7 +287,7 @@
                                 <td>
                                   <div class="card-block">
                                     <?php if ($status !== 'rilis'): ?>
-                                    <input type="hidden" name="cn[]" value="<?php echo $value->cn; ?>" min="0" class="form-control border-primary">
+                                    <input type="hidden" name="cn[]" value="<?php echo $value->cn; ?>" min="0" class="form-control border-primary" >
                                     <?php endif; ?>
                                     <?php echo $value->cn; ?>
                                   </div>
@@ -296,7 +296,7 @@
                                   <div class="card-block">
                                     <div class="input-group">
                                       <?php if ($status !== 'rilis'): ?>
-                                      <input type="text" name="diskon[]" id="" class="form-control border-primary" value="<?php echo $value->diskon; ?>" min="0" required>
+                                      <input type="number" name="diskon[]" id="" class="form-control border-primary" value="<?php echo $value->diskon; ?>" min="0" required>
                                       <span class="input-group-addon">%</span>
                                       <?php else: ?>
                                       <?php echo $value->diskon; ?>
@@ -345,7 +345,7 @@
                         <?php if ($status !== 'rilis'): ?>
                         <div class="form-group">
                           <label class="label-control">Approver</label>
-                          <select name="id_rilis" class="form-control select2">
+                          <select name="id_rilis" class="form-control select2" required>
                             <option value="" selected disabled>Pilih SPV / RM / Direktur</option>
                             <?php if ($detailer['data']->num_rows() < 1): ?>
                             <option value="" disabled>Belum tersedia</option>
@@ -359,7 +359,7 @@
                         </div>
                         <div class="form-group">
                           <label class="label-control">Status</label>
-                          <select name="status" class="form-control border-primary">
+                          <select name="status" class="form-control border-primary" required>
                             <option value="" selected disabled>Pilih status</option>
                             <option value="waiting">Waiting</option>
                             <option value="spv">Mengetahui Pemohon (RM / SPV)</option>

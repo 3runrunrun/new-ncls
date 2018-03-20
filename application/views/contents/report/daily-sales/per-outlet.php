@@ -69,10 +69,10 @@
                       <?php foreach ($sales['data']->result() as $value): ?> 
                       <tr>
                         <td><?php echo strtoupper($value->nama_area); ?></td>
-                        <td><?php echo strtoupper($value->id_outlet); ?></td>
+                        <td><?php echo strtoupper($value->kode_outlet); ?></td>
                         <td><?php echo strtoupper($value->nama_outlet); ?></td>
-                        <td><?php echo $value->target; ?></td>
-                        <td><?php echo number_format($value->total, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->total_sales, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->januari, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->februari, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->maret, 0, ',', '.'); ?></td>
@@ -86,9 +86,7 @@
                         <td><?php echo number_format($value->november, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->desember, 0, ',', '.'); ?></td>
                         <td>
-                          <div class="btn-group-vertical">
-                            <a href="<?php echo site_url(); ?>/detail-sales-outlet/<?php echo $value->id_outlet; ?>" target="_blank" class="btn btn-info">Detail</a>
-                          </div>
+                          <a href="<?php echo site_url(); ?>/detail-sales-outlet/<?php echo $value->kode_outlet; ?>" target="_blank" class="btn btn-info">Detail</a>
                         </td>
                       </tr>
                       <?php endforeach ?>
@@ -209,6 +207,10 @@
                       </div>
                       <div class="col-md-6 col-xs-12">
                         <h5 class="form-section">3. Informasi Diskon</h5>
+                        <div class="bs-callout-pink callout-border-left mt-1 mb-1 p-1">
+                          <strong>Perhatian</strong>
+                          <p>Sebelum mengaktifkan diskon, pastikan data penjualan yang akan anda masukkan sesuai dengan data yang ada pada faktur diskon yang akan dipilih.</p>
+                        </div>
                         <div class="form-group">
                           <fieldset>
                             <label class="custom-control custom-checkbox">
@@ -231,6 +233,9 @@
                               <?php endforeach; ?>
                               <?php endif; ?>
                             </select>
+                            <p class="block-tag text-xs-left">
+                              <small class="tag tag-default tag-warning">Lihat daftar faktur yang tersedia pada tabel di bawah</small>
+                            </p>
                           </div>
                           <div class="col-md-4 col-xs-12">
                             <label class="label-control">Jenis KO</label>
@@ -249,32 +254,42 @@
                               </label>
                             </fieldset>
                           </div>
-                          <p>*) Anda dapat melihat informasi faktur yang tersedia pada tabel di bawah</p>
                         </div>
                         <div class="form-group row input-diskon">
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Diskon On</label>
                             <fieldset>
                               <div class="input-group">  
-                              <input type="number" name="diskon_on" class="form-control border-primary" disabled readonly>
+                              <input type="number" name="diskon_on" class="form-control border-primary" min="0" disabled>
                               <span class="input-group-addon">%</span>
                               </div>
                             </fieldset>
+                            <p class="block-tag text-xs-left">
+                              <small class="tag tag-default tag-danger">Masukkan data diskon dengan benar</small>
+                            </p>
                           </div>
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Diskon Off</label>
                             <fieldset>
                               <div class="input-group">  
-                              <input type="number" name="diskon_off" class="form-control border-primary" disabled readonly>
+                              <input type="number" name="diskon_off" class="form-control border-primary" min="0" disabled>
                               <span class="input-group-addon">%</span>
                               </div>
                             </fieldset>
+                            <p class="block-tag text-xs-left">
+                              <small class="tag tag-default tag-danger">Masukkan data diskon dengan benar</small>
+                            </p>
                           </div>
                         </div>
-                        <div class="table-responsive">
-                          <table class="table table-xs table-bordered table-hover nowrap display border-top-blue" id="simple-table-2">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="table-responsive height-400">
+                          <table class="table dataex-html5-export table-xs table-bordered table-hover nowrap display border-top-blue" id="simple-table-2">
                             <thead>
                               <tr>
+                                <th>Jenis Faktur</th>
                                 <th>No. Faktur</th>
                                 <th>Dist / Subdist</th>
                                 <th>Detailer</th>
@@ -285,6 +300,21 @@
                                 <th>Off<br />(%)</th>
                               </tr>
                             </thead>
+                            <tbody>
+                              <?php foreach ($detail_faktur['data']->result() as $value): ?>
+                              <tr>
+                                <td><?php echo strtoupper($value->jenis_faktur); ?></td>
+                                <td><?php echo str_replace('-', '/', strtoupper($value->id)); ?></td>
+                                <td><?php echo ucwords($value->nama_distributor); ?></td>
+                                <td><?php echo ucwords($value->nama_detailer); ?></td>
+                                <td><?php echo ucwords($value->nama_outlet); ?></td>
+                                <td><?php echo ucwords($value->nama_produk); ?></td>
+                                <td><?php echo ucwords($value->jumlah); ?></td>
+                                <td><?php echo number_format($value->on_total, 2, ',', '.') ?>%</td>
+                                <td><?php echo number_format($value->off_total, 2, ',', '.') ?>%</td>
+                              </tr>
+                              <?php endforeach ?>
+                            </tbody>
                           </table>
                         </div>
                       </div>
@@ -379,3 +409,4 @@
     });
   });
 </script>
+

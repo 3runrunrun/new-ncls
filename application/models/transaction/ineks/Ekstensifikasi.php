@@ -37,6 +37,8 @@ class Ekstensifikasi extends CI_Model {
     $this->db->join('v_user d', 'a.id_customer = d.id');
     $this->db->join('area e', 'b.id_area = e.id');
     $this->db->join('detailer f', 'a.id_detailer = f.id');
+    $this->db->join('produk g', 'a.id_produk = g.id');
+    $this->db->join('produk_harga h', 'a.id_produk = h.id_produk');
     $this->db->where('a.tahun', $this->session->userdata('tahun'));
     $this->db->where('a.hapus', null);
     $result = $this->db->get();

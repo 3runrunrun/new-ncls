@@ -23,6 +23,7 @@ class C_Daily_Sales extends CI_Controller {
     $data['outlet'] = $this->Outlet->get_outlet_aktif('id, UPPER(alias_area) as alias_area, UPPER(nama_outlet) as nama_outlet');
     $data['produk'] = $this->Produk->get_produk_harga('id, UPPER(nama) as nama, UPPER(kemasan) as kemasan, harga_master, harga_hna');
     $data['faktur'] = $this->Kog_Kot->get_data('id, jenis_faktur');
+    $data['detail_faktur'] = $this->Kog_Kot->get_detail();
 
     $this->load->view('heads/head-form-table-print');
     $this->load->view('navbar');
@@ -39,6 +40,7 @@ class C_Daily_Sales extends CI_Controller {
     $data['outlet'] = $this->Outlet->get_outlet_aktif('id, UPPER(alias_area) as alias_area, UPPER(nama_outlet) as nama_outlet');
     $data['produk'] = $this->Produk->get_produk_harga('id, UPPER(nama) as nama, UPPER(kemasan) as kemasan, harga_master, harga_hna');
     $data['faktur'] = $this->Kog_Kot->get_data('id, jenis_faktur');
+    $data['detail_faktur'] = $this->Kog_Kot->get_detail();
 
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
