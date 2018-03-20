@@ -159,7 +159,6 @@
                             <a href="<?php echo site_url(); ?>/detail-product-distributor/<?php echo $value->id; ?>/approve" class="btn btn-warning">Verifikasi</a>
                             <?php endif; ?>
                             <a href="<?php echo site_url(); ?>/detail-product-distributor/<?php echo $value->id; ?>" target="_blank" class="btn btn-info">Detail</a>
-                            <a href="#" class="btn btn-primary">Print</a>
                           </div>
                         </td>
                       </tr>
