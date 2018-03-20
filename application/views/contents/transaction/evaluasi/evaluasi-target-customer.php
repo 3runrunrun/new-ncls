@@ -37,7 +37,7 @@
                         <td class="rt-money"><?php echo number_format($value->achievement, 2, ',', '.'); ?>%</td>
                         <td class="rt-data">
                           <div class="btn-group-vertical">
-                            <a href="<?php echo site_url(); ?>/detail-target-customer/as" target="_blank" class="btn btn-info">Detail</a>
+                            <a href="<?php echo site_url(); ?>/detail-intens/<?php echo $value->id_detailer; ?>" target="_blank" class="btn btn-info">Detail</a>
                           </div>
                         </td>
                       </tr>
