@@ -3,30 +3,30 @@
     <div class="content-header row">
     </div>
     <div class="content-body">
-      
+
       <div class="row">
         <div class="col-xs-12">
           <?php if ( ! is_null($this->session->flashdata())): ?>
-          <?php if ( ! is_null($this->session->flashdata('error_msg'))): ?>  
-          <div class="alert alert-danger alert-dismissible fade in" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <?php echo $this->session->flashdata('error_msg'); ?>
-          </div>
-          <?php elseif ( ! is_null($this->session->flashdata('success_msg'))): ?>
-          <div class="alert alert-success alert-dismissible fade in" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <?php echo $this->session->flashdata('success_msg'); ?>
-          </div>
-          <?php elseif ( ! is_null($this->session->flashdata('query_msg'))): ?>
-          <div class="bs-callout-danger callout-border-left">
-            <strong>Database Error!</strong>
-            <p><?php echo $this->session->flashdata('query_msg')['message']; ?> <strong><?php echo $this->session->flashdata('query_msg')['code']; ?></strong></p>
-          </div><br />
-          <?php endif; ?>
+            <?php if ( ! is_null($this->session->flashdata('error_msg'))): ?>  
+              <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <?php echo $this->session->flashdata('error_msg'); ?>
+              </div>
+            <?php elseif ( ! is_null($this->session->flashdata('success_msg'))): ?>
+              <div class="alert alert-success alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <?php echo $this->session->flashdata('success_msg'); ?>
+              </div>
+            <?php elseif ( ! is_null($this->session->flashdata('query_msg'))): ?>
+              <div class="bs-callout-danger callout-border-left">
+                <strong>Database Error!</strong>
+                <p><?php echo $this->session->flashdata('query_msg')['message']; ?> <strong><?php echo $this->session->flashdata('query_msg')['code']; ?></strong></p>
+              </div><br />
+            <?php endif; ?>
           <?php endif; ?>
         </div>
       </div>
@@ -46,6 +46,7 @@
                     <thead>
                       <tr>
                         <th>Tanggal</th>
+                        <th>Detailer</th>
                         <th>City<br />(Rp)</th>
                         <th>Allowance<br />(Rp)</th>
                         <th>Tol Parkir<br />(Rp)</th>
@@ -55,23 +56,30 @@
                         <th>Med. Care<br />(Rp)</th>
                         <th>Other<br />(Rp)</th>
                         <th>Total<br />(Rp)</th>
+                        <th>Tools</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php foreach ($operasional['data']->result() as $value): ?>
-                      <tr>
-                        <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
-                        <td><?php echo $tanggal; ?></td>
-                        <td><?php echo number_format($value->city, 0, ',', '.'); ?></td>
-                        <td><?php echo number_format($value->allowance, 0, ',', '.'); ?></td>
-                        <td><?php echo number_format($value->tol_parkir, 0, ',', '.'); ?></td>
-                        <td><?php echo number_format($value->bensin, 0, ',', '.'); ?></td>
-                        <td><?php echo number_format($value->comm, 0, ',', '.'); ?></td>
-                        <td><?php echo number_format($value->entertainment, 0, ',', '.'); ?></td>
-                        <td><?php echo number_format($value->medcare, 0, ',', '.'); ?></td>
-                        <td><?php echo number_format($value->other, 0, ',', '.'); ?></td>
-                        <td><?php echo number_format($value->total, 0, ',', '.'); ?></td>
-                      </tr>
+                        <tr>
+                          <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
+                          <td><?php echo $tanggal; ?></td>
+                          <td><?php echo $value->nama; ?></td>
+                          <td><?php echo number_format($value->city, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->allowance, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->tol_parkir, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->bensin, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->comm, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->entertainment, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->medcare, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->other, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->total, 0, ',', '.'); ?></td>
+                          <td>
+                            <div class="btn-group-vertical">
+                              <a href="<?php echo site_url(); ?>/master-operasional-print/<?php echo $value->id_detailer; ?>" target="_blank" class="btn btn-info">Print</a>
+                            </div>
+                          </td>
+                        </tr>
                       <?php endforeach; ?>
                     </tbody>
                   </table>
@@ -104,11 +112,11 @@
                           <select name="id_detailer" class="form-control select2" required>
                             <option value="" selected disabled>Pilih Detailer</option>
                             <?php if ($detailer['data']->num_rows() < 1): ?>
-                            <option value="" disabled>Detailer belum tersedia</option>
+                              <option value="" disabled>Detailer belum tersedia</option>
                             <?php else: ?>
-                            <?php foreach ($detailer['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>"><?php echo $value->nama; ?></option>
-                            <?php endforeach; ?>
+                              <?php foreach ($detailer['data']->result() as $value): ?>
+                                <option value="<?php echo $value->id; ?>"><?php echo $value->nama; ?></option>
+                              <?php endforeach; ?>
                             <?php endif; ?>
                           </select>
                         </div>

@@ -29,6 +29,29 @@ class Operasional extends CI_Model {
     return $ret_val;
   }
 
+  public function show_data($id, $column = '*')
+  {
+    $this->db->select($column);
+    $this->db->from('operasional a');
+    $this->db->join('detailer b', 'a.id_detailer = b.id');
+    $this->db->join('v_detailer_aktif c', 'a.id_detailer = c.id');
+    $this->db->where('a.id_detailer', $id);
+    $this->db->where('a.hapus', null);
+    $result = $this->db->get();
+    if ( ! $result) {
+      $ret_val = array(
+        'status' => 'error',
+        'data' => $this->db->error()
+      );
+    } else {
+      $ret_val = array(
+        'status' => 'success',
+        'data' => $result
+      );
+    }
+    return $ret_val;
+  }
+
   public function store($data = array())
   {
     $query = $this->db->set($data)->get_compiled_insert('operasional');

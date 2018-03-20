@@ -11,19 +11,28 @@ class C_Operasional extends CI_Controller {
 
   public function index()
   {
-    $data['operasional'] = $this->Operasional->get_data('a.id, tanggal, city, allowance, tol_parkir, bensin, comm, entertainment, medcare, other, total');
+    $data['operasional'] = $this->Operasional->get_data('a.id, UPPER(b.nama) as nama, id_detailer, tanggal, city, allowance, tol_parkir, bensin, comm, entertainment, medcare, other, total');
     $data['detailer'] = $this->Detailer->get_data('id, UPPER(nama) as nama');
 
     if ($data['operasional']['status'] == 'error') {
       $this->session->set_flashdata('query_msg', $data['operasional']['data']);
     }
-
-    // var_dump($data['operasional']['data']->result());
-
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
     $this->load->view('contents/master/operasional', $data);
     $this->load->view('footers/footer-js-form-simple-table');
+  }
+  public function cetak($id)
+  {
+    $data['operasional'] = $this->Operasional->show_data($id,'a.id, UPPER(c.nama_area) as nama_area, UPPER(b.nama) as nama, id_detailer, tanggal,  city, allowance, tol_parkir, bensin, comm, entertainment, medcare, other, total');
+    $data['detailer'] = $this->Detailer->get_data('id, UPPER(nama) as nama');
+    $data['maxtgl'] = $this->Operasional->show_data($id,'max(tanggal) as tgl_max, min(tanggal) as tgl_min, sum(city) as city,sum(allowance) as allowance, sum(tol_parkir) as tol_parkir, sum(bensin) as bensin, sum(comm) as comm, sum(entertainment) as entertainment, sum(medcare) as medcare, sum(other) as other, sum(total) as total');
+    $data['nomer'] = $this->nsu->letter_number_generator('wpi',4);
+
+    if ($data['operasional']['status'] == 'error') {
+      $this->session->set_flashdata('query_msg', $data['operasional']['data']);
+    }
+    $this->load->view('contents/master/cetak-operasional', $data);
   }
 
   public function store($operation = null)
