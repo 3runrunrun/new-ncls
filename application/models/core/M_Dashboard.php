@@ -146,4 +146,53 @@ class M_Dashboard extends CI_Model {
     return $ret_val;
   }
 
+  public function top_sales()
+  {
+    $query = "SELECT 
+        a.id_detailer,
+        b.nama_detailer,
+        b.nama_area,
+        b.alias_area,
+        a.achievement_perbulan
+      FROM
+      (SELECT 
+        a1.id_detailer,
+        SUM(a1.jumlah) as jumlah,
+        SUM(a1.jumlah * b1.harga_master) as nominal_jumlah,
+        c1.target,
+        (SUM(a1.jumlah * b1.harga_master) - COALESCE(SUM(a1.jumlah * b1.harga_master) * ((COALESCE(d1.diskon_on, 0) + COALESCE(d1.diskon_off, 0)) / 100), 0)) AS jumlah_diskon,
+        ((SUM(a1.jumlah * b1.harga_master) - COALESCE(SUM(a1.jumlah * b1.harga_master) * ((COALESCE(d1.diskon_on, 0) + COALESCE(d1.diskon_off, 0)) / 100), 0)) / c1.target * 100) as achievement_perbulan
+      FROM sales a1
+      JOIN produk_harga b1 ON a1.id_produk = b1.id_produk
+      LEFT JOIN sales_diskon d1 ON a1.id = d1.id_sales
+      LEFT JOIN (SELECT
+        a2.id_detailer,
+        a2.id_produk,
+        SUM(a2.target * a2.harga_master) as target
+      FROM v_target_detailer a2
+      WHERE a2.tahun = ?
+      AND a2.hapus IS NULL
+      GROUP BY a2.id_detailer) c1 ON a1.id_detailer = c1.id_detailer
+      WHERE date_format(a1.tanggal, '%m') like ?
+      AND a1.hapus IS NULL
+      GROUP BY a1.id_detailer) a
+      JOIN v_detailer_aktif b ON a.id_detailer = b.id
+      order by a.achievement_perbulan desc
+      limit 1";
+    $bind_param = array($this->session->userdata('tahun'), date('m'));
+    $result = $this->db->query($query, $bind_param);
+    if (!$result) {
+      $ret_val = array(
+        'status' => 'error',
+        'data'   => $this->db->error(),
+      );
+    } else {
+      $ret_val = array(
+        'status' => 'success',
+        'data'   => $result,
+      );
+    }
+    return $ret_val;
+  }
+
 }

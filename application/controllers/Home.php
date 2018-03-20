@@ -15,6 +15,10 @@ class Home extends CI_Controller {
     $data['sales_counter'] = $this->M_Dashboard->sales_counter('count(id) as jml');
     $data['profit'] = $this->M_Dashboard->profit();
     $data['dsa'] = $this->M_Dashboard->daily_sales_activity();
+    $data['top_sales'] = $this->M_Dashboard->top_sales();
+
+    // diagram
+    $data['performa'] = $this->Achievement->get_data();
 
     $this->load->view('heads/head-dashboard');
     $this->load->view('navbar');

@@ -76,6 +76,27 @@ class Ekstensifikasi extends CI_Model {
     return $ret_val;
   }
 
+  public function get_log_eksten($id_detailer, $column = '*')
+  {
+    $this->db->select($column);
+    $this->db->where('id_detailer', $id_detailer);
+    $this->db->where('tahun', $this->session->userdata('tahun'));
+    $this->db->where('hapus', null);
+    $result = $this->db->get('v_ineks_log');
+    if ( ! $result) {
+      $ret_val = array(
+        'status' => 'error',
+        'data' => $this->db->error()
+        );
+    } else {
+      $ret_val = array(
+        'status' => 'success',
+        'data' => $result
+        );
+    }
+    return $ret_val;
+  }
+
   public function store($data = array())
   {
     $query = $this->db->set($data)->get_compiled_insert('ektensifikasi');

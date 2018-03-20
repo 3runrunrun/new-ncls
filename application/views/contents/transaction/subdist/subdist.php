@@ -49,7 +49,7 @@
                         <th>Area</th>
                         <th>Nama</th>
                         <th>Total Target</th>
-                        <th>Tools</th>
+                        <!-- <th>Tools</th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -59,11 +59,11 @@
                         <td>(<?php echo strtoupper($value->alias_area); ?>) <?php echo strtoupper($value->nama_area); ?></td>
                         <td><?php echo strtoupper($value->nama); ?></td>
                         <td><?php echo $value->target; ?></td>
-                        <td>
+                        <!-- <td>
                           <div class="btn-group-vertical">
                             <a href="<?php echo site_url(); ?>/detail-subdist/<?php echo $value->id; ?>" target="_blank" class="btn btn-info">Detail</a>
                           </div>
-                        </td>
+                        </td> -->
                       </tr>                        
                       <?php endforeach ?>
                     </tbody>

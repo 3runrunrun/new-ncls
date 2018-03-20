@@ -13,6 +13,13 @@ class C_Fixed_Cost_Ratio extends CI_Controller {
   {
     $data['performa'] = $this->Achievement->get_data();
 
+    $data['promosi'] = $this->Fixed_Cost->get_promosi();
+    $data['cogm'] = $this->Fixed_Cost->get_cogm();
+    $data['operasional'] = $this->Fixed_Cost->get_operasional();
+
+    // diagram
+    $data['sales_person'] = $this->M_Dashboard->sales_person('count(id) as jml');
+
     $this->load->view('heads/head-simple-form-table-chart');
     $this->load->view('navbar');
     $this->load->view('contents/transaction/fixed-cost/fixed-cost', $data);

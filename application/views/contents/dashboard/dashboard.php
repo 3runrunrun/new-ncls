@@ -2,6 +2,36 @@
   $sp = null;
   $sl = null;
   $p = null;
+
+  // diagram
+  $salper = 0;
+  $up = 0;
+  $prf = 0;
+  $mvd = 0;
+
+  // diagram
+  foreach ($sales_person['data']->result() as $value) {
+    $salper = $value->jml;
+  }
+
+  foreach ($performa['data']->result() as $value) {
+    if ($value->achievement < 50) {
+      $up += 1;
+    } elseif ($value->achievement >= 80 && $value->achievement <= 100) {
+      $prf += 1;
+    } elseif ($value->achievement > 110) {
+      $mvd += 1;
+    } 
+  }
+
+  // var_dump($salper);
+  // var_dump($up);
+  // var_dump($prf);
+  // var_dump($mvd);
+  $pr_up = $up / intval($salper) * 100;
+  $pr_prf = $prf / intval($salper) * 100;
+  $pr_mvd = $mvd / intval($salper) * 100;
+
  ?>
 
  <?php 
@@ -133,15 +163,11 @@
                       </span>
                     </div>
                     <div class="card-body">
-                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="65" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#00BCD4" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
+                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="<?php echo number_format($pr_up, 0, ',', '.') ?>%" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#FF0049" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
                       <ul class="list-inline clearfix mt-1 mb-0">
-                        <li class="border-right-grey border-right-lighten-2 pr-2">
-                          <h2 class="grey darken-1 text-bold-400">65%</h2>
-                          <span class="success">Completed</span>
-                        </li>
-                        <li class="pl-2">
-                          <h2 class="grey darken-1 text-bold-400">35%</h2>
-                          <span class="danger">Remaining</span>
+                        <li>
+                          <h2 class="grey darken-1 text-bold-400"><?php echo number_format($pr_up, 0, ',', '.') ?>%</h2>
+                          <span class="danger">Detailer</span>
                         </li>
                       </ul>
                     </div>
@@ -151,16 +177,15 @@
                   <div class="my-1 text-xs-center">
                     <div class="card-header mb-2 pt-0">
                       <span class="deep-orange">
-                        <h3 class="font-large-2 text-bold-200">MVD</h3>
+                        <h3 class="font-large-2 text-bold-200">Performance</h3>
                       </span>
                     </div>
                     <div class="card-body">
-                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="70" class="knob hide-value responsive angle-offset" data-angleoffset="0" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#FF5722" data-knob-icon="icon-user2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;">
-                        </div>
+                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="<?php echo number_format($pr_prf, 0, ',', '.') ?>%" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#3FB9FF" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
                       <ul class="list-inline clearfix mt-1 mb-0">
                         <li>
-                          <h2 class="grey darken-1 text-bold-400">10%</h2>
-                          <span class="deep-orange"> Today's Target</span>
+                          <h2 class="grey darken-1 text-bold-400"><?php echo number_format($pr_prf, 0, ',', '.') ?>%</h2>
+                          <span class="info">Detailer</span>
                         </li>
                       </ul>
                     </div>
@@ -170,15 +195,15 @@
                   <div class="my-1 text-xs-center">
                     <div class="card-header mb-2 pt-0">
                       <span class="danger">
-                        <h3 class="font-large-2 text-bold-200">Balance </h3>
+                        <h3 class="font-large-2 text-bold-200">MVD</h3>
                       </span>
                     </div>
                     <div class="card-body">
-                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="75" class="knob hide-value responsive angle-offset" data-angleoffset="20" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#DA4453" data-knob-icon="icon-heart6" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
+                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="<?php echo number_format($pr_mvd, 0, ',', '.') ?>%" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#09D9A1" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
                       <ul class="list-inline clearfix mt-1 mb-0">
                         <li>
-                          <h2 class="grey darken-1 text-bold-400">125%</h2>
-                          <span class="danger">Over </span>
+                          <h2 class="grey darken-1 text-bold-400"><?php echo number_format($pr_mvd, 0, ',', '.') ?>%</h2>
+                          <span class="success">Detailer</span>
                         </li>
                       </ul>
                     </div>
@@ -199,16 +224,18 @@
               <div class="card height-250 profile-card-with-cover border-top-blue">
                 <div class="card-body">
                   <h4 class="card-title text-xs-center mt-2">Top Sales</h4>
+                  <?php foreach ($top_sales['data']->result() as $key => $value): ?>
                   <div class="profile-card-with-cover-content text-xs-center">
                     <div class="my-2">
-                      <h4 class="card-title">Nama</h4>
+                      <h4 class="card-title"><?php echo ucwords($value->nama_detailer); ?></h4>
                       <ul class="list-inline clearfix mt-2">
-                        <li class="mr-2">Achievement<h2 class="block">60%<span class="font-small-3 text-muted">%</span></h2></li>
-                        <li class="mr-2">Area<h2 class="block">Jakarta</h2></li>
-                        <li>Month<h2 class="block">Januari</h2></li>
+                        <li class="mr-2">Achievement<h2 class="block"><?php echo number_format($value->achievement_perbulan, 0, ',', '.') ?>%</h2></li>
+                        <li class="mr-2">Area<h2 class="block"><?php echo ucwords($value->nama_area); ?></h2></li>
+                        <li>Month<h2 class="block"><?php echo date('F'); ?></h2></li>
                       </ul>
                     </div>
                   </div>
+                  <?php endforeach; ?>
                 </div>
               </div>
             </div>
@@ -229,7 +256,16 @@
                         </tr>
                       </thead>
                       <tbody id="resume-sales">
-                        <!-- isi -->
+                        <?php foreach ($performa['data']->result() as $value): ?>
+                        <tr>
+                          <td><?php echo strtoupper($value->id_detailer); ?></td>
+                          <td><?php echo ucwords($value->nama_detailer); ?></td>
+                          <td><?php echo ucwords($value->nama_area); ?></td>
+                          <td><?php echo number_format($value->total_sales, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
+                          <td><?php echo number_format($value->achievement, 2, ',', '.'); ?>%</td>
+                        </tr>
+                        <?php endforeach; ?>
                       </tbody>
                     </table>
                   </div>

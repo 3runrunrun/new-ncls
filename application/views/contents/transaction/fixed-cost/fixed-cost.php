@@ -1,3 +1,59 @@
+<?php 
+  $pr = 0;
+  $co = 0;
+  $kr = 0;
+  $iv = 0;
+  $op = 0;
+  $is = 0;
+  $tot = 0;
+
+  // diagram
+  $salper = 0;
+  $up = 0;
+  $prf = 0;
+  $mvd = 0;
+
+  // promosi
+  foreach ($promosi['data']->result() as $value) {
+    $pr = $value->dana;
+  }
+
+  // cogm
+  foreach ($cogm['data']->result() as $value) {
+    $co = $value->biaya;
+  }
+
+  // operasional
+  foreach ($operasional['data']->result() as $value) {
+    $op = $value->total;
+  }
+  // total
+  $tot = $pr + $co + $kr + $iv + $op + $is;
+
+  // diagram
+  foreach ($sales_person['data']->result() as $value) {
+    $salper = $value->jml;
+  }
+
+  foreach ($performa['data']->result() as $value) {
+    if ($value->achievement < 50) {
+      $up += 1;
+    } elseif ($value->achievement >= 80 && $value->achievement <= 100) {
+      $prf += 1;
+    } elseif ($value->achievement > 110) {
+      $mvd += 1;
+    } 
+  }
+
+  // var_dump($salper);
+  // var_dump($up);
+  // var_dump($prf);
+  // var_dump($mvd);
+  $pr_up = $up / intval($salper) * 100;
+  $pr_prf = $prf / intval($salper) * 100;
+  $pr_mvd = $mvd / intval($salper) * 100;
+ ?>
+
 <div class="app-content content container-fluid">
   <div class="content-wrapper">
     <div class="content-header row">
@@ -22,10 +78,10 @@
                       </span>
                     </div>
                     <div class="card-body">
-                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="65" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#FF0049" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
+                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="<?php echo number_format($pr_up, 0, ',', '.') ?>%" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#FF0049" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
                       <ul class="list-inline clearfix mt-1 mb-0">
                         <li>
-                          <h2 class="grey darken-1 text-bold-400">35%</h2>
+                          <h2 class="grey darken-1 text-bold-400"><?php echo number_format($pr_up, 0, ',', '.') ?>%</h2>
                           <span class="danger">Detailer</span>
                         </li>
                       </ul>
@@ -91,10 +147,10 @@
                       </span>
                     </div>
                     <div class="card-body">
-                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="65" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#3FB9FF" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
+                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="<?php echo number_format($pr_prf, 0, ',', '.') ?>%" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#3FB9FF" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
                       <ul class="list-inline clearfix mt-1 mb-0">
                         <li>
-                          <h2 class="grey darken-1 text-bold-400">35%</h2>
+                          <h2 class="grey darken-1 text-bold-400"><?php echo number_format($pr_prf, 0, ',', '.') ?>%</h2>
                           <span class="info">Detailer</span>
                         </li>
                       </ul>
@@ -159,10 +215,10 @@
                       </span>
                     </div>
                     <div class="card-body">
-                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="65" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#09D9A1" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
+                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="<?php echo number_format($pr_mvd, 0, ',', '.') ?>%" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#09D9A1" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
                       <ul class="list-inline clearfix mt-1 mb-0">
                         <li>
-                          <h2 class="grey darken-1 text-bold-400">35%</h2>
+                          <h2 class="grey darken-1 text-bold-400"><?php echo number_format($pr_mvd, 0, ',', '.') ?>%</h2>
                           <span class="success">Detailer</span>
                         </li>
                       </ul>
@@ -231,13 +287,36 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php for ($i=0; $i < 5; $i++): ?>
                       <tr>
-                        <td class="rt-data">Item</td>
-                        <td class="rt-data">Unit</td>
-                        <td class="rt-money">120.000</td>
+                        <td class="rt-data">Promosi</td>
+                        <td class="rt-data">Rp</td>
+                        <td class="rt-money"><?php echo number_format($pr, 0, ',','.'); ?></td>
                       </tr>
-                      <?php endfor; ?>
+                      <tr>
+                        <td class="rt-data">COGM</td>
+                        <td class="rt-data">Rp</td>
+                        <td class="rt-money"><?php echo number_format($co, 0, ',','.'); ?></td>
+                      </tr>
+                      <tr>
+                        <td class="rt-data">Karyawan</td>
+                        <td class="rt-data">Rp</td>
+                        <td class="rt-money"><?php echo number_format($kr, 0, ',','.'); ?></td>
+                      </tr>
+                      <tr>
+                        <td class="rt-data">Inventaris</td>
+                        <td class="rt-data">Rp</td>
+                        <td class="rt-money"><?php echo number_format($iv, 0, ',','.'); ?></td>
+                      </tr>
+                      <tr>
+                        <td class="rt-data">Operasional</td>
+                        <td class="rt-data">Rp</td>
+                        <td class="rt-money"><?php echo number_format($op, 0, ',','.'); ?></td>
+                      </tr>
+                      <tr>
+                        <td class="rt-data">Insentif</td>
+                        <td class="rt-data">Rp</td>
+                        <td class="rt-money"><?php echo number_format($is, 0, ',','.'); ?></td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -247,7 +326,7 @@
                       <tr>
                         <th>Total</th>
                         <th width="10%">&nbsp;</th>
-                        <th width="15%" class="tt-money">140.000</th>
+                        <th width="15%" class="tt-money"><?php echo number_format($tot, 0, ',','.'); ?></th>
                       </tr>
                     </thead>
                   </table>
@@ -264,6 +343,7 @@
 </div>
 
 <script type="text/javascript">
+  $(document).ready(function(){}
     $('#report-table-2 td').addClass('text-truncate');
     $('#report-table-2 td:even').addClass('bg-table-blue');
     $('#total-table').addClass('bg-table-red');

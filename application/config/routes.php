@@ -134,6 +134,7 @@ $route['store-eksten'] = 'transaction/C_Pros_Inten_Eksten/store_eksten';
 $route['store-eksten/(:any)'] = 'transaction/C_Pros_Inten_Eksten/store_eksten/$1';
 
 $route['detailer-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/show_intens/$1';
+$route['detail-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/show/$1';
 $route['store-intens'] = 'transaction/C_Pros_Inten_Eksten/store_intens';
 $route['store-intens/(:any)'] = 'transaction/C_Pros_Inten_Eksten/store_intens/$1';
 
