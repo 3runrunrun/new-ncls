@@ -67,6 +67,7 @@
                         <td><?php echo $value->target; ?></td>
                         <td>
                           <div class="btn-group-vertical">
+                            <a href="<?php echo site_url(); ?>/detail-intens/<?php echo $value->id_detailer; ?>" target="_blank" class="btn btn-primary">Detail</a>
                             <a href="<?php echo site_url(); ?>/detailer-intens/<?php echo $value->id; ?>" class="btn btn-success">Intensifikasi</a>
                           </div>
                         </td>

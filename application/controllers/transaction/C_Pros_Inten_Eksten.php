@@ -11,7 +11,7 @@ class C_Pros_Inten_Eksten extends CI_Controller {
 
   public function index()
   {
-    $data['ekstensifikasi'] = $this->eks->get_target_eksten('a.id, UPPER(e.alias_area) as alias_area, UPPER(e.nama) as nama_area, UPPER(f.nama) as nama_detailer, UPPER(c.nama) as nama_outlet, UPPER(d.nama) as nama_customer, a.id_produk, UPPER(g.nama) as nama_produk,  a.target');
+    $data['ekstensifikasi'] = $this->eks->get_target_eksten('a.id, a.id_detailer, UPPER(e.alias_area) as alias_area, UPPER(e.nama) as nama_area, UPPER(f.nama) as nama_detailer, UPPER(c.nama) as nama_outlet, UPPER(d.nama) as nama_customer, a.id_produk, UPPER(g.nama) as nama_produk,  a.target');
     $data['detailer'] = $this->Detailer->get_detailer_aktif('id, UPPER(nama_detailer) as nama_detailer, UPPER(alias_area) as alias_area');
     $data['outlet'] = $this->Outlet->get_outlet_aktif('id, UPPER(alias_area) as alias_area, UPPER(nama_outlet) as nama_outlet');
     $data['customer'] = $this->User->get_data('id, UPPER(alias_area) as alias_area, UPPER(nama) as nama, UPPER(jenis) as jenis');
@@ -21,6 +21,16 @@ class C_Pros_Inten_Eksten extends CI_Controller {
     $this->load->view('navbar');
     $this->load->view('contents/transaction/ineks/eksten', $data);
     $this->load->view('footers/footer-js-form-simple-table');
+  }
+
+  public function show($id)
+  {
+    $data['log_eksten'] = $this->eks->get_log_eksten($id);
+
+    $this->load->view('heads/head-form-table-print');
+    $this->load->view('navbar');
+    $this->load->view('contents/transaction/ineks/detail', $data);
+    $this->load->view('footers/footer-js-form-table-print');
   }
 
   public function store_eksten($operation = null)

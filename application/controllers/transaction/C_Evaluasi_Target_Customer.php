@@ -11,7 +11,7 @@ class C_Evaluasi_Target_Customer extends CI_Controller {
 
   public function index()
   {
-    $data['achievement'] = $this->Achievement->get_data('COUNT(id) as sales_person');
+    $data['achievement'] = $this->Achievement->get_data();
 
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');

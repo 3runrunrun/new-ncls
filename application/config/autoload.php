@@ -188,6 +188,8 @@ $autoload['model'] = array(
   'transaction/ineks/Subdist_Eksten' => 'subeks',
   'transaction/ineks/Subdist_Intensifikasi' => 'subins',
 
+  'transaction/fixed-cost/Fixed_Cost',
+
   'transaction/rtd/Rtd',
   'transaction/rtd/Rtd_Status',
 
