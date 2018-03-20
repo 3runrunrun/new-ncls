@@ -64,8 +64,8 @@
                     <tbody>
                       <?php foreach ($sales['data']->result() as $value): ?>
                       <tr>
-                        <td><?php echo strtoupper($value->id_detailer); ?></td>
-                        <td><?php echo ucwords($value->nama_detailer); ?></td>
+                        <td><?php echo strtoupper($value->kode_sales); ?></td>
+                        <td><?php echo ucwords($value->nama_sales); ?></td>
                         <td><?php echo number_format($value->januari, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->februari, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->maret, 0, ',', '.'); ?></td>
