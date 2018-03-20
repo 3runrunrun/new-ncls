@@ -217,6 +217,7 @@ $route['print-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/cetak/$
 
 $route['stock-product-distributor'] = 'report/C_Stock_Product_Distributor/index';
 $route['detail-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/show/$1';
+$route['print-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/cetak/$1';
 $route['detail-product-distributor/(:any)/(:any)'] = 'report/C_Stock_Product_Distributor/show/$1/$2';
 $route['store-product-distributor'] = 'report/C_Stock_Product_Distributor/store';
 $route['store-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/store/$1';

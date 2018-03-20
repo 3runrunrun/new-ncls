@@ -78,4 +78,11 @@ class C_Stock_Product_Distributor extends CI_Controller {
     }
   }
 
+  public function cetak($id)
+  {
+    $data['produk'] = $this->ppdd->show($id);
+    $data['detail'] = $this->ppd->show($id);
+    $this->load->view('contents/report/stok-distributor/cetak',$data);
+  }
+
 }
