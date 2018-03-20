@@ -70,7 +70,7 @@
                         <td><?php echo strtoupper($value->nama_area); ?></td>
                         <td><?php echo strtoupper($value->kode_produk); ?></td>
                         <td><?php echo strtoupper($value->nama_produk); ?></td>
-                        <td><?php echo number_format($value->target_rp, 0, ',', '.'); ?></td>
+                        <td><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->total_sales, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->januari, 0, ',', '.'); ?></td>
                         <td><?php echo number_format($value->februari, 0, ',', '.'); ?></td>
@@ -204,6 +204,10 @@
                       </div>
                       <div class="col-md-6 col-xs-12">
                         <h5 class="form-section">3. Informasi Diskon</h5>
+                        <div class="bs-callout-pink callout-border-left mt-1 mb-1 p-1">
+                          <strong>Perhatian</strong>
+                          <p>Sebelum mengaktifkan diskon, pastikan data penjualan yang akan anda masukkan sesuai dengan data yang ada pada faktur diskon yang akan dipilih.</p>
+                        </div>
                         <div class="form-group">
                           <fieldset>
                             <label class="custom-control custom-checkbox">
@@ -226,6 +230,9 @@
                               <?php endforeach; ?>
                               <?php endif; ?>
                             </select>
+                            <p class="block-tag text-xs-left">
+                              <small class="tag tag-default tag-warning">Lihat daftar faktur yang tersedia pada tabel di bawah</small>
+                            </p>
                           </div>
                           <div class="col-md-4 col-xs-12">
                             <label class="label-control">Jenis KO</label>
@@ -243,33 +250,43 @@
                                 <span class="custom-control-description">Tender</span>
                               </label>
                             </fieldset>
-                          </div>
-                          <p>*) Anda dapat melihat informasi faktur yang tersedia pada tabel di bawah</p>
+                          </div>                          
                         </div>
                         <div class="form-group row input-diskon">
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Diskon On</label>
                             <fieldset>
                               <div class="input-group">  
-                              <input type="number" name="diskon_on" class="form-control border-primary" disabled readonly>
+                              <input type="number" name="diskon_on" class="form-control border-primary" min="0" disabled>
                               <span class="input-group-addon">%</span>
                               </div>
                             </fieldset>
+                            <p class="block-tag text-xs-left">
+                              <small class="tag tag-default tag-danger">Masukkan data diskon dengan benar</small>
+                            </p>
                           </div>
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Diskon Off</label>
                             <fieldset>
                               <div class="input-group">  
-                              <input type="number" name="diskon_off" class="form-control border-primary" disabled readonly>
+                              <input type="number" name="diskon_off" class="form-control border-primary" min="0" disabled>
                               <span class="input-group-addon">%</span>
                               </div>
                             </fieldset>
+                            <p class="block-tag text-xs-left">
+                              <small class="tag tag-default tag-danger">Masukkan data diskon dengan benar</small>
+                            </p>
                           </div>
                         </div>
-                        <div class="table-responsive">
-                          <table class="table dataex-html5-export table-xs table-bordered table-hover nowrap display border-top-blue" id="simple-table">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="table-responsive height-400">
+                          <table class="table dataex-html5-export table-xs table-bordered table-hover nowrap display border-top-blue" id="simple-table-2">
                             <thead>
                               <tr>
+                                <th>Jenis Faktur</th>
                                 <th>No. Faktur</th>
                                 <th>Dist / Subdist</th>
                                 <th>Detailer</th>
@@ -280,6 +297,21 @@
                                 <th>Off<br />(%)</th>
                               </tr>
                             </thead>
+                            <tbody>
+                              <?php foreach ($detail_faktur['data']->result() as $value): ?>
+                              <tr>
+                                <td><?php echo strtoupper($value->jenis_faktur); ?></td>
+                                <td><?php echo str_replace('-', '/', strtoupper($value->id)); ?></td>
+                                <td><?php echo ucwords($value->nama_distributor); ?></td>
+                                <td><?php echo ucwords($value->nama_detailer); ?></td>
+                                <td><?php echo ucwords($value->nama_outlet); ?></td>
+                                <td><?php echo ucwords($value->nama_produk); ?></td>
+                                <td><?php echo ucwords($value->jumlah); ?></td>
+                                <td><?php echo number_format($value->on_total, 2, ',', '.') ?>%</td>
+                                <td><?php echo number_format($value->off_total, 2, ',', '.') ?>%</td>
+                              </tr>
+                              <?php endforeach ?>
+                            </tbody>
                           </table>
                         </div>
                       </div>
@@ -342,5 +374,33 @@
         ]
       });
     $('#simple-table_info').remove();
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#simple-table-2 th, #simple-table-2 td').css({
+      'text-align': 'center',
+    });
+    $('#simple-table-2 td').addClass('text-truncate');
+    $('#simple-table-2 td:even').addClass('bg-table-blue');
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#simple-table-2').DataTable({
+        "paging": false,
+      });
+    $('#simple-table-2_filter').css({
+      'text-align': 'center',
+    });
+    $('#simple-table-2_wrapper').children(':first').children(':first').remove();
+    $('#simple-table-2_filter').parent().addClass('col-xs-12').removeClass('col-md-6');
+    $('#simple-table-2_filter > label > input').addClass('input-md').removeClass('input-sm').attr({
+        placeholder: 'Keyword',
+      });
+
+    $('#simple-table-2_wrapper').children(':last').remove();
   });
 </script>

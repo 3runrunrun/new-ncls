@@ -50,6 +50,7 @@
                         <th>Detailer</th>
                         <th>Outlet</th>
                         <th>Customer</th>
+                        <th>Produk</th>
                         <th>Target<br />(unit)</th>
                         <th>Tools</th>
                       </tr>
@@ -62,6 +63,7 @@
                         <td><?php echo $value->nama_detailer; ?></td>
                         <td><?php echo $value->nama_outlet; ?></td>
                         <td><?php echo $value->nama_customer; ?></td>
+                        <td><?php echo $value->nama_produk; ?></td>
                         <td><?php echo $value->target; ?></td>
                         <td>
                           <div class="btn-group-vertical">
@@ -235,7 +237,6 @@
         placeholder: 'Keyword',
       });
 
-    $('#simple-table_wrapper').children(':last').remove();
   });
 </script>
 
