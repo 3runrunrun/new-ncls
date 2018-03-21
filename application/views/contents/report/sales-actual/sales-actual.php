@@ -3,34 +3,6 @@
     <div class="content-header row">
     </div>
     <div class="content-body">
-      
-      <div class="row">
-        <div class="col-xs-12">
-          <?php if ( ! is_null($this->session->flashdata())): ?>
-          <?php if ( ! is_null($this->session->flashdata('error_msg'))): ?>  
-          <div class="alert alert-danger alert-dismissible fade in" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <?php echo $this->session->flashdata('error_msg'); ?>
-          </div>
-          <?php elseif ( ! is_null($this->session->flashdata('success_msg'))): ?>
-          <div class="alert alert-success alert-dismissible fade in" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <?php echo $this->session->flashdata('success_msg'); ?>
-          </div>
-          <?php elseif ( ! is_null($this->session->flashdata('query_msg'))): ?>
-          <div class="bs-callout-danger callout-border-left">
-            <strong>Database Error!</strong>
-            <p><?php echo $this->session->flashdata('query_msg')['message']; ?> <strong><?php echo $this->session->flashdata('query_msg')['code']; ?></strong></p>
-          </div><br />
-          <?php endif; ?>
-          <?php endif; ?>
-        </div>
-      </div>
-      <!-- /alert -->
 
       <!-- table -->
       <div class="row">
@@ -130,10 +102,10 @@
                     <tbody>
                       <?php foreach ($sales_bawah['data']->result() as $value): ?>
                       <tr>
-                        <td class="rt-data"><?php echo strtoupper($value->kode_detailer); ?></td>
+                        <td class="rt-data"><?php echo strtoupper($value->id_detailer); ?></td>
                         <td class="rt-data"><?php echo ucwords($value->nama_detailer); ?></td>
                         <td class="rt-money"><?php echo number_format($value->sales_reg, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->sales_dis_prog, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->sales_disprog, 0, ',', '.'); ?></td>
                         <td class="rt-money"><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
                         <td class="rt-money"><?php echo number_format($value->achievement, 2, ',', '.'); ?>%</td>
                       </tr>
