@@ -157,7 +157,7 @@
             </li>
             <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-table"></i>Key Loyalty Management (KLM)</a>
               <ul class="dropdown-menu">
-                <li data-menu="" ><a href="<?php echo site_url() ?>/daily-sales-product" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Sales (Leveling)</a>
+                <li data-menu="" ><a href="<?php echo site_url() ?>/klm-sales/" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Sales (Leveling)</a>
                 </li>
                 <li data-menu=""><a href="<?php echo site_url() ?>/daily-sales-outlet" data-toggle="dropdown" class="dropdown-item"><i  class="fa fa-table"></i>Dana</a>
                 </li>
