@@ -156,7 +156,7 @@ $route['store-pma-expense'] = 'transaction/C_Pros_Marketing_Act/store_expense';
 
 // evaluasi
 $route['evaluasi-target-customer'] = 'transaction/C_Evaluasi_Target_Customer/index';
-$route['detail-target-customer/(:any)'] = 'transaction/C_Evaluasi_Target_Customer/show/$1';
+$route['detail-evaluasi/(:any)'] = 'transaction/C_Evaluasi_Target_Customer/show/$1';
 
 // call plan
 $route['target-call-plan'] = 'transaction/C_Evaluasi_CP_SPV/index';

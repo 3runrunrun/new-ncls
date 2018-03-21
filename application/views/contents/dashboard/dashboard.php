@@ -118,7 +118,7 @@
             </div>
             <div class="card-body collapse in">
               <div class="table-responsive height-250">
-                <table class="table table-hover mb-0" id="daily-sales-activity" id="report-table-2">
+                <table class="table table-hover mb-0" id="report-table-2">
                   <thead>
                     <tr>
                       <th>Kode Area</th>
@@ -135,9 +135,9 @@
                       <td class="rt-data"><?php echo $value->id_area; ?></td>
                       <td class="rt-data"><?php echo ucwords($value->nama_area); ?></td>
                       <td class="rt-data"><?php echo number_format($value->ppg, 0, ',', '.'); ?></td>
-                      <td><?php echo number_format($value->penta, 0, ',', '.'); ?></td>
-                      <td><?php echo number_format($value->ptkp, 0, ',', '.'); ?></td>
-                      <td><?php echo number_format($value->jki, 0, ',', '.'); ?></td>
+                      <td class="rt-data"><?php echo number_format($value->penta, 0, ',', '.'); ?></td>
+                      <td class="rt-data"><?php echo number_format($value->ptkp, 0, ',', '.'); ?></td>
+                      <td class="rt-data"><?php echo number_format($value->jki, 0, ',', '.'); ?></td>
                     </tr>
                     <?php endforeach ?>
                   </tbody>
@@ -244,7 +244,7 @@
               <div class="card profile-card-with-cover border-top-red">
                 <div class="card-body collapse in">
                   <div class="table-responsive height-250">
-                    <table class="table table-hover mb-0">
+                    <table class="table table-hover mb-0" id="simple-table">
                       <thead>
                         <tr>
                           <th>Kode Detailer</th>
@@ -258,12 +258,12 @@
                       <tbody id="resume-sales">
                         <?php foreach ($performa['data']->result() as $value): ?>
                         <tr>
-                          <td><?php echo strtoupper($value->id_detailer); ?></td>
-                          <td><?php echo ucwords($value->nama_detailer); ?></td>
-                          <td><?php echo ucwords($value->nama_area); ?></td>
-                          <td><?php echo number_format($value->total_sales, 0, ',', '.'); ?></td>
-                          <td><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
-                          <td><?php echo number_format($value->achievement, 2, ',', '.'); ?>%</td>
+                          <td class="rt-data"><?php echo strtoupper($value->id_detailer); ?></td>
+                          <td class="rt-data"><?php echo ucwords($value->nama_detailer); ?></td>
+                          <td class="rt-data"><?php echo ucwords($value->nama_area); ?></td>
+                          <td class="rt-money"><?php echo number_format($value->nominal_jumlah, 0, ',', '.'); ?></td>
+                          <td class="rt-money"><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
+                          <td class="rt-money"><?php echo number_format($value->achievement, 2, ',', '.'); ?>%</td>
                         </tr>
                         <?php endforeach; ?>
                       </tbody>

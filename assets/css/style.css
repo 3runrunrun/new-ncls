@@ -100,11 +100,14 @@ a {
   text-align: right;
 }
 
-#simple-table .rt-data{
+#simple-table th, #simple-table-2 th, #simple-table-3 th {
+  text-align: center;
+}
+#simple-table .rt-data, #simple-table-2 .rt-data, #simple-table-3 .rt-data {
   text-align: center;
   vertical-align: middle;
 }
-#simple-table .rt-money{
+#simple-table .rt-money, #simple-table-2 .rt-money, #simple-table-3 .rt-money {
   text-align: right;
   vertical-align: middle;
 }

@@ -154,6 +154,7 @@ $autoload['model'] = array(
   'core/Kog_Kot',
   'core/Achievement',
   'core/M_Dashboard',
+  'core/Insentif',
    
   // master
   'master/Area',
