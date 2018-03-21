@@ -27,6 +27,8 @@
                       <tr>
                         <th>Kode Produk</th>
                         <th>Produk</th>
+                        <th>Kode Outlet</th>
+                        <th>Outlet</th>
                         <th>Target<br />(Rp)</th>
                         <th>Total Sales<br />(Rp)</th>
                         <th>January</th>
@@ -48,20 +50,22 @@
                       <tr>
                         <td class="rt-data"><?php echo strtoupper($value->id_produk); ?></td>
                         <td class="rt-data"><?php echo ucwords($value->nama_produk); ?></td>
+                        <td class="rt-data"><?php echo strtoupper($value->id_outlet); ?></td>
+                        <td class="rt-data"><?php echo ucwords($value->nama_outlet); ?></td>
                         <td class="rt-money"><?php echo number_format($value->nominal_target, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->total_sales, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->januari, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->februari, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->maret, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->april, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->mei, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->juni, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->juli, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->agustus, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->september, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->oktober, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->november, 0, ',', '.'); ?></td>
-                        <td class="rt-money"><?php echo number_format($value->desember, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_januari, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_februari, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_maret, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_april, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_mei, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_juni, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_juli, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_agustus, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_september, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_oktober, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_november, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_jumlah_desember, 0, ',', '.'); ?></td>
                       </tr>
                       <?php endforeach ?>
                     </tbody>

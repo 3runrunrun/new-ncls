@@ -117,12 +117,39 @@ class Achievement extends CI_Model {
     return $ret_val;
   }
 
+  // detailer per outlet
   public function show($id, $column = '*')
   {
     $this->db->select($column, false);
     $this->db->from('acv_sales_perbulan a');
     $this->db->join('v_detailer_aktif b', 'a.id_detailer = b.id');
     $this->db->join('v_outlet c', 'a.id_outlet = c.id');
+    $this->db->where('a.id_detailer', $id);
+    $this->db->where('a.tahun', $this->session->userdata('tahun'));
+    $this->db->where('a.hapus', null);
+    $result = $this->db->get();
+    if (!$result) {
+      $ret_val = array(
+        'status' => 'error',
+        'data'   => $this->db->error(),
+      );
+    } else {
+      $ret_val = array(
+        'status' => 'success',
+        'data'   => $result,
+      );
+    }
+    return $ret_val;
+  }
+
+  // detailer per outlet per produk
+  public function show_produk($id, $column = '*')
+  {
+    $this->db->select($column, false);
+    $this->db->from('acv_sales_outlet_produk_perbulan_tahun a');
+    $this->db->join('v_detailer_aktif b', 'a.id_detailer = b.id');
+    $this->db->join('v_outlet c', 'a.id_outlet = c.id');
+    $this->db->join('v_produk_harga d', 'a.id_produk = d.id');
     $this->db->where('a.id_detailer', $id);
     $this->db->where('a.tahun', $this->session->userdata('tahun'));
     $this->db->where('a.hapus', null);
