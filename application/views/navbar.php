@@ -159,7 +159,7 @@
               <ul class="dropdown-menu">
                 <li data-menu="" ><a href="<?php echo site_url() ?>/klm-sales/" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Sales (Leveling)</a>
                 </li>
-                <li data-menu=""><a href="<?php echo site_url() ?>/daily-sales-outlet" data-toggle="dropdown" class="dropdown-item"><i  class="fa fa-table"></i>Dana</a>
+                <li data-menu=""><a href="<?php echo site_url() ?>/show-klm-dana/" data-toggle="dropdown" class="dropdown-item"><i  class="fa fa-table"></i>Dana</a>
                 </li>
               </ul>
             </li>
