@@ -241,3 +241,4 @@ $route['store-reward'] = 'report/C_Reward/store';
 $route['store-reward/(:any)'] = 'report/C_Reward/store/$1';
 
 $route['klm'] = 'report/C_Klm/index';
+$route['klm-sales'] = 'report/C_Klm/show_sales';
