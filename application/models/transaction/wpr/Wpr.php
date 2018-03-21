@@ -84,6 +84,55 @@ class Wpr extends CI_Model {
     }
     return $ret_val;
   }
+  public function get_klm_dana($column = '*')
+  {
+    $this->db->select($column);
+    $this->db->from('wpr a');
+    $this->db->join('wpr_detail b', 'a.id = b.id_wpr');
+    $this->db->join('wpr_status c', 'a.id = c.id_wpr and c.status = "approved"');
+    $this->db->group_by('DATE_FORMAT(c.tanggal,"%m")');
+    $this->db->where('a.tahun', $this->session->userdata('tahun'));
+    $this->db->where('a.status', 'approved');
+    $this->db->where('a.hapus', null);       
+    $result = $this->db->get();
+    if (!$result) {
+      $ret_val = array(
+        'status' => 'error',
+        'data'   => $this->db->error(),
+      );
+    } else {
+      $ret_val = array(
+        'status' => 'success',
+        'data'   => $result,
+      );
+    }
+    return $ret_val;
+  }
+  public function show_klm_dana($id, $column = '*')
+  {
+    $this->db->select($column);
+    $this->db->from('wpr a');
+    $this->db->join('detailer b', 'a.id_detailer = b.id');
+    $this->db->join('v_wpr_detail c', 'a.id = c.id_wpr');
+    $this->db->join('wpr_status d', 'a.id = d.id_wpr and d.status = "approved"');
+    $this->db->where('a.tahun', $this->session->userdata('tahun'));
+    $this->db->where('a.status', 'approved'); 
+    $this->db->where('DATE_FORMAT(d.tanggal,"%M")', $id);
+    $this->db->where('a.hapus', null);       
+    $result = $this->db->get();
+    if (!$result) {
+      $ret_val = array(
+        'status' => 'error',
+        'data'   => $this->db->error(),
+      );
+    } else {
+      $ret_val = array(
+        'status' => 'success',
+        'data'   => $result,
+      );
+    }
+    return $ret_val;
+  }
   public function show($id, $column = '*')
   {
     $this->db->select($column);
