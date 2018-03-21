@@ -10,42 +10,62 @@ class Achievement extends CI_Model {
 
   public function get_data($column = '*')
   {
-    $query = "SELECT 
-        a.id_detailer,
-        b.nama_detailer,
-        b.nama_area,
-        b.alias_area,
-        a.jumlah_diskon as total_sales,
-        a.target,
-        a.nominal_target,
-        a.jumlah,
-        a.jumlah / a.target * 100 as achievement_unit,
-        a.jumlah_diskon / a.nominal_target * 100 as achievement
-      FROM
-      (SELECT 
-        a1.id_detailer,
-        SUM(a1.jumlah) as jumlah,
-        SUM(a1.jumlah * b1.harga_master) as nominal_jumlah,
-        c1.target,
-        SUM(c1.target * b1.harga_master) as nominal_target,
-        (SUM(a1.jumlah * b1.harga_master) - COALESCE(SUM(a1.jumlah * b1.harga_master) * ((COALESCE(d1.diskon_on, 0) + COALESCE(d1.diskon_off, 0)) / 100), 0)) AS jumlah_diskon
-      FROM sales a1
-      JOIN produk_harga b1 ON a1.id_produk = b1.id_produk
-      LEFT JOIN sales_diskon d1 ON a1.id = d1.id_sales
-      LEFT JOIN (SELECT
-        a2.id_detailer,
-        a2.id_produk,
-        SUM(a2.target) as target
-      FROM v_target_detailer a2
-      WHERE a2.tahun = ?
-      AND a2.hapus IS NULL
-      GROUP BY a2.id_detailer, a2.id_produk) c1 ON a1.id_detailer = c1.id_detailer
-      WHERE a1.tahun = ?
-      AND a1.hapus IS NULL
-      GROUP BY a1.id_detailer) a
-      JOIN v_detailer_aktif b ON a.id_detailer = b.id";
-    $bind_param = array($this->session->userdata('tahun'), $this->session->userdata('tahun'));
-    $result = $this->db->query($query, $bind_param);
+    // $query = "SELECT 
+    //     a.id_detailer,
+    //     b.nama_detailer,
+    //     b.nama_area,
+    //     b.alias_area,
+    //     a.jumlah_diskon as total_sales,
+    //     a.target,
+    //     a.nominal_target,
+    //     a.jumlah,
+    //     a.jumlah / a.target * 100 as achievement_unit,
+    //     a.jumlah_diskon / a.nominal_target * 100 as achievement
+    //   FROM
+    //   (SELECT 
+    //     a1.id_detailer,
+    //     SUM(a1.jumlah) as jumlah,
+    //     SUM(a1.jumlah * b1.harga_master) as nominal_jumlah,
+    //     c1.target,
+    //     SUM(c1.target * b1.harga_master) as nominal_target,
+    //     (SUM(a1.jumlah * b1.harga_master) - COALESCE(SUM(a1.jumlah * b1.harga_master) * ((COALESCE(d1.diskon_on, 0) + COALESCE(d1.diskon_off, 0)) / 100), 0)) AS jumlah_diskon
+    //   FROM sales a1
+    //   JOIN produk_harga b1 ON a1.id_produk = b1.id_produk
+    //   LEFT JOIN sales_diskon d1 ON a1.id = d1.id_sales
+    //   LEFT JOIN (SELECT
+    //     a2.id_detailer,
+    //     a2.id_produk,
+    //     SUM(a2.target) as target
+    //   FROM v_target_detailer a2
+    //   WHERE a2.tahun = ?
+    //   AND a2.hapus IS NULL
+    //   GROUP BY a2.id_detailer, a2.id_produk) c1 ON a1.id_detailer = c1.id_detailer
+    //   WHERE a1.tahun = ?
+    //   AND a1.hapus IS NULL
+    //   GROUP BY a1.id_detailer) a
+    //   JOIN v_detailer_aktif b ON a.id_detailer = b.id";
+    // $bind_param = array($this->session->userdata('tahun'), $this->session->userdata('tahun'));
+    // $result = $this->db->query($query, $bind_param);
+    $column = "a.tahun,
+      a.id_detailer,
+      c.nama_detailer,
+      c.id_area,
+      c.nama_area,
+      c.alias_area,
+      SUM(b.target) AS target,
+      SUM(b.nominal_target) AS nominal_target,
+      SUM(a.jumlah) AS jumlah,
+      SUM(a.nominal_jumlah) AS nominal_jumlah,
+      SUM(a.nominal_jumlah) / SUM(b.nominal_target) * 100 as achievement,
+      a.hapus";
+    $this->db->select($column, false);
+    $this->db->from('acv_sales_detailer_produk a');
+    $this->db->join('acv_target_detailer_produk b', 'a.id_detailer = b.id_detailer AND a.id_produk = b.id_produk');
+    $this->db->join('v_detailer_aktif c', 'a.id_detailer = c.id');
+    $this->db->where('a.tahun', $this->session->userdata('tahun'));
+    $this->db->where('a.hapus', null);
+    $this->db->group_by('a.id_detailer, a.tahun');
+    $result = $this->db->get();
     if (!$result) {
       $ret_val = array(
         'status' => 'error',
@@ -60,7 +80,68 @@ class Achievement extends CI_Model {
     return $ret_val;
   }
 
-  public function show($id)
+  public function show_pertahun($id, $column = '*')
+  {
+    $column = "a.tahun,
+      a.id_detailer,
+      c.nama_detailer,
+      c.id_area,
+      c.nama_area,
+      c.alias_area,
+      SUM(b.target) AS target,
+      SUM(b.nominal_target) AS nominal_target,
+      SUM(a.jumlah) AS jumlah,
+      SUM(a.nominal_jumlah) AS nominal_jumlah,
+      SUM(a.nominal_jumlah) / SUM(b.nominal_target) * 100 as achievement,
+      a.hapus";
+    $this->db->select($column, false);
+    $this->db->from('acv_sales_detailer_produk a');
+    $this->db->join('acv_target_detailer_produk b', 'a.id_detailer = b.id_detailer AND a.id_produk = b.id_produk');
+    $this->db->join('v_detailer_aktif c', 'a.id_detailer = c.id');
+    $this->db->where('a.id_detailer', $id);
+    $this->db->where('a.tahun', $this->session->userdata('tahun'));
+    $this->db->where('a.hapus', null);
+    $this->db->group_by('a.id_detailer, a.tahun');
+    $result = $this->db->get();
+    if (!$result) {
+      $ret_val = array(
+        'status' => 'error',
+        'data'   => $this->db->error(),
+      );
+    } else {
+      $ret_val = array(
+        'status' => 'success',
+        'data'   => $result,
+      );
+    }
+    return $ret_val;
+  }
+
+  public function show($id, $column = '*')
+  {
+    $this->db->select($column, false);
+    $this->db->from('acv_sales_perbulan a');
+    $this->db->join('v_detailer_aktif b', 'a.id_detailer = b.id');
+    $this->db->join('v_outlet c', 'a.id_outlet = c.id');
+    $this->db->where('a.id_detailer', $id);
+    $this->db->where('a.tahun', $this->session->userdata('tahun'));
+    $this->db->where('a.hapus', null);
+    $result = $this->db->get();
+    if (!$result) {
+      $ret_val = array(
+        'status' => 'error',
+        'data'   => $this->db->error(),
+      );
+    } else {
+      $ret_val = array(
+        'status' => 'success',
+        'data'   => $result,
+      );
+    }
+    return $ret_val;
+  }
+
+  /*public function show($id)
   {
     $query = "SELECT 
       a.id_detailer,
@@ -130,6 +211,6 @@ class Achievement extends CI_Model {
       );
     }
     return $ret_val;
-  }
+  }*/
 
 }
