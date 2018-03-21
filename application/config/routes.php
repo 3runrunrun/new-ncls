@@ -242,3 +242,6 @@ $route['store-reward/(:any)'] = 'report/C_Reward/store/$1';
 
 $route['klm'] = 'report/C_Klm/index';
 $route['klm-sales'] = 'report/C_Klm/show_sales';
+$route['show-klm-dana'] = 'report/C_Klm/show_dana';
+$route['detail-klm-dana/(:any)'] = 'report/C_Klm/detail_dana/$1';
+$route['print-klm-dana/(:any)'] = 'report/C_Klm/cetak/$1';
