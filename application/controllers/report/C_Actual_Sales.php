@@ -13,7 +13,7 @@ class C_Actual_Sales extends CI_Controller {
   {
     $data['sales'] = $this->sala->get_data();
     $data['total'] = $this->sala->get_total();
-    $data['sales_bawah'] = $this->sala->get_data_lower();
+    $data['sales_bawah'] = $this->sala->get_data_lower('a.id_detailer, b.nama_detailer, a.sales_reg, a.sales_disprog, a.nominal_target, a.achievement');
 
     $this->load->view('heads/head-form-simple-table');
     $this->load->view('navbar');
