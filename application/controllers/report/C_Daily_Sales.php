@@ -145,12 +145,7 @@ class C_Daily_Sales extends CI_Controller {
     $val['id_outlet'] = $data['id_outlet'];
     $val['id_produk'] = $data['id_produk'];
     $val['jumlah'] = $data['jumlah'];
-    
-    if ($data['dist_subdist'] === 's') {
-      $val['id_distributor'] = 0;
-    } else {
-      $val['id_distributor'] = $data['id_distributor'];
-    }
+    $val['id_distributor'] = $data['id_distributor'];
 
     $this->sal->store($val);
   }
@@ -192,12 +187,7 @@ class C_Daily_Sales extends CI_Controller {
     $val['id_outlet'] = $data['id_outlet'];
     $val['id_produk'] = $data['id_produk'];
     $val['jumlah'] = $data['jumlah'];
-    
-    if ($data['dist_subdist'] === 's') {
-      $val['id_distributor'] = 0;
-    } else {
-      $val['id_distributor'] = $data['id_distributor'];
-    }
+    $val['id_distributor'] = $data['id_distributor'];
 
     $this->salt->store($val);
   }

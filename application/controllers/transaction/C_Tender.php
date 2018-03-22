@@ -310,7 +310,7 @@ class C_Tender extends CI_Controller {
     $val['id_permohonan'] = $data['id_permohonan'];
     $val['tanggal'] = $data['tanggal'];
     $val['status'] = $data['status'];
-    $this->ppds->store($val);
+    $this->ppss->store($val);
   }
   // end of permohonan produk subdist
 

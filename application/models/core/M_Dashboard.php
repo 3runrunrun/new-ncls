@@ -95,14 +95,16 @@ class M_Dashboard extends CI_Model {
         SUM(ppg) as ppg,
         SUM(penta) as penta,
         SUM(ptkp) as ptkp,
-        SUM(jki) as jki
+        SUM(jki) as jki,
+        SUM(subdist) as subdist
       FROM
       (
         select coalesce(a.id_area, '-') as id_area, coalesce(a.nama,'-') as nama_area,
         coalesce((case when a.id_master = '1' then sum(a.jumlah) end),0) as ppg,
         coalesce((case when a.id_master = '2' then sum(a.jumlah) end),0) as penta,
         coalesce((case when a.id_master = '3' then sum(a.jumlah) end),0) as ptkp,
-        coalesce((case when a.id_master = '4' then sum(a.jumlah) end),0) as jki
+        coalesce((case when a.id_master = '4' then sum(a.jumlah) end),0) as jki,
+        coalesce((case when a.id_master = '5' then sum(a.jumlah) end),0) as subdist
         from 
         (
           select 
