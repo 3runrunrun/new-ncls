@@ -72,7 +72,6 @@
                         <td><?php echo $value->status; ?></td>
                         <td>
                           <div class="btn-group-vertical">
-                            <a href="<?php echo site_url(); ?>/detail-pemindahan-sales/<?php echo $value->id; ?>/approve" target="_blank" class="btn btn-warning">Approve</a>
                             <a href="<?php echo site_url(); ?>/detail-pemindahan-sales/<?php echo $value->id; ?>" target="_blank" class="btn btn-info">Detail</a>
                           </div>
                         </td>

@@ -133,7 +133,8 @@
                     </div>
                     <?php endforeach; ?>
                     <div class="row">
-                      <?php if ($status != 'approved' && $approve === 'approve'): ?>        
+                      <?php if ($status != 'approved' && $approve === 'approve'): ?>
+                      <input type="hidden" name="id" value="<?php echo $value->id; ?>">
                       <div class="col-xs-12">
                         <div class="form-group">
                           <label class="label-control">Approver</label>

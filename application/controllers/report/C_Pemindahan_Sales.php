@@ -45,7 +45,19 @@ class C_Pemindahan_Sales extends CI_Controller {
     } elseif ($operation == 'edit') {
       # code...
     } elseif ($operation == 'approve') {
-      # code...
+      $input_var = $this->input->post();
+
+      $this->approve_ps($input_var);
+      $this->update_tgl_ps($input_var);
+
+      if ($this->db->trans_status() === FALSE) {
+        $this->db->trans_rollback();
+        $this->session->set_flashdata('error_msg', 'Approval pemindahan sales <strong>gagal</strong>.');
+      } else {
+        // $this->db->trans_rollback();
+        $this->db->trans_commit();
+        $this->session->set_flashdata('success_msg', 'Approval pemindahan sales <strong>berhasil</strong> disimpan.');
+      }
     } else {
       $input_var = $this->input->post();
       $input_var['id'] = $this->nsu->letter_number_generator('ps');
@@ -100,6 +112,26 @@ class C_Pemindahan_Sales extends CI_Controller {
     $val['id_pemindahan'] = $data['id'];
     $val['tanggal'] = date('Y-m-d H:i:s');
     $val['status'] = $data['status'];
+    $this->Pemindahan_Sales_Status->store($val);
+  }
+
+  public function update_tgl_ps($data = array())
+  {
+    if ($data['status'] === 'spv') {
+      $val['tgl_spv'] = date('Y-m-d');
+      $this->Pemindahan_Sales->update($data['id'], $val);
+    } elseif ($data['status'] === 'approved') {
+      $val['tgl_rm'] = date('Y-m-d');
+      $this->Pemindahan_Sales->update($data['id'], $val);
+    }
+  }
+
+  private function approve_ps($data = array())
+  {
+    $val['id_pemindahan'] = $data['id'];
+    $val['tanggal'] = date('Y-m-d H:i:s');
+    $val['status'] = $data['status'];
+    $val['id_approver'] = $data['id_approver'];
     $this->Pemindahan_Sales_Status->store($val);
   }
 
