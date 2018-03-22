@@ -70,54 +70,7 @@
 
       <!-- form -->
       <div class="row">
-        <div class="col-md-6 col-xs-12">
-          <div class="card border-top-green">
-            <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Add Subdistributor</h4>
-            </div>
-            <div class="card-body">
-              <div class="card-block">
-                <div class="card-text">
-                  <p>Formulir untuk menambah subdistributor baru</p>
-                </div>
-                <form action="<?php echo site_url(); ?>/store-subdistributor" class="form" method="POST" role="form">
-                  <div class="form-body">
-                    <div class="form-group">
-                      <label class="label-control">Kode Subdist</label><br />
-                      <?php $this->session->set_userdata('id_subdist', $id_subdist); ?>
-                      <span class="tag tag-lg tag-success"><?php echo strtoupper($id_subdist); ?></span>
-                    </div>
-                    <!-- /id-subdist -->
-                    <div class="form-group">
-                      <label class="label-control">Nama</label>
-                      <input type="text" name="nama" class="form-control border-primary" required>
-                    </div>
-                    <!-- /nama -->
-                    <div class="form-group">
-                      <label class="label-control">Area</label>
-                      <select name="id_area" class="form-control select2" required>
-                        <option value="" selected disabled>Pilih area</option>
-                        <?php if ($area['data']->num_rows() < 1): ?>
-                        <option value="" disabled>Area belum tersedia</option>
-                        <?php else: ?>
-                        <?php foreach ($area['data']->result() as $value): ?>
-                        <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) <?php echo $value->nama; ?></option>
-                        <?php endforeach; ?>
-                        <?php endif; ?>
-                      </select>
-                    </div>
-                    <!-- /id-area -->
-                  </div>
-                  <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-xs-12">
+        <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
               <h4 class="card-title" id="horz-layout-basic">Add Target</h4>
@@ -129,7 +82,7 @@
                 </div>
                 <div class="bs-callout-danger callout-border-right mb-1 p-1">
                   <strong>Perhatian!</strong>
-                  <p>Sebelum mengisi target subdistributor, pastikan anda telah mengisi data subdistributor melalui formulir di sebelah kiri.</p>
+                  <p>Sebelum mengisi target subdistributor, pastikan anda telah mengisi data subdistributor melalui formulir penambahan distributor pada <a href="<?php echo site_url(); ?>/master-distributor" class="alert-link danger">halaman ini</a>.</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-subdistributorEkstern" class="form" method="POST" role="form">
                   <div class="form-body">

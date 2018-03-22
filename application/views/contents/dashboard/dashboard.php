@@ -127,6 +127,7 @@
                       <th>Sales PENTA</th>
                       <th>Sales PTKP</th>
                       <th>Sales JKI</th>
+                      <th>Sales SUBDIST</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -138,6 +139,7 @@
                       <td class="rt-data"><?php echo number_format($value->penta, 0, ',', '.'); ?></td>
                       <td class="rt-data"><?php echo number_format($value->ptkp, 0, ',', '.'); ?></td>
                       <td class="rt-data"><?php echo number_format($value->jki, 0, ',', '.'); ?></td>
+                      <td class="rt-data"><?php echo number_format($value->subdist, 0, ',', '.'); ?></td>
                     </tr>
                     <?php endforeach ?>
                   </tbody>

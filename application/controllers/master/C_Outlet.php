@@ -13,7 +13,8 @@ class C_Outlet extends CI_Controller {
   {
     $data['outlet'] = $this->Outlet->get_outlet_aktif('id, UPPER(alias_area) as alias_area, UPPER(nama_area) as nama_area, UPPER(nama_outlet) as nama_outlet, UPPER(kota) as kota, UPPER(nama_distributor) as nama_distributor, UPPER(alias_distributor) as alias_distributor, UPPER(nama_detailer) as nama_detailer, periode,UPPER(dispensing) as dispensing');
     $data['area'] = $this->Area->get_data('id, UPPER(nama) as nama, UPPER(alias_area) as alias_area');
-    $data['distributor'] = $this->Distributor->get_data('a.id, UPPER(b.alias_distributor) as alias_distributor, UPPER(a.nama) as nama, UPPER(c.alias_area) as alias_area');
+    // $data['distributor'] = $this->Distributor->get_data('a.id, UPPER(b.alias_distributor) as alias_distributor, UPPER(a.nama) as nama, UPPER(c.alias_area) as alias_area');
+    $data['distributor'] = $this->Dist_Subdist->get_data('id, UPPER(alias_distributor) as alias_distributor, UPPER(nama) as nama, UPPER(alias_area) as alias_area');
     $data['id'] = $this->nsu->digit_id_generator(4,'ot');
     $data['detailer'] = $this->Detailer->get_detailer_aktif('id, UPPER(nama_detailer) as nama_detailer, UPPER(alias_area) as alias_area');
 
