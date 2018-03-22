@@ -45,8 +45,8 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode Customer</th>
-                        <th>Customer</th>
+                        <th>Kode User</th>
+                        <th>User</th>
                         <th>Tanggal</th>
                         <th>Value<br />(Rp)</th>
                         <th>Tools</th>

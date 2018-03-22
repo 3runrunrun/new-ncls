@@ -262,5 +262,7 @@ $autoload['model'] = array(
   'report/stock-subdist/Barang_Keluar_Subdist' => 'bks',
 
   'report/entry-breakdown/Entry_Breakdown',
+  
+  'report/klm/Klm',
 
 );

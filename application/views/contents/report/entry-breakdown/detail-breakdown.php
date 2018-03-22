@@ -26,6 +26,7 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
+                        <th>No. WPR</th>
                         <th>Kode Produk</th>
                         <th>Nama Produk</th>
                         <th>Jumlah</th>
@@ -35,6 +36,7 @@
                     <tbody>
                       <?php foreach ($produk['data']->result() as $value): ?>
                       <tr>
+                        <td><?php echo str_replace('-', '/', strtoupper($value->no_wpr)); ?></td>
                         <td><?php echo strtoupper($value->id_produk); ?></td>
                         <td><?php echo ucwords($value->nama_produk); ?></td>
                         <td><?php echo $value->jumlah; ?></td>

@@ -45,19 +45,25 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode</th>
-                        <th>Produk</th>
-                        <th>Jumlah</th>
-                        <th>Value</th>
+                        <th>Area</th>
+                        <th>Kode User</th>
+                        <th>User</th>
+                        <th>Kode Produk</th>
+                        <th>Nama Produk</th>
+                        <th>Jumlah<br />(Unit)</th>
+                        <th>Value<br />(Rp)</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php foreach ($entry_breakdown['data']->result() as $key => $value): ?>
                       <tr>
+                        <td class="rt-data"><?php echo ucwords($value->nama_area); ?></td>
+                        <td class="rt-data"><?php echo strtoupper($value->id_user); ?></td>
+                        <td class="rt-data"><?php echo ucwords($value->nama_customer); ?></td>
                         <td class="rt-data"><?php echo strtoupper($value->id_produk); ?></td>
                         <td class="rt-data"><?php echo strtoupper($value->nama_produk); ?></td>
                         <td class="rt-data"><?php echo $value->jumlah; ?></td>
-                        <td class="rt-money"><?php echo number_format($value->value, 0, ',', '.'); ?></td>
+                        <td class="rt-money"><?php echo number_format($value->nominal_sales, 0, ',', '.'); ?></td>
                       </tr>
                       <?php endforeach ?>
                     </tbody>
