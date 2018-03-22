@@ -77,4 +77,12 @@ class Pemindahan_Sales extends CI_Model {
     $this->db->query($query);
   }
 
+  public function update($id, $data = array())
+  {
+    $this->db->set($data);
+    $this->db->where('id', $id);
+    $query = $this->db->get_compiled_update('pemindahan_sales');
+    $this->db->query($query);
+  }
+
 }
