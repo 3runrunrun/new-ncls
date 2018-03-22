@@ -13,8 +13,8 @@ class Sales_Daily extends CI_Model {
     $query = "select a.nama as nama_area, 
       a.id_produk as kode_produk, 
       a.nama_produk, 
-      b.nominal_target,
-      sum(a.jumlah_diskon) as total_sales,
+      coalesce(b.nominal_target,0) as nominal_target,
+      coalesce(sum(a.jumlah_diskon),0) as total_sales,
       coalesce((case when bulan = '01' then a.jumlah_diskon end),0) as januari,
       coalesce((case when bulan = '02' then a.jumlah_diskon end),0) as februari,
       coalesce((case when bulan = '03' then a.jumlah_diskon end),0) as maret,
@@ -69,7 +69,7 @@ class Sales_Daily extends CI_Model {
         ) z
       GROUP BY z.bulan, z.id_produk, z.id_area
       ) a
-      join
+      left join
       (
         select 
           c2.nama as nama_area, 
@@ -107,8 +107,8 @@ class Sales_Daily extends CI_Model {
     $query = "select a.nama as nama_area, 
       a.id_outlet as kode_outlet, 
       a.nama_outlet, 
-      b.nominal_target,
-      sum(a.jumlah_diskon) as total_sales,
+      coalesce(b.nominal_target,0) as nominal_target,
+      coalesce(sum(a.jumlah_diskon),0) as total_sales,
       coalesce((case when bulan = '01' then a.jumlah_diskon end),0) as januari,
       coalesce((case when bulan = '02' then a.jumlah_diskon end),0) as februari,
       coalesce((case when bulan = '03' then a.jumlah_diskon end),0) as maret,
@@ -163,7 +163,7 @@ class Sales_Daily extends CI_Model {
           ) z
         GROUP BY z.bulan, z.id_outlet, z.id_area
       ) a
-      join
+      left join
       (
         select 
           c2.nama as nama_area, 
