@@ -40,20 +40,11 @@ class Entry_Breakdown extends CI_Model
 
     public function get_per_product($column = '*')
     {
-        $query = "SELECT 
-                b.id_produk,
-                d.nama as nama_produk,
-                SUM(b.jumlah) as jumlah,
-                (SUM(b.jumlah * c.harga_master)) as value
-            FROM sales_customer a
-            JOIN sales_customer_detail b ON a.id = b.id_sc
-            JOIN produk_harga c ON b.id_produk = c.id_produk
-            JOIN produk d ON b.id_produk = d.id
-            WHERE a.hapus IS NULL
-            AND a.tahun = ?
-            GROUP BY b.id_produk";
-        $bind_param = array($this->session->userdata('tahun'));
-        $result = $this->db->query($query, $bind_param);
+        $this->db->select($column)
+            ->from('v_breakdown_per_produk')
+            ->where('tahun', $this->session->userdata('tahun'))
+            ->where('hapus', null);
+        $result = $this->db->get();
         if (!$result) {
             $ret_val = array(
                 'status' => 'error',

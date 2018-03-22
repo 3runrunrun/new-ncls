@@ -1,3 +1,30 @@
+<?php 
+  $rf = 0;
+  $bl = 0;
+  $mvc = 0;
+
+  $cstper = $achievement_customer['data']->num_rows();
+
+  foreach ($achievement_customer['data']->result() as $value) {
+    if (floatval($value->ratio_dana) < 50) {
+      $rf += 1;
+    } elseif (floatval($value->ratio_dana) >= 80 && floatval($value->ratio_dana) <= 100) {
+      $bl += 1;
+    } elseif (floatval($value->ratio_dana) >= 110) {
+      $mvc += 1;
+    }
+  }
+
+  // echo $rf;
+  // echo $bl;
+  // echo $mvc;
+  // echo $cstper;
+  
+  $pr_rf = $rf / $cstper * 100;
+  $pr_bl = $bl / $cstper * 100;
+  $pr_mvc = $mvc / $cstper * 100;
+ ?>
+
 <div class="app-content content container-fluid">
   <div class="content-wrapper">
     <div class="content-header row">
@@ -22,10 +49,10 @@
                       </span>
                     </div>
                     <div class="card-body">
-                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="%" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#FF0049" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
+                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="<?php echo $pr_rf; ?>" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#FF0049" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
                       <ul class="list-inline clearfix mt-1 mb-0">
                         <li>
-                          <h2 class="grey darken-1 text-bold-400">%</h2>
+                          <h2 class="grey darken-1 text-bold-400"><?php echo number_format($pr_rf, 2, ',', '.'); ?>%</h2>
                           <span class="danger">Detailer</span>
                         </li>
                       </ul>
@@ -37,25 +64,27 @@
                       <table class="table table-bordered table-hover table-xs border-top-red" id="simple-table">
                         <thead>
                           <tr>
-                            <th>Kode Detailer</th>
-                            <th>Detailer</th>
                             <th>Area</th>
-                            <th>Total Sales</th>
-                            <th>Target</th>
-                            <th>Achievement</th>
-                            <th>Tools</th>
+                            <th>Kode Customer</th>
+                            <th>Customer</th>
+                            <th>Total Sales<br />(Rp)</th>
+                            <th>Target<br />(Rp)</th>
+                            <th>Ratio<br />(%)</th>
                           </tr>
                         </thead>
                         <tbody>
+                          <?php foreach ($achievement_customer['data']->result() as $value): ?>
+                          <?php if (floatval($value->ratio_dana) < 50): ?>
                           <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><?php echo ucwords($value->nama_area); ?></td>
+                            <td><?php echo strtoupper($value->id_user); ?></td>
+                            <td><?php echo ucwords($value->nama_user); ?></td>
+                            <td><?php echo number_format($value->nominal_sales, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->total_dana, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->ratio_dana, 2, ',', '.'); ?>%</td>
                           </tr>
+                          <?php endif; ?>
+                          <?php endforeach; ?>
                         </tbody>
                       </table>
                     </div>
@@ -83,10 +112,10 @@
                       </span>
                     </div>
                     <div class="card-body">
-                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#3FB9FF" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
+                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="<?php echo $pr_bl; ?>" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#3FB9FF" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
                       <ul class="list-inline clearfix mt-1 mb-0">
                         <li>
-                          <h2 class="grey darken-1 text-bold-400">%</h2>
+                          <h2 class="grey darken-1 text-bold-400"><?php echo number_format($pr_bl, 2, ',', '.'); ?>%</h2>
                           <span class="info">Detailer</span>
                         </li>
                       </ul>
@@ -98,23 +127,27 @@
                       <table class="table table-bordered table-hover table-xs border-top-red" id="simple-table-2">
                         <thead>
                           <tr>
-                            <th>Kode Detailer</th>
-                            <th>Detailer</th>
                             <th>Area</th>
-                            <th>Total Sales</th>
-                            <th>Target</th>
-                            <th>Tools</th>
+                            <th>Kode Customer</th>
+                            <th>Customer</th>
+                            <th>Total Sales<br />(Rp)</th>
+                            <th>Target<br />(Rp)</th>
+                            <th>Ratio<br />(%)</th>
                           </tr>
                         </thead>
-                        <tbody>                          
+                        <tbody>
+                          <?php foreach ($achievement_customer['data']->result() as $value): ?>
+                          <?php if (floatval($value->ratio_dana) >= 80 && floatval($value->ratio_dana) <= 100): ?>
                           <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><?php echo ucwords($value->nama_area); ?></td>
+                            <td><?php echo strtoupper($value->id_user); ?></td>
+                            <td><?php echo ucwords($value->nama_user); ?></td>
+                            <td><?php echo number_format($value->nominal_sales, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->total_dana, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->ratio_dana, 2, ',', '.'); ?>%</td>
                           </tr>
+                          <?php endif; ?>
+                          <?php endforeach; ?>
                         </tbody>
                       </table>
                     </div>
@@ -142,10 +175,10 @@
                       </span>
                     </div>
                     <div class="card-body">
-                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="%" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#09D9A1" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
+                      <div style="display:inline;width:100px;height:100px;"><input type="text" value="<?php echo $pr_mvc; ?>" class="knob hide-value responsive angle-offset" data-angleoffset="40" data-thickness=".15" data-linecap="round" data-width="100" data-height="100" data-inputcolor="#e1e1e1" data-readonly="true" data-fgcolor="#09D9A1" data-knob-icon="icon-feedback2" readonly="readonly" style="width: 69px; height: 43px; position: absolute; vertical-align: middle; margin-top: 43px; border: 0px; background: none; font-style: normal; font-variant: normal; font-weight: bold; font-stretch: normal; font-size: 26px; line-height: normal; font-family: Arial; text-align: center; color: rgb(225, 225, 225); padding: 0px; -webkit-appearance: none; margin-left: -99px; display: none;"></div>
                       <ul class="list-inline clearfix mt-1 mb-0">
                         <li>
-                          <h2 class="grey darken-1 text-bold-400">%</h2>
+                          <h2 class="grey darken-1 text-bold-400"><?php echo number_format($pr_mvc, 2, ',', '.'); ?>%</h2>
                           <span class="success">Detailer</span>
                         </li>
                       </ul>
@@ -157,23 +190,27 @@
                       <table class="table table-bordered table-hover table-xs border-top-red" id="simple-table-3">
                         <thead>
                           <tr>
-                            <th>Kode Detailer</th>
-                            <th>Detailer</th>
                             <th>Area</th>
-                            <th>Total Sales</th>
-                            <th>Target</th>
-                            <th>Tools</th>
+                            <th>Kode Customer</th>
+                            <th>Customer</th>
+                            <th>Total Sales<br />(Rp)</th>
+                            <th>Target<br />(Rp)</th>
+                            <th>Ratio<br />(%)</th>
                           </tr>
                         </thead>
                         <tbody>
+                          <?php foreach ($achievement_customer['data']->result() as $value): ?>
+                          <?php if (floatval($value->ratio_dana) >= 110): ?>
                           <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td><?php echo ucwords($value->nama_area); ?></td>
+                            <td><?php echo strtoupper($value->id_user); ?></td>
+                            <td><?php echo ucwords($value->nama_user); ?></td>
+                            <td><?php echo number_format($value->nominal_sales, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->total_dana, 0, ',', '.'); ?></td>
+                            <td><?php echo number_format($value->ratio_dana, 2, ',', '.'); ?>%</td>
                           </tr>
+                          <?php endif; ?>
+                          <?php endforeach; ?>
                         </tbody>
                       </table>
                     </div>
