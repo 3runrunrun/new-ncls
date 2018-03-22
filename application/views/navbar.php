@@ -149,7 +149,7 @@
                 </li>
               </ul>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Laporan Pemindahan Sales</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/pemindahan-sales" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Laporan Pemindahan Sales</a>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/actual-sales" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Laporan Actual Sales per Year</a>
             </li>
