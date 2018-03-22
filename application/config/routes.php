@@ -201,14 +201,17 @@ $route['store-tender/(:any)'] = 'transaction/C_Tender/store/$1';
 | Report 
 |
  */
+// daily sales
 $route['daily-sales-product'] = 'report/C_Daily_Sales/show_product';
 $route['daily-sales-outlet'] = 'report/C_Daily_Sales/show_outlet';
 $route['detail-sales-outlet/(:any)'] = 'report/C_Daily_Sales/detail_outlet/$1';
 $route['store-sales'] = 'report/C_Daily_Sales/store';
 $route['store-sales/(:any)'] = 'report/C_Daily_Sales/store/$1';
 
+// sales distributor
 $route['sales-distributor'] = 'report/C_Daily_Sales_Distributor/index';
 
+// stok produk nucleus
 $route['stock-product-nucleus'] = 'report/C_Stock_Product_Nucleus/index';
 $route['detail-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/show/$1';
 $route['print-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/cetak/$1';
@@ -217,6 +220,7 @@ $route['store-product-nucleus'] = 'report/C_Stock_Product_Nucleus/store';
 $route['store-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/store/$1';
 $route['print-product-nucleus/(:any)'] = 'report/C_Stock_Product_Nucleus/cetak/$1';
 
+// stok produk distributor
 $route['stock-product-distributor'] = 'report/C_Stock_Product_Distributor/index';
 $route['detail-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/show/$1';
 $route['print-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/cetak/$1';
@@ -224,22 +228,29 @@ $route['detail-product-distributor/(:any)/(:any)'] = 'report/C_Stock_Product_Dis
 $route['store-product-distributor'] = 'report/C_Stock_Product_Distributor/store';
 $route['store-product-distributor/(:any)'] = 'report/C_Stock_Product_Distributor/store/$1';
 
+// entry breakdown sales
 $route['entry-breakdown-general'] = 'report/C_Entry_Breakdown/show_general';
 $route['detail-breakdown-general/(:any)'] = 'report/C_Entry_Breakdown/show/$1';
 $route['entry-breakdown-product'] = 'report/C_Entry_Breakdown/show_product';
 $route['store-entry-breakdown'] = 'report/C_Entry_Breakdown/store';
 $route['store-entry-breakdown/(:any)'] = 'report/C_Entry_Breakdown/store/$1';
 
+// pemindahan sales
 $route['pemindahan-sales'] = 'report/C_Pemindahan_Sales/index';
-$route['pemindahan-sales'] = 'report/C_Pemindahan_Sales/store';
-$route['pemindahan-sales/(:any)'] = 'report/C_Pemindahan_Sales/store/$1';
+$route['detail-pemindahan-sales/(:any)'] = 'report/C_Pemindahan_Sales/show/$1';
+$route['detail-pemindahan-sales/(:any)/(:any)'] = 'report/C_Pemindahan_Sales/show/$1/$2';
+$route['store-pemindahan-sales'] = 'report/C_Pemindahan_Sales/store';
+$route['store-pemindahan-sales/(:any)'] = 'report/C_Pemindahan_Sales/store/$1';
 
+// actual sales
 $route['actual-sales'] = 'report/C_Actual_Sales/index';
 
+// reward
 $route['reward'] = 'report/C_Reward/index';
 $route['store-reward'] = 'report/C_Reward/store';
 $route['store-reward/(:any)'] = 'report/C_Reward/store/$1';
 
+// klm
 $route['klm'] = 'report/C_Klm/index';
 $route['klm-sales'] = 'report/C_Klm/show_sales';
 $route['show-klm-dana'] = 'report/C_Klm/show_dana';
