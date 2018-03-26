@@ -1,5 +1,5 @@
 <?php
-class Aset extends CI_Model
+class Customer_Non extends CI_Model
 {
     public function __construct()
     {
@@ -9,7 +9,7 @@ class Aset extends CI_Model
     public function get_all($column = '*')
     {
         $this->db->select($column);
-        $result = $this->db->get('aset');
+        $result = $this->db->get('customer_non');
         if (!$result) {
             $ret_val = array(
                 'status' => 'error',
@@ -26,11 +26,8 @@ class Aset extends CI_Model
     public function get_data($column = '*')
     {
         $this->db->select($column);
-        $this->db->from('aset a');
-        $this->db->join('aset_penyusutan b', 'a.id = b.id_aset');
-        $this->db->where('a.tahun', $this->session->userdata('tahun'));
-        $this->db->where('a.hapus', null);
-        $result = $this->db->get();
+        $this->db->where('hapus', null);
+        $result = $this->db->get('v_customer_non');
         if (!$result) {
             $ret_val = array(
                 'status' => 'error',
@@ -46,21 +43,7 @@ class Aset extends CI_Model
     }
     public function store($data = array())
     {
-        $query = $this->db->set($data)->get_compiled_insert('aset');
-        $this->db->query($query);
-    }
-    public function update($id, $data = array())
-    {
-        $this->db->set($data);
-        $this->db->where('id', $id);
-        $query = $this->db->get_compiled_insert('aset');
-        $this->db->query($query);
-    }
-    public function destroy($id)
-    {
-        $this->db->set('hapus', date('Y-m-d'));
-        $this->db->where('id', $id);
-        $query = $this->db->get_compiled_insert('aset');
+        $query = $this->db->set($data)->get_compiled_insert('customer_non');
         $this->db->query($query);
     }
 }

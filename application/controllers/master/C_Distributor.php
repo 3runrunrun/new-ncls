@@ -12,7 +12,7 @@ class C_Distributor extends CI_Controller {
   public function index()
   {
     $data['distributor'] = $this->Distributor->get_data('a.id, UPPER(a.nama) as nama_distributor, UPPER(b.alias_distributor) as jenis, UPPER(c.nama) as nama_area, UPPER(c.alias_area) as alias_area');
-    $data['jenis'] = $this->Master_Distributor->get_data('id, UPPER(nama) as nama, UPPER(alias_distributor) as alias_distributor');
+    $data['jenis'] = $this->Master_Distributor->get_data_no_subdist('id, UPPER(nama) as nama, UPPER(alias_distributor) as alias_distributor');
     $data['area'] = $this->Area->get_data('id, UPPER(nama) as nama, UPPER(alias_area) as alias_area');
 
     if ($data['distributor']['status'] == 'error') {
@@ -34,14 +34,14 @@ class C_Distributor extends CI_Controller {
       # code...
     } else {
       $input_var = $this->input->post();
-      
+
       $this->Distributor->store($input_var);
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan data distributor <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to add a distributor.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data distributor baru <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'New distributor is <strong>saved</strong>.');
       }
     }
     

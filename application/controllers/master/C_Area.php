@@ -39,10 +39,10 @@ class C_Area extends CI_Controller {
       $this->Area->store($input_var);
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan data area <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to add an area.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data area baru <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'New area <strong>saved</strong>.');
       }
     }
     

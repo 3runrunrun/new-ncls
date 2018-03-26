@@ -90,14 +90,13 @@ body {
     <table style="margin-top: 80px;" width="100%" border="1" cellspacing="0">
       <thead>
         <tr>
-          <th>Tanggal</th>
+          <th colspan="2">Date</th>
           <th>Kota<br />(Rp)</th>
           <th>Allowance<br />(Rp)</th>
           <th>Tol Parkir<br />(Rp)</th>
           <th>Bensin<br />(Rp)</th>
           <th>Comm<br />(Rp)</th>
           <th>Entertainment<br />(Rp)</th>
-          <th>Med. Care<br />(Rp)</th>
           <th>Other<br />(Rp)</th>
           <th>Total<br />(Rp)</th>
         </tr>
@@ -105,64 +104,60 @@ body {
       <tbody>
         <?php foreach ($operasional['data']->result() as $value): ?>
           <tr style="text-align: center;">
-            <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
-            <td><?php echo $tanggal; ?></td>                          
+            <?php $dari = date('d-M-Y', strtotime($value->dari)); ?>
+            <?php $sampai = date('d-M-Y', strtotime($value->sampai)); ?>
+            <td><?php echo $dari; ?></td>                      
+            <td><?php echo $sampai; ?></td>                      
             <td><?php echo number_format($value->city, 0, ',', '.'); ?></td>
             <td><?php echo number_format($value->allowance, 0, ',', '.'); ?></td>
             <td><?php echo number_format($value->tol_parkir, 0, ',', '.'); ?></td>
             <td><?php echo number_format($value->bensin, 0, ',', '.'); ?></td>
             <td><?php echo number_format($value->comm, 0, ',', '.'); ?></td>
             <td><?php echo number_format($value->entertainment, 0, ',', '.'); ?></td>
-            <td><?php echo number_format($value->medcare, 0, ',', '.'); ?></td>
             <td><?php echo number_format($value->other, 0, ',', '.'); ?></td>
             <td><?php echo number_format($value->total, 0, ',', '.'); ?></td>
           </tr>                        
         <?php endforeach; ?> 
         <tr style="background-color: grey">
-          <th></th>
+          <th colspan="2">Total</th>
           <th>
             <?php $b = $maxtgl['data']->result_array();
-            echo $b[0]['city'];
+            echo number_format($b[0]['city'], 0, ',', '.');
             ?>
           </th>
           <th>
             <?php $b = $maxtgl['data']->result_array();
-            echo $b[0]['allowance'];
+            echo number_format($b[0]['allowance'], 0, ',', '.');
             ?>
           </th>
           <th>
             <?php $b = $maxtgl['data']->result_array();
-            echo $b[0]['tol_parkir'];
+            echo number_format($b[0]['tol_parkir'], 0, ',', '.');
             ?>
           </th>
           <th>
             <?php $b = $maxtgl['data']->result_array();
-            echo $b[0]['bensin'];
+            echo number_format($b[0]['bensin'], 0, ',', '.');
             ?>
           </th>
           <th>
             <?php $b = $maxtgl['data']->result_array();
-            echo $b[0]['comm'];
+            echo number_format($b[0]['comm'], 0, ',', '.');
             ?>
           </th>
           <th>
             <?php $b = $maxtgl['data']->result_array();
-            echo $b[0]['entertainment'];
+            echo number_format($b[0]['entertainment'], 0, ',', '.');
             ?>
           </th>
           <th>
             <?php $b = $maxtgl['data']->result_array();
-            echo $b[0]['medcare'];
+            echo number_format($b[0]['other'], 0, ',', '.');
             ?>
           </th>
           <th>
             <?php $b = $maxtgl['data']->result_array();
-            echo $b[0]['other'];
-            ?>
-          </th>
-          <th>
-            <?php $b = $maxtgl['data']->result_array();
-            echo $b[0]['total'];
+            echo number_format($b[0]['total'], 0, ',', '.');
             ?>
           </th>
         </tr>                     

@@ -15,6 +15,7 @@ class Distributor extends CI_Model {
     $this->db->join('master_distributor b', 'a.id_master = b.id');
     $this->db->join('area c', 'a.id_area = c.id');
     $this->db->where('a.hapus', null);
+    $this->db->where('a.id_master <>', 10);
     $result = $this->db->get();
     if ( ! $result) {
       $ret_val = array(

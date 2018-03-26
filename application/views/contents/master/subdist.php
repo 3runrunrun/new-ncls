@@ -45,9 +45,9 @@
                   <table class="table table-hover table-xs border-top-blue display nowrap" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode</th>
+                        <th>Id</th>
                         <th>Area</th>
-                        <th>Nama</th>
+                        <th>Name</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -70,7 +70,49 @@
 
       <!-- form -->
       <div class="row">
-        <div class="col-xs-12">
+
+        <div class="col-sm-6 col-xs-12">
+          <div class="card border-top-green">
+            <div class="card-header">
+              <h4 class="card-title" id="horz-layout-basic">Add Subdistributor</h4>
+            </div>
+            <div class="card-body">
+              <div class="card-block">
+                <div class="card-text">
+                  <p>New subdistributor submission form</p>
+                </div>
+                <form action="<?php echo site_url(); ?>/store-subdistributor" class="form" method="POST" role="form">
+                  <div class="form-body">
+                    <div class="form-group">
+                      <label class="label-control">Name</label>
+                      <input type="text" name="nama" class="form-control border-primary" required>
+                    </div>
+                    <!-- /nama -->
+                    <div class="form-group">
+                      <label class="label-control">Area</label>
+                      <select name="id_area" class="form-control select2" required>
+                        <option value="" selected disabled>Choose area</option>
+                        <?php if ($area['data']->num_rows() < 1): ?>
+                        <option value="" disabled>Unavailable</option>
+                        <?php else: ?>
+                        <?php foreach ($area['data']->result() as $value): ?>
+                        <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) <?php echo $value->nama; ?></option>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+                      </select>
+                    </div>
+                    <!-- /id-area -->
+                  </div>
+                  <div class="form-actions center">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
               <h4 class="card-title" id="horz-layout-basic">Add Target</h4>
@@ -78,26 +120,27 @@
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir untuk menambah target subdistributor baru</p>
+                  <p>New subdistributor sales target submission form</p>
                 </div>
                 <div class="bs-callout-danger callout-border-right mb-1 p-1">
-                  <strong>Perhatian!</strong>
-                  <p>Sebelum mengisi target subdistributor, pastikan anda telah mengisi data subdistributor melalui formulir penambahan distributor pada <a href="<?php echo site_url(); ?>/master-distributor" class="alert-link danger">halaman ini</a>.</p>
+                  <strong>Attention!</strong>
+                  <p>Before you complete this form, make sure you added the subdistributor by filling the <strong>Add Subdistributor</strong> form on the left side.</p>
+                  <p>You can see the subdistributor's target in this <a href="<?php echo site_url(); ?>/subdist" class="alert-link" style="color: black;" target="_blank">page</a>.</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-subdistributorEkstern" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="form-group">
-                      <label class="label-control">Kode Target</label><br />
+                      <label class="label-control">Target Id</label><br />
                       <?php $this->session->set_userdata('id_sks', $id_sks); ?>
                       <span class="tag tag-lg tag-success"><?php echo strtoupper($id_sks); ?></span>
                     </div>
                     <!-- /id-sks -->
                     <div class="form-group">
-                      <label class="label-control">Sudist</label>
+                      <label class="label-control">Sudistributor</label>
                       <select name="id_subdist" class="form-control select2" required>
-                        <option value="" selected disabled>Pilih subdistributor</option>
+                        <option value="" selected disabled>Choose subdistributor</option>
                         <?php if ($subdistributor['data']->num_rows() < 1): ?>
-                        <option value="" disabled>Sudist belum tersedia</option>
+                        <option value="" disabled>Unavailable</option>
                         <?php else: ?>
                         <?php foreach ($subdistributor['data']->result() as $value): ?>
                         <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) <?php echo $value->nama_subdist; ?></option>
@@ -109,9 +152,9 @@
                     <div class="form-group">
                       <label class="label-control">User</label>
                       <select name="id_customer" class="form-control select2" required>
-                        <option value="" selected disabled>Pilih user</option>
+                        <option value="" selected disabled>Choose user</option>
                         <?php if ($user['data']->num_rows() < 1): ?>
-                        <option value="" disabled>User belum tersedia</option>
+                        <option value="" disabled>Unavailable</option>
                         <?php else: ?>
                         <?php foreach ($user['data']->result() as $value): ?>
                         <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo $value->jenis; ?> -  <?php echo $value->nama; ?></option>
@@ -123,11 +166,11 @@
                     <div class="form-group row">
                       <div class="col-md-6 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Produk</label>
+                          <label class="label-control">Product</label>
                           <select name="id_produk" class="form-control select2" required>
-                            <option value="" selected disabled>Pilih user</option>
+                            <option value="" selected disabled>Chooser product</option>
                             <?php if ($produk['data']->num_rows() < 1): ?>
-                            <option value="" disabled>User belum tersedia</option>
+                            <option value="" disabled>Unavailable</option>
                             <?php else: ?>
                             <?php foreach ($produk['data']->result() as $value): ?>
                             <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->nama); ?></option>
@@ -173,6 +216,7 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
+        "order": [[ 1, "asc" ]],
       });
     $('#simple-table_filter').css({
       'text-align': 'center',

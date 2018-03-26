@@ -45,11 +45,11 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode</th>
+                        <th>Id</th>
                         <th>Area</th>
-                        <th>Nama</th>
-                        <th>Spesialis</th>
-                        <th>Lokasi Praktek</th>
+                        <th>Name</th>
+                        <th>Specialty</th>
+                        <th>Location of Practice</th>
                         <th>RM</th>
                       </tr>
                     </thead>
@@ -60,7 +60,7 @@
                         <td>(<?php echo $value->alias_area; ?>) <?php echo $value->nama_area; ?></td>
                         <td><?php echo $value->nama; ?></td>
                         <td><?php echo $value->spesialis; ?></td>
-                        <td><?php echo $value->lokasi_praktek; ?></td>
+                        <td>(<?php echo $value->id_outlet; ?>) <?php echo $value->nama_outlet; ?></td>
                         <td><?php echo $value->nama_rm; ?></td>
                       </tr>
                       <?php endforeach ?>
@@ -84,42 +84,51 @@
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir untuk menambah Customer baru</p>
+                  <p>New customer submission form</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-customer" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-md-6 offset-md-3 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Kode Customer</label><br />
+                          <label class="label-control">Customer Id</label><br />
                           <?php $this->session->set_userdata('id_customer', $id); ?>
                           <span class="tag tag-lg tag-success"><?php echo strtoupper($id); ?></span>
                         </div>
                         <!-- /id -->
                         <div class="form-group">
-                          <label class="label-control">Nama</label>
+                          <label class="label-control">Name</label>
                           <input type="text" name="nama" class="form-control border-primary" required>
                         </div>
                         <!-- /nama -->
                         <div class="form-group">
-                          <label class="label-control">Spesialis</label>
+                          <label class="label-control">Specialty</label>
                           <input type="text" name="spesialis" class="form-control border-primary" required>
                         </div>
                         <!-- /spesialis -->
                         <div class="form-group">
-                          <label class="label-control">Lokasi Praktek</label>
-                          <input type="text" name="lokasi_praktek" class="form-control border-primary">
+                          <label class="label-control">Location of Practice</label>
+                          <select name="id_outlet" class="form-control select2">
+                            <option value="" selected disabled>Choose location (outlet)</option>
+                            <?php if ($outlet['data']->num_rows() < 1): ?>
+                            <option value="" disabled>Unavailable</option>
+                            <?php else: ?>
+                            <?php foreach ($outlet['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->jenis; ?> - <?php echo $value->nama_outlet; ?></option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                          </select>
                         </div>
                         <!-- /lokasi-praktek -->
                         <div class="form-group">
                           <label class="label-control">Area</label>
                           <select name="id_area" class="form-control select2" required>
-                            <option value="" selected disabled>Pilih jenis Area</option>
+                            <option value="" selected disabled>Choose area</option>
                             <?php if ($area['data']->num_rows() < 1): ?>
-                            <option value="" disabled>Jenis Area belum tersedia</option>
+                            <option value="" disabled>Unavailable</option>
                             <?php else: ?>
                             <?php foreach ($area['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) <?php echo $value->nama; ?></option>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama; ?></option>
                             <?php endforeach; ?>
                             <?php endif; ?>
                           </select>
@@ -128,19 +137,19 @@
                         <div class="form-group">
                           <label class="label-control">RM</label>
                           <select name="id_rm" class="form-control select2">
-                            <option value="" selected disabled>Pilih RM</option>
+                            <option value="" selected disabled>Choose RM</option>
                             <?php if ($rm['data']->num_rows() < 1): ?>
-                            <option value="" disabled>RM belum tersedia</option>
+                            <option value="" disabled>Unavailable</option>
                             <?php else: ?>
                             <?php foreach ($rm['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) <?php echo $value->nama_detailer; ?></option>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
                             <?php endforeach; ?>
                             <?php endif; ?>
                           </select>
                         </div>
                         <!-- /id-rm -->
                         <div class="form-group">
-                          <label class="label-control">Alamat</label>
+                          <label class="label-control">Address</label>
                           <textarea name="alamat" cols="3" rows="10" class="form-control border-primary"></textarea>
                         </div>
                         <!-- /alamat -->
@@ -148,8 +157,8 @@
                     </div>
                   </div>
                   <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
                   </div>
                 </form>
               </div>
@@ -177,6 +186,7 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
+        "order": [[ 0, "desc" ]],
       });
     $('#simple-table_filter').css({
       'text-align': 'center',

@@ -48,10 +48,22 @@
   <!-- END Page Level CSS-->
   <!-- BEGIN Custom CSS-->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/datepicker/css/jquery-ui.css"> <!-- datepicker -->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/datepicker/css/jquery-ui.structure.css"> <!-- datepicker -->
   <!-- END Custom CSS-->
 
   <!-- BEGIN VENDOR JS-->
   <script src="<?php echo base_url(); ?>assets/js/jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="<?php echo base_url(); ?>process-js/def-path.js"></script>
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/datepicker/external/jquery/jquery.js"></script> <!-- datepicker -->
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/datepicker/js/jquery-ui.min.js"></script> <!-- datepicker -->
   <!-- END VENDOR JS-->
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      if ( $('[type="date"]').prop('type') != 'date' ) {
+        $('[type="date"]').datepicker();
+      }
+    });
+  </script>
 </head>

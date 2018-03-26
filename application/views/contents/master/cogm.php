@@ -37,7 +37,7 @@
         <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">COGM</h4>
+              <h4 class="card-title" id="horz-layout-basic">COGM (Monthly)</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
@@ -45,7 +45,7 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="report-table">
                     <thead>
                       <tr>
-                        <th>Bulan</th>
+                        <th>Month</th>
                         <?php foreach ($jenis['data']->result() as $value): ?>
                         <th><?php echo ucwords(strtolower($value->nama)); ?><br />(Rp)</th>
                         <?php endforeach; ?>
@@ -86,6 +86,47 @@
       </div>
       <!-- /table -->
 
+      <!-- table -->
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="card border-top-green">
+            <div class="card-header">
+              <h4 class="card-title" id="horz-layout-basic">COGM</h4>
+            </div>
+            <div class="card-body">
+              <div class="card-block">
+                <div class="table-responsive height-350">
+                  <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>COGM Type</th>
+                        <th>Year</th>
+                        <th>Date</th>
+                        <th>Cost</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php foreach ($cogm['data']->result() as $value): ?>
+                      <tr>
+                        <td><?php echo strtoupper($value->id); ?></td>
+                        <td><?php echo ucwords($value->jenis_cogm); ?></td>
+                        <td><?php echo $value->tahun; ?></td>
+                        <?php $tanggal = date('d-M-Y', strtotime($value->tanggal)); ?>
+                        <td><?php echo $tanggal; ?></td>
+                        <td><?php echo number_format($value->biaya, 0, ',', '.'); ?></td>
+                      </tr>
+                      <?php endforeach ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /table -->
+
       <!-- form -->
       <div class="row">  
         <div class="col-xs-12">
@@ -96,25 +137,25 @@
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir untuk menambah COGM baru</p>
+                  <p>COGM submission form</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-cogm" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row div-repeat">
                       <div class="col-md-4 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Tanggal</label>
+                          <label class="label-control">Date</label>
                           <input type="date" name="tanggal[]" class="form-control border-primary" value="<?php echo date('Y-m-d'); ?>" required>
                         </div>
                       </div>
                       <!-- /tanggal -->
                       <div class="col-md-4 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Jenis COGM</label>
+                          <label class="label-control">COGM Type</label>
                           <select name="id_cogm[]" class="form-control select2">
-                            <option value="" selected disabled>Pilih jenis COGM</option>
+                            <option value="" selected disabled>Choose type</option>
                             <?php if ($jenis['data']->num_rows() < 1): ?>
-                            <option value="" disabled>Jenis COGM belum tersedia</option>
+                            <option value="" disabled>Unavailable</option>
                             <?php else: ?>
                             <?php foreach ($jenis['data']->result() as $value): ?>
                             <option value="<?php echo $value->id; ?>"><?php echo $value->nama; ?></option>
@@ -126,7 +167,7 @@
                       <!-- /jenis-cogm -->
                       <div class="col-md-3 col-xs-10">
                         <div class="form-group">
-                          <label class="label-control">Biaya</label>
+                          <label class="label-control">Cost</label>
                           <fieldset>
                             <div class="input-group">
                               <span class="input-group-addon">Rp</span>
@@ -142,20 +183,19 @@
                           <button type="button" class="btn btn-danger" onclick="$(this).parent().parent().parent().remove()"><i class="fa fa-times"></i></button>
                         </div>
                       </div>
-                      <!-- /biaya -->
                     </div>
                     <div id="repeater-out"></div>
                     <div class="row">
                       <div class="col-md-2 col-xs-12">
                         <div class="form-group">
-                          <button type="button" id="add-repeater" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;Tambah COGM</button>
+                          <button type="button" id="add-repeater" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;Add COGM</button>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
                   </div>
                 </form>
               </div>
@@ -177,6 +217,35 @@
     });
     $('#report-table td').addClass('text-truncate');
     $('#report-table td:even').addClass('bg-table-blue');
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#simple-table th, #simple-table td').css({
+      'text-align': 'center',
+    });
+    $('#simple-table td').addClass('text-truncate');
+    $('#simple-table td:even').addClass('bg-table-blue');
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#simple-table').DataTable({
+        "paging": false,
+        "order": [[ 0, "desc" ]],
+      });
+    $('#simple-table_filter').css({
+      'text-align': 'center',
+    });
+    $('#simple-table_wrapper').children(':first').children(':first').remove();
+    $('#simple-table_filter').parent().addClass('col-xs-12').removeClass('col-md-6');
+    $('#simple-table_filter > label > input').addClass('input-md').removeClass('input-sm').attr({
+        placeholder: 'Keyword',
+      });
+
+    $('#simple-table_wrapper').children(':last').remove();
   });
 </script>
 

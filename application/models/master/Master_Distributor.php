@@ -27,6 +27,26 @@ class Master_Distributor extends CI_Model {
     return $ret_val;
   }
 
+  public function get_data_no_subdist($column = '*')
+  {
+    $this->db->select($column);
+    $this->db->where('hapus', null);
+    $this->db->where('nama <>', 'subdist');
+    $result = $this->db->get('master_distributor');
+    if ( ! $result) {
+      $ret_val = array(
+        'status' => 'error',
+        'data' => $this->db->error()
+        );
+    } else {
+      $ret_val = array(
+        'status' => 'success',
+        'data' => $result
+        );
+    }
+    return $ret_val;
+  }
+
   public function store($data = array())
   {
     $query = $this->db->set($data)->get_compiled_insert('master_distributor');

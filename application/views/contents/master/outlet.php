@@ -45,10 +45,11 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode</th>
+                        <th>Id</th>
                         <th>Area</th>
-                        <th>Nama</th>
-                        <th>Kota</th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>City</th>
                         <th>Distributor</th>
                         <th>Detailer</th>
                         <th>Periode</th>
@@ -60,6 +61,7 @@
                       <tr>
                         <td><?php echo strtoupper($value->id); ?></td>
                         <td>(<?php echo $value->alias_area; ?>) <?php echo $value->nama_area; ?></td>
+                        <td><?php echo $value->jenis; ?></td>
                         <td><?php echo $value->nama_outlet; ?></td>
                         <td><?php echo $value->kota; ?></td>
                         <td>(<?php echo $value->alias_distributor; ?>) <?php echo $value->nama_distributor; ?></td>
@@ -89,14 +91,14 @@
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir untuk menambah Outlet baru</p>
+                  <p>New outlet submission form</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-outlet" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-md-6 offset-md-3 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Kode Customer</label><br />
+                          <label class="label-control">Outlet Id</label><br />
                           <?php $this->session->set_userdata('id_outlet', $id); ?>
                           <span class="tag tag-lg tag-success"><?php echo strtoupper($id); ?></span>
                         </div>
@@ -105,12 +107,12 @@
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Area</label>
                             <select name="id_area" class="form-control select2" required>
-                              <option value="" selected disabled>Pilih Area</option>
+                              <option value="" selected disabled>Choose area</option>
                               <?php if ($area['data']->num_rows() < 1): ?>
-                              <option value="" disabled>Jenis Area belum tersedia</option>
+                              <option value="" disabled>Unavailable</option>
                               <?php else: ?>
                               <?php foreach ($area['data']->result() as $value): ?>
-                              <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo $value->nama; ?></option>
+                              <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama; ?></option>
                               <?php endforeach; ?>
                               <?php endif; ?>
                             </select>
@@ -118,12 +120,12 @@
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Distributor</label>
                             <select name="id_distributor" class="form-control select2" required>
-                              <option value="" selected disabled>Pilih Distributor</option>
+                              <option value="" selected disabled>Choose distributor</option>
                               <?php if ($distributor['data']->num_rows() < 1): ?>
-                              <option value="" disabled>Distributor belum tersedia</option>
+                              <option value="" disabled>Unavailable</option>
                               <?php else: ?>
                               <?php foreach ($distributor['data']->result() as $value): ?>
-                              <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) <?php echo $value->nama; ?> (<?php echo $value->alias_distributor; ?>)</option>
+                              <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama; ?> (<?php echo $value->alias_distributor; ?>)</option>
                               <?php endforeach; ?>
                               <?php endif; ?>
                             </select>
@@ -133,12 +135,12 @@
                         <div class="form-group">
                           <label class="label-control">Detailer</label>
                           <select name="id_detailer" class="form-control select2">
-                            <option value="" selected disabled>Pilih Detailer</option>
+                            <option value="" selected disabled>Choose detailer</option>
                             <?php if ($detailer['data']->num_rows() < 1): ?>
-                            <option value="" disabled>Detailer belum tersedia</option>
+                            <option value="" disabled>Unavailable</option>
                             <?php else: ?>
                             <?php foreach ($detailer['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) <?php echo $value->nama_detailer; ?></option>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
                             <?php endforeach; ?>
                             <?php endif; ?>
                           </select>
@@ -149,18 +151,32 @@
                           <input type="date" name="periode" class="form-control border-primary" value="<?php echo date('Y-m-d'); ?>">
                         </div>
                         <!-- /periode -->
-                        <div class="form-group">
-                          <label class="label-control">Nama</label>
-                          <input type="text" name="nama" class="form-control border-primary" required>
+                        <div class="form-group row">
+                          <div class="col-md-3 col-xs-12">
+                            <label class="label-control">Type</label>
+                            <select name="jenis" class="form-control border-primary" required>
+                              <option value="" selected disabled>Choose type</option>
+                              <option value="rs">(RS) - Private Hosipital</option>
+                              <option value="outlet">(Outlet) - Outlet</option>
+                              <option value="rsud">(RSUD) - Public Hospital</option>
+                              <option value="klinik">(Klinik) - Clinic</option>
+                              <option value="apotek">(Apotek) - Pharmacy</option>
+                              <option value="praktek_pribadi">(Praktek Pribadi) - Personal Practice</option>
+                            </select>
+                          </div>
+                          <div class="col-md-9 col-xs-12">
+                            <label class="label-control">Name</label>
+                            <input type="text" name="nama" class="form-control border-primary" required>
+                          </div>
                         </div>
                         <!-- /nama -->
                         <div class="form-group">
-                          <label class="label-control">Alamat</label>
+                          <label class="label-control">Address</label>
                           <textarea name="alamat" cols="3" rows="3" class="form-control border-primary"></textarea>
                         </div>
                         <!-- /alamat -->
                         <div class="form-group">
-                          <label class="label-control">Kota</label>
+                          <label class="label-control">City</label>
                           <input type="text" name="kota" class="form-control border-primary">
                         </div>
                         <!-- /kota -->
@@ -171,7 +187,7 @@
                         <!-- /npwp -->
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
-                            <label class="label-control">Segmen</label>
+                            <label class="label-control">Segment</label>
                             <select name="segmen" class="form-control select2" required>
                               <option value="a">A</option>
                               <option value="b">B</option>
@@ -191,8 +207,8 @@
                     </div>
                   </div>
                   <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
                   </div>
                 </form>
               </div>
@@ -220,6 +236,7 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
+        "order": [[ 0, "desc" ]],
       });
     $('#simple-table_filter').css({
       'text-align': 'center',
