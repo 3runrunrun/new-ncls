@@ -61,6 +61,42 @@ class Detailer extends CI_Model
         }
         return $ret_val;
     }
+    public function show_istri($id, $column = '*')
+    {
+        $this->db->select($column);
+        $this->db->where('id_detailer', $id);
+        $result = $this->db->get('detailer_keluarga');
+        if (!$result) {
+            $ret_val = array(
+                'status' => 'error',
+                'data'   => $this->db->error(),
+            );
+        } else {
+            $ret_val = array(
+                'status' => 'success',
+                'data'   => $result,
+            );
+        }
+        return $ret_val;
+    }
+    public function show_anak($id, $column = '*')
+    {
+        $this->db->select($column);
+        $this->db->where('id_detailer', $id);
+        $result = $this->db->get('detailer_anak');
+        if (!$result) {
+            $ret_val = array(
+                'status' => 'error',
+                'data'   => $this->db->error(),
+            );
+        } else {
+            $ret_val = array(
+                'status' => 'success',
+                'data'   => $result,
+            );
+        }
+        return $ret_val;
+    }
     public function store($data = array())
     {
         $query = $this->db->set($data)->get_compiled_insert('detailer');
