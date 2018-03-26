@@ -27,6 +27,23 @@ class C_Detailer extends CI_Controller {
     $this->load->view('footers/footer-js-form-simple-table');
   }
 
+  public function print($id)
+  {
+    $data['halaman1'] = $this->Detailer->show($id, 'nama_detailer, jenis_kelamin, nama_area, tanggal_masuk, jabatan, id_spv, id_rm, agama, ktp, notelp, nohp, tempat_lahir, tanggal_lahir, kewarganegaraan, pendidikan_terakhir, status_kawin, gaji, housing, sewa_kendaraan, tunjangan, bank, norek, keterangan');
+    $data['istri'] = $this->Detailer->show_istri($id, 'istri');
+    $data['anak'] = $this->Detailer->show_anak($id, 'anak');
+    // $data['halaman2'] = $this->Detailer->show($id, 'nama_detailer, jenis_kelamin, nama_area, tanggal_masuk, jabatan, id_spv, id_rm, agama, tempat_lahir, tanggal_lahir, notelp, nohp, gaji, housing, sewa_kendaraan, tunjangan, bank, norek, keterangan');
+
+    // var_dump($data['halaman2']['data']->row());
+
+    $this->load->view('contents/master/cetak-detailer', $data);
+
+    // $this->load->view('heads/head-form-simple-table');
+    // $this->load->view('navbar');
+    // $this->load->view('contents/master/detailer', $data);
+    // $this->load->view('footers/footer-js-form-simple-table');
+  }
+
   public function store($operation = null)
   {
     $this->db->trans_begin();

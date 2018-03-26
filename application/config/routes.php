@@ -71,6 +71,7 @@ $route['store-area/(:any)'] = 'master/C_Area/store/$1';
 $route['master-detailer'] = 'master/C_Detailer/index';
 $route['store-detailer'] = 'master/C_Detailer/store';
 $route['store-detailer/(:any)'] = 'master/C_Detailer/store/$1';
+$route['print-detailer/(:any)'] = 'master/C_Detailer/print/$1';
 
 // operasional
 $route['master-operasional'] = 'master/C_Operasional/index';
