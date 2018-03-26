@@ -74,8 +74,10 @@ $route['store-detailer/(:any)'] = 'master/C_Detailer/store/$1';
 $route['print-detailer/(:any)'] = 'master/C_Detailer/print/$1';
 
 // operasional
-$route['master-operasional'] = 'master/C_Operasional/index';
+$route['expenses'] = 'master/C_Operasional/index';
+$route['ca'] = 'master/C_Operasional/get_ca';
 $route['master-operasional-print/(:any)'] = 'master/C_Operasional/cetak/$1';
+$route['approve-operasional/(:any)'] = 'master/C_Operasional/show/$1';
 $route['store-operasional'] = 'master/C_Operasional/store';
 $route['store-operasional/(:any)'] = 'master/C_Operasional/store/$1';
 
@@ -100,7 +102,9 @@ $route['store-customer'] = 'master/C_Customer/store';
 $route['store-customer/(:any)'] = 'master/C_Customer/store/$1';
 
 // customer non
-$route['master-customer-non'] = $route['master-outlet'];
+$route['master-customer-non'] = 'master/C_Customer_non/index';
+$route['store-customer-non'] = 'master/C_Customer_non/store';
+$route['store-customer-non/(:any)'] = 'master/C_Customer_non/store/$1';
 
 // distributor
 $route['master-distributor'] = 'master/C_Distributor/index';

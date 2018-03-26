@@ -61,19 +61,25 @@
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/master-detailer" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-at"></i>Master Detailer</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/master-operasional" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Master Operasional</a>
+            <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-money"></i>Master Operational</a>
+              <ul class="dropdown-menu">
+                <li data-menu="" ><a href="<?php echo site_url(); ?>/expenses" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Expenses</a>
+                </li>
+                <li data-menu="" ><a href="<?php echo site_url(); ?>/ca" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>CA</a>
+                </li>
+              </ul>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/master-cogm" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-stack-overflow"></i>Master COGM</a>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/master-aset" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-archive"></i>Master Aset</a>
             </li>
+            <li data-menu=""><a href="<?php echo site_url() ?>/master-outlet" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-building-o"></i>Master Outlet</a>
+            </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/master-customer" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-user"></i>Master Customer</a>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/master-customer-non" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-users"></i>Master Customer (Non)</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/master-outlet" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-building-o"></i>Master Outlet</a>
-            </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/master-product" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-medkit"></i>Master Produk</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/master-product" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-medkit"></i>Master Product</a>
             </li>
           </ul>
         </li>

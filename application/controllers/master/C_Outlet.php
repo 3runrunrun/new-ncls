@@ -11,11 +11,14 @@ class C_Outlet extends CI_Controller {
 
   public function index()
   {
-    $data['outlet'] = $this->Outlet->get_outlet_aktif('id, UPPER(alias_area) as alias_area, UPPER(nama_area) as nama_area, UPPER(nama_outlet) as nama_outlet, UPPER(kota) as kota, UPPER(nama_distributor) as nama_distributor, UPPER(alias_distributor) as alias_distributor, UPPER(nama_detailer) as nama_detailer, periode,UPPER(dispensing) as dispensing');
+    $data_ou = $this->Outlet->get_all();
+    $rows = $data_ou['data']->num_rows();
+    $id = 'ot' . $this->nsu->zerofill_generator(7, $rows);
+
+    $data['outlet'] = $this->Outlet->get_outlet_aktif('id, UPPER(jenis) as jenis, UPPER(alias_area) as alias_area, UPPER(nama_area) as nama_area, UPPER(nama_outlet) as nama_outlet, UPPER(kota) as kota, UPPER(nama_distributor) as nama_distributor, UPPER(alias_distributor) as alias_distributor, UPPER(nama_detailer) as nama_detailer, periode,UPPER(dispensing) as dispensing');
     $data['area'] = $this->Area->get_data('id, UPPER(nama) as nama, UPPER(alias_area) as alias_area');
-    // $data['distributor'] = $this->Distributor->get_data('a.id, UPPER(b.alias_distributor) as alias_distributor, UPPER(a.nama) as nama, UPPER(c.alias_area) as alias_area');
     $data['distributor'] = $this->Dist_Subdist->get_data('id, UPPER(alias_distributor) as alias_distributor, UPPER(nama) as nama, UPPER(alias_area) as alias_area');
-    $data['id'] = $this->nsu->digit_id_generator(4,'ot');
+    $data['id'] = $id;
     $data['detailer'] = $this->Detailer->get_detailer_aktif('id, UPPER(nama_detailer) as nama_detailer, UPPER(alias_area) as alias_area');
 
     if ($data['outlet']['status'] == 'error') {
@@ -42,10 +45,10 @@ class C_Outlet extends CI_Controller {
       $this->Outlet->store($input_var);
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan data outlet <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to save new Outlet.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data outlet baru <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'Outlet has been <strong>saved</strong>.');
       }
       $this->session->unset_userdata('id_outlet');
     }

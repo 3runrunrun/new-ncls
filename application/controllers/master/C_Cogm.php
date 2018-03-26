@@ -14,7 +14,7 @@ class C_Cogm extends CI_Controller {
     $data['laporan'] = $this->Cogm->get_cogm();
     $data['laporan_tahun'] = $this->Cogm->get_cogm_year();
     $data['jenis'] = $this->Master_Cogm->get_data('id, UPPER(nama) as nama');
-    $data['cogm'] = $this->Cogm->get_data('a.id, b.nama as jenis, a.tanggal, a.biaya');
+    $data['cogm'] = $this->Cogm->get_data();
 
     if ($data['cogm']['status'] == 'error') {
       $this->session->set_flashdata('query_msg', $data['cogm']['data']);
@@ -35,15 +35,15 @@ class C_Cogm extends CI_Controller {
       # code...
     } else {
       $input_var = $this->input->post();
+
       $this->save_cogm($input_var);
       
-      // $this->Area->store($input_var);
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan data COGM <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to add COGM.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data COGM <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'COGM has been <strong>saved</strong>.');
       }
     }
     
@@ -53,7 +53,11 @@ class C_Cogm extends CI_Controller {
   private function save_cogm($data = array())
   {
     foreach ($data['id_cogm'] as $key => $value) {
-      $val['id'] = $this->nsu->digit_id_generator(4, 'co');
+      $data_co = $this->Cogm->get_all();
+      $rows = $data_co['data']->num_rows();
+      $id = 'co' . $this->nsu->zerofill_generator(7, $rows);
+
+      $val['id'] = $id;
       $val['id_cogm'] = $value;
       $val['tahun'] = date('Y');
       $val['tanggal'] = $data['tanggal'][$key];

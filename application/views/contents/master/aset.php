@@ -45,11 +45,11 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode</th>
-                        <th>Tanggal</th>
-                        <th>Bentuk Aset</th>
-                        <th>Nilai<br />(Rp)</th>
-                        <th>Nilai Penyusutan</th>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Asset</th>
+                        <th>Value<br />(Rp)</th>
+                        <th>Depreciation<br />(%)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -83,26 +83,26 @@
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir untuk menambah Aset baru</p>
+                  <p>Nucleus's assets submission</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-aset" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-md-6 offset-md-3 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Tanggal</label>
+                          <label class="label-control">Date</label>
                           <input type="date" name="tanggal" class="form-control border-primary" value="<?php echo date('Y-m-d'); ?>" required>
                         </div>
                         <!-- /tanggal -->
                         <div class="form-group">
-                          <label class="label-control">Jenis Aset</label>
+                          <label class="label-control">Assets</label>
                           <input type="text" name="nama" class="form-control border-primary" required>
                         </div>
                         <!-- /nama -->
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
                             <fieldset>
-                              <label class="label-control">Nominal</label>
+                              <label class="label-control">Value</label>
                               <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
                                 <input type="number" name="nominal" class="form-control border-primary" min="0" required>
@@ -111,7 +111,7 @@
                           </div>
                           <div class="col-md-6 col-xs-12">
                             <fieldset>
-                              <label class="label-control">Penyusutan</label>
+                              <label class="label-control">Depreciation</label>
                               <div class="input-group">
                                 <input type="number" name="penyusutan" class="form-control border-primary" min="0" required>
                                 <span class="input-group-addon">%</span>
@@ -124,8 +124,8 @@
                     </div>
                   </div>
                   <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
                   </div>
                 </form>
               </div>
@@ -153,6 +153,7 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
+        "order": [[ 0, "desc" ]],
       });
     $('#simple-table_filter').css({
       'text-align': 'center',

@@ -32,30 +32,36 @@
       </div>
       <!-- /alert -->
 
+      <!-- table -->
       <div class="row">
-        <!-- table -->
-        <div class="col-sm-6 col-xs-12">
+        <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Distributor</h4>
+              <h4 class="card-title" id="horz-layout-basic">Customer (Non)</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
                 <div class="table-responsive height-350">
-                  <table class="table table-hover table-xs border-top-blue display nowrap" id="simple-table">
+                  <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
                         <th>Id</th>
                         <th>Area</th>
-                        <th>(Type) Name</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Location of Practice</th>
+                        <th>RM</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php foreach ($distributor['data']->result() as $value): ?>
+                      <?php foreach ($customer['data']->result() as $value): ?>
                       <tr>
-                        <td><?php echo $value->id; ?></td>
+                        <td><?php echo strtoupper($value->id); ?></td>
                         <td>(<?php echo $value->alias_area; ?>) <?php echo $value->nama_area; ?></td>
-                        <td>(<?php echo $value->jenis; ?>) - <?php echo $value->nama_distributor; ?></td>
+                        <td><?php echo $value->nama; ?></td>
+                        <td><?php echo $value->jenis; ?></td>
+                        <td>(<?php echo $value->id_outlet; ?>) <?php echo $value->nama_outlet; ?></td>
+                        <td><?php echo $value->nama_rm; ?></td>
                       </tr>
                       <?php endforeach ?>
                     </tbody>
@@ -65,42 +71,61 @@
             </div>
           </div>
         </div>
-        <!-- /table -->
+      </div>
+      <!-- /table -->
 
-        <!-- form -->
-        <div class="col-sm-6 col-xs-12">
+      <!-- form -->
+      <div class="row">  
+        <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Add Distributor</h4>
+              <h4 class="card-title" id="horz-layout-basic">Add Customer (non)</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>New distributor submission form</p>
+                  <p>New customer (non) submission form</p>
                 </div>
-                <form action="<?php echo site_url(); ?>/store-distributor" class="form" method="POST" role="form">
+                <form action="<?php echo site_url(); ?>/store-customer-non" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
-                      <div class="col-xs-12">
+                      <div class="col-md-6 offset-md-3 col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Name</label>
-                          <input type="text" name="nama" class="form-control border-primary" required>
+                          <label class="label-control">Customer (non) Id</label><br />
+                          <?php $this->session->set_userdata('id_customer_non', $id); ?>
+                          <span class="tag tag-lg tag-success"><?php echo strtoupper($id); ?></span>
+                        </div>
+                        <!-- /id -->
+                        <div class="form-group row">
+                          <div class="col-md-3 col-xs-12">
+                            <label class="label-control">Type</label>
+                            <select name="jenis" class="form-control border-primary">
+                              <option value="" selected disabled>Choose type</option>
+                              <option value="bidan">Bidan</option>
+                              <option value="apoteker">Apoteker</option>
+                              <option value="lainnya">Lainnya</option>
+                            </select>
+                          </div>
+                          <div class="col-md-9 col-xs-12">
+                            <label class="label-control">Name</label>
+                            <input type="text" name="nama" class="form-control border-primary" required>
+                          </div>
                         </div>
                         <!-- /nama -->
                         <div class="form-group">
-                          <label class="label-control">Distributor type</label>
-                          <select name="id_master" class="form-control select2" required>
-                            <option value="" selected disabled>Choose type</option>
-                            <?php if ($jenis['data']->num_rows() < 1): ?>
+                          <label class="label-control">Outlet</label>
+                          <select name="id_outlet" class="form-control select2">
+                            <option value="" selected disabled>Choose outlet</option>
+                            <?php if ($outlet['data']->num_rows() < 1): ?>
                             <option value="" disabled>Unavailable</option>
                             <?php else: ?>
-                            <?php foreach ($jenis['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>"><?php echo $value->alias_distributor; ?></option>
+                            <?php foreach ($outlet['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->jenis; ?> - <?php echo $value->nama_outlet; ?></option>
                             <?php endforeach; ?>
                             <?php endif; ?>
                           </select>
                         </div>
-                        <!-- /id-master -->
+                        <!-- /lokasi-praktek -->
                         <div class="form-group">
                           <label class="label-control">Area</label>
                           <select name="id_area" class="form-control select2" required>
@@ -109,12 +134,31 @@
                             <option value="" disabled>Unavailable</option>
                             <?php else: ?>
                             <?php foreach ($area['data']->result() as $value): ?>
-                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) <?php echo $value->nama; ?></option>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama; ?></option>
                             <?php endforeach; ?>
                             <?php endif; ?>
                           </select>
                         </div>
                         <!-- /id-area -->
+                        <div class="form-group">
+                          <label class="label-control">RM</label>
+                          <select name="id_rm" class="form-control select2">
+                            <option value="" selected disabled>Choose RM</option>
+                            <?php if ($rm['data']->num_rows() < 1): ?>
+                            <option value="" disabled>Unavailable</option>
+                            <?php else: ?>
+                            <?php foreach ($rm['data']->result() as $value): ?>
+                            <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area; ?>) - <?php echo strtoupper($value->id); ?> - <?php echo $value->nama_detailer; ?></option>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
+                          </select>
+                        </div>
+                        <!-- /id-rm -->
+                        <div class="form-group">
+                          <label class="label-control">Address</label>
+                          <textarea name="alamat" cols="3" rows="10" class="form-control border-primary"></textarea>
+                        </div>
+                        <!-- /alamat -->
                       </div>
                     </div>
                   </div>
@@ -127,8 +171,8 @@
             </div>
           </div>
         </div>
-        <!-- /form -->
       </div>
+      <!-- /form -->
 
     </div>
   </div>
@@ -148,7 +192,7 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
-        "order": [[ 1, "asc" ]],
+        "order": [[ 0, "desc" ]],
       });
     $('#simple-table_filter').css({
       'text-align': 'center',
@@ -162,3 +206,4 @@
     $('#simple-table_wrapper').children(':last').remove();
   });
 </script>
+

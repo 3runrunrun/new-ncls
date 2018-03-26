@@ -45,8 +45,8 @@
                   <table class="table table-hover table-xs border-top-blue display nowrap" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode</th>
-                        <th>Nama</th>
+                        <th>Id</th>
+                        <th>Name</th>
                         <th>Alias</th>
                       </tr>
                     </thead>
@@ -76,20 +76,20 @@
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir untuk menambah area baru</p>
+                  <p>New area submission form</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-area" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-xs-12">
                         <div class="form-group">
-                          <label class="label-control">Kode Area</label><br>
+                          <label class="label-control">Id Area</label><br>
                           <?php $this->session->set_flashdata('id_area', $id); ?>
                           <span class="tag tag-xl tag-success"><?php echo $id; ?></span>
                         </div>
                         <!-- /id -->
                         <div class="form-group">
-                          <label class="label-control">Nama</label>
+                          <label class="label-control">Name</label>
                           <input type="text" name="nama" class="form-control border-primary" required>
                         </div>
                         <!-- /nama -->
@@ -102,8 +102,8 @@
                     </div>
                   </div>
                   <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
                   </div>
                 </form>
               </div>

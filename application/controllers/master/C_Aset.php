@@ -27,18 +27,22 @@ class C_Aset extends CI_Controller {
     } elseif ($operation == 'delete') {
       # code...
     } else {
+      $data = $this->Aset->get_all();
+      $rows = $data['data']->num_rows();
+      $id = 'as' . $this->nsu->zerofill_generator(5, $rows);
+
       $input_var = $this->input->post();
-      $input_var['id'] = $this->nsu->digit_id_generator(4,'as');
+      $input_var['id'] = $id;
       $input_var['tahun'] = date('Y');
       
       $this->save_aset($input_var);
       $this->save_aset_penyusutan($input_var);
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan data aset <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to save new asset.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data operasional aset <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'New asset has been <strong>saved</strong>.');
       }
     }
 

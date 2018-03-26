@@ -45,19 +45,21 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode</th>
-                        <th>Nama</th>
-                        <th>Kemasan</th>
-                        <th>Harga (Master)<br >(Rp)</th>
-                        <th>Harga (HNA)<br >(Rp)</th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Package</th>
+                        <th>Type</th>
+                        <th>Price (Master)<br >(Rp)</th>
+                        <th>Price (HNA)<br >(Rp)</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php foreach ($produk['data']->result() as $value): ?>
                         <tr>
                           <td><?php echo strtoupper($value->id); ?></td>
-                          <td><?php echo strtoupper($value->nama); ?></td>
-                          <td><?php echo strtoupper($value->kemasan); ?></td>
+                          <td><?php echo $value->nama_produk; ?></td>
+                          <td><?php echo $value->kemasan; ?></td>
+                          <td><?php echo $value->jenis; ?></td>
                           <td><?php echo number_format($value->harga_master, '0', ',', '.'); ?></td>
                           <td><?php echo number_format($value->harga_hna, '0', ',', '.'); ?></td>
                         </tr>
@@ -82,45 +84,45 @@
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir untuk menambah produk baru</p>
+                  <p>Product submission form</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-product" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-md-6 col-xs-12">
-                        <h5 class="form-section">Identitas Produk</h5>
+                        <h5 class="form-section">Product Identity</h5>
                         <div class="form-group">
-                          <label class="label-control">Kode Produk</label><br />
+                          <label class="label-control">Product Id</label><br />
                           <?php $this->session->set_userdata('id_produk', $id); ?>
                           <span class="tag tag-lg tag-success"><?php echo strtoupper($id); ?></span>
                         </div>
                         <!-- /id -->
                         <div class="form-group">
-                          <label class="label-control">Nama</label>
+                          <label class="label-control">Name</label>
                           <input type="text" name="nama" class="form-control border-primary" required>
                         </div>
                         <!-- /nama -->
                         <div class="form-group">
-                          <label class="label-control">Kemasan</label>
+                          <label class="label-control">Package</label>
                           <input type="text" name="kemasan" class="form-control border-primary" required>
                         </div>
                         <!-- /kemasan -->
-                        <h5 class="form-section">Harga Produk</h5>
+                        <h5 class="form-section">Product Prices</h5>
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
-                            <label class="label-control">Harga Master</label>
+                            <label class="label-control">Master Price</label>
                             <fieldset>
                               <div class="input-group">
-                                <span class="input-group-add">Rp</span>
+                                <span class="input-group-addon">Rp</span>
                                 <input type="number" name="harga_master" class="form-control border-primary" required>
                               </div>
                             </fieldset>
                           </div>
                           <div class="col-md-6 col-xs-12">
-                            <label class="label-control">Harga HNA</label>
+                            <label class="label-control">HNA Price</label>
                             <fieldset>
                               <div class="input-group">
-                                <span class="input-group-add">Rp</span>
+                                <span class="input-group-addon">Rp</span>
                                 <input type="number" name="harga_hna" class="form-control border-primary" readonly required>
                               </div>
                             </fieldset>
@@ -129,13 +131,13 @@
                         <!-- /harga_master /harga_hna -->
                       </div>
                       <div class="col-md-6 col-xs-12">
-                        <h5 class="form-section">Jenis Produk</h5>
+                        <h5 class="form-section">Product Types</h5>
                         <div class="form-group row">
                           <?php foreach ($jenis['data']->result() as $value): ?>
                           <div class="col-md-3 col-xs-12">
                             <fieldset>
-                              <label class="custom-control custom-checkbox">
-                                <input type="checkbox" name="id_jenis[]" class="custom-control-input" value="<?php echo $value->id; ?>">
+                              <label class="custom-control custom-radio">
+                                <input type="radio" name="id_jenis" class="custom-control-input" value="<?php echo $value->id; ?>">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description"><?php echo $value->nama; ?></span>
                               </label>
@@ -145,7 +147,7 @@
                         </div>
                         <!-- /jenis-produk -->
                         <div class="form-group">
-                          <label class="label-control">Keterangan</label>
+                          <label class="label-control">Annotation</label>
                           <textarea name="keterangan" rows="10" class="form-control border-primary"></textarea>
                         </div>
                         <!-- /keterangan -->
@@ -153,8 +155,8 @@
                     </div>
                   </div>
                   <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
                   </div>
                 </form>
               </div>
@@ -190,6 +192,7 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
+        "order": [[ 0, "desc" ]],
       });
     $('#simple-table_filter').css({
       'text-align': 'center',

@@ -11,11 +11,13 @@ class C_Detailer extends CI_Controller {
 
   public function index()
   {
-    $data['id'] = $this->nsu->digit_id_generator(4, 'dt');
-    $data['spv'] = $this->Detailer->get_data('id, UPPER(nama) as nama');
-    $data['rm'] = $this->Detailer->get_data('id, UPPER(nama) as nama');
-    $data['direktur'] = $this->Detailer->get_data('id, UPPER(nama) as nama');
-    $data['detailer_lama'] = $this->Detailer->get_data('id, UPPER(nama) as nama');
+    // id_detailer
+    $data_dt = $this->Detailer->get_all();
+    $rows = $data_dt['data']->num_rows();
+    $id = 'dt' . $this->nsu->zerofill_generator(5, $rows);
+
+    $data['id'] = $id;
+    $data['spv'] = $this->Detailer->get_detailer_aktif('id, UPPER(alias_area) as alias_area, UPPER(nama_detailer) as nama_detailer');
     $data['area'] = $this->Area->get_data('id, UPPER(nama) as nama');
     $data['jabatan'] = $this->Master_Jabatan->get_data('id, UPPER(jabatan) as jabatan');
 
@@ -68,10 +70,10 @@ class C_Detailer extends CI_Controller {
       
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan data detailer <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to save Detailer.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data detailer baru <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'Detailer has been <strong>saved</strong>.');
       }
     }
     
@@ -91,6 +93,7 @@ class C_Detailer extends CI_Controller {
     $val['pendidikan_terakhir'] = $data['pendidikan_terakhir'];
     $val['status_kawin'] = $data['status_kawin'];
     $val['status'] = 'aktif';
+    $val['alamat'] = $data['alamat'];
     $val['keterangan'] = $data['keterangan'];
     $this->Detailer->store($val);
   }
@@ -102,9 +105,11 @@ class C_Detailer extends CI_Controller {
   }
   private function save_detailer_anak($data = array())
   {
-    $val['id_detailer'] = $data['id'];
-    $val['anak'] = $data['anak'];
-    $this->Detailer_Anak->store($val);
+    foreach ($data['anak'] as $key => $value) {
+      $val['id_detailer'] = $data['id'];
+      $val['anak'] = $value;
+      $this->Detailer_Anak->store($val);
+    }
   }
   private function save_detailer_ff($data = array())
   {
