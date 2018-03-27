@@ -29,7 +29,7 @@ class C_Detailer extends CI_Controller {
     $this->load->view('footers/footer-js-form-simple-table');
   }
 
-  public function print($id)
+  public function cetak($id)
   {
     $data['halaman1'] = $this->Detailer->show($id, 'nama_detailer, jenis_kelamin, nama_area, tanggal_masuk, jabatan, id_spv, id_direktur, id_rm, agama, alamat, ktp, notelp, nohp, tempat_lahir, tanggal_lahir, kewarganegaraan, pendidikan_terakhir, status_kawin, gaji, housing, sewa_kendaraan, tunjangan, bank, norek, keterangan');
     $data['istri'] = $this->Detailer->show_istri($id, 'istri');
