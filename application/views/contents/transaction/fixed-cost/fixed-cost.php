@@ -93,8 +93,8 @@
                       <table class="table table-bordered table-hover table-xs border-top-red" id="simple-table">
                         <thead>
                           <tr>
-                            <th>Kode Detailer</th>
-                            <th>Detailer</th>
+                            <th>Detailer Id</th>
+                            <th>Name</th>
                             <th>Area</th>
                             <th>Total Sales</th>
                             <th>Target</th>
@@ -162,8 +162,8 @@
                       <table class="table table-bordered table-hover table-xs border-top-red" id="simple-table-2">
                         <thead>
                           <tr>
-                            <th>Kode Detailer</th>
-                            <th>Detailer</th>
+                            <th>Detailer Id</th>
+                            <th>Name</th>
                             <th>Area</th>
                             <th>Total Sales</th>
                             <th>Target</th>
@@ -230,8 +230,8 @@
                       <table class="table table-bordered table-hover table-xs border-top-red" id="simple-table-3">
                         <thead>
                           <tr>
-                            <th>Kode Detailer</th>
-                            <th>Detailer</th>
+                            <th>Detailer Id</th>
+                            <th>Name</th>
                             <th>Area</th>
                             <th>Total Sales</th>
                             <th>Target</th>
@@ -288,7 +288,7 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="rt-data">Promosi</td>
+                        <td class="rt-data">Promotion</td>
                         <td class="rt-data">Rp</td>
                         <td class="rt-money"><?php echo number_format($pr, 0, ',','.'); ?></td>
                       </tr>
@@ -298,22 +298,22 @@
                         <td class="rt-money"><?php echo number_format($co, 0, ',','.'); ?></td>
                       </tr>
                       <tr>
-                        <td class="rt-data">Karyawan</td>
+                        <td class="rt-data">Employee</td>
                         <td class="rt-data">Rp</td>
                         <td class="rt-money"><?php echo number_format($kr, 0, ',','.'); ?></td>
                       </tr>
                       <tr>
-                        <td class="rt-data">Inventaris</td>
+                        <td class="rt-data">Inventory</td>
                         <td class="rt-data">Rp</td>
                         <td class="rt-money"><?php echo number_format($iv, 0, ',','.'); ?></td>
                       </tr>
                       <tr>
-                        <td class="rt-data">Operasional</td>
+                        <td class="rt-data">Operational</td>
                         <td class="rt-data">Rp</td>
                         <td class="rt-money"><?php echo number_format($op, 0, ',','.'); ?></td>
                       </tr>
                       <tr>
-                        <td class="rt-data">Insentif</td>
+                        <td class="rt-data">Insentive Cost</td>
                         <td class="rt-data">Rp</td>
                         <td class="rt-money"><?php echo number_format($is, 0, ',','.'); ?></td>
                       </tr>

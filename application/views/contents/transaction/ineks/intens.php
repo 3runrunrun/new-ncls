@@ -37,15 +37,15 @@
         <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Intensifikasi</h4>
+              <h4 class="card-title" id="horz-layout-basic">Intensification</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir intensifikasi sales detailer</p>
+                  <p>Detailer intensification form</p>
                   <div class="bs-callout-danger callout-border-right mb-1 p-1">
-                    <strong>Perhatian!</strong>
-                    <p>Sebelum mengisi intensifikasi, pastikan anda telah mengisi data ekstensifikasi detailer melalui <a href="<?php echo site_url(); ?>/prospek-ineks" class="alert-link">halaman ini</a>.</p>
+                    <strong>Attention!</strong>
+                    <p>Before submitting the detailer intensification, please make sure you inserted detailer extensification on <a href="<?php echo site_url(); ?>/prospek-ineks" class="alert-link">this page</a>.</p>
                   </div>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-intens" class="form" method="POST" role="form">
@@ -57,13 +57,13 @@
                         <input type="text" class="form-control border-primary" value="<?php echo strtoupper($value->nama_detailer); ?>" disabled>
                       </div>
                       <div class="col-md-6 col-xs-12">
-                        <label class="label-control">Kode Ekstensifikasi</label>
+                        <label class="label-control">Extensification Id</label>
                         <input type="text" class="form-control border-primary" value="<?php echo strtoupper($value->id); ?>" disabled>
                         <input type="hidden" name="id_eksten" value="<?php echo $value->id; ?>">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="label-control">Tanggal</label>
+                      <label class="label-control">Date</label>
                       <input type="date" name="tanggal" class="form-control border-primary" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <h5 class="form-section">Target</h5>
@@ -77,11 +77,11 @@
                         <input type="text" class="form-control border-primary" value="<?php echo strtoupper($value->nama_customer); ?>" disabled>
                       </div>
                       <div class="col-md-2 col-xs-12">
-                        <label class="label-control">Pertemuan</label>
+                        <label class="label-control">Encounter (Pertemuan)</label>
                         <input type="number" name="pertemuan" value="<?php echo strtoupper($value->pertemuan); ?>" class="form-control border-primary" readonly>
                       </div>
                       <div class="col-md-4 col-xs-12">
-                        <label class="label-control">Dana</label>
+                        <label class="label-control">Cost</label>
                         <fieldset>
                           <div class="input-group">
                             <span class="input-group-addon">Rp</span>
@@ -90,25 +90,25 @@
                         </fieldset>
                       </div>
                       <div class="col-md-6 col-xs-12">
-                        <label class="label-control">Biaya</label>
+                        <label class="label-control">Cost (per patient)</label>
                         <fieldset>
                           <div class="input-group">
                             <span class="input-group-addon">Rp</span>
                             <input type="number" name="biaya" value="<?php echo strtoupper($value->biaya); ?>" class="form-control border-primary" readonly>
                           </div>
                         </fieldset>
-                        <p>*) Rerata per pasien</p>
+                        <p>*) Average per pasien</p>
                       </div>
                       <div class="col-md-6 col-xs-12">
-                        <label class="label-control">Produk</label>
+                        <label class="label-control">Product</label>
                         <input type="text" class="form-control border-primary" value="<?php echo strtoupper($value->nama_produk); ?>" disabled>
                       </div>
                       <div class="col-md-3 col-xs-12 mb-1">
-                        <label class="label-control">Jumlah (unit)</label>
+                        <label class="label-control">Old Target (unit)</label>
                         <input type="number" class="form-control border-primary" value="<?php echo strtoupper($value->target); ?>" disabled>
                       </div>
                       <div class="col-md-3 col-xs-12 mb-1">
-                        <label class="label-control">Target Baru (unit)</label>
+                        <label class="label-control">New Target (unit)</label>
                         <input type="number" name="target" class="form-control border-primary" value="<?php echo strtoupper($value->target); ?>">
                       </div>
                     </div>
@@ -116,8 +116,8 @@
                     <?php endforeach; ?>
                   </div>
                   <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
                   </div>
                 </form>
               </div>

@@ -29,7 +29,7 @@
                         </div>
                     </fieldset>
                     <fieldset class="form-group position-relative has-icon-left">
-                        <input type="number" name="tahun" class="form-control form-control-lg input-lg" id="tahun" placeholder="Year" min="2017" max="<?php echo date('Y'); ?>" required>
+                        <input type="number" name="tahun" class="form-control form-control-lg input-lg" id="tahun" placeholder="Year" min="2018" max="<?php echo date('Y'); ?>" required>
                         <div class="form-control-position">
                             <i class="fa fa-flag"></i>
                         </div>

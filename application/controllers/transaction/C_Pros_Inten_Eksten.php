@@ -41,14 +41,21 @@ class C_Pros_Inten_Eksten extends CI_Controller {
     } elseif ($operation == 'delete') {
       # code...
     } else {
+      $data = $this->eks->get_all();
+      $rows = $data['data']->num_rows();
+      $id = 'dks' . $this->nsu->zerofill_generator(7, $rows);
+
       $input_var = $this->input->post();
+      $input_var['id'] = $id;
+
       $this->save_ekstensifikasi($input_var);
+
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan ekstensifikasi <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to save extensification or intensification.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data ekstensifikasi <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'Extensification or intensification has been <strong>saved</strong>.');
       }
       $this->session->unset_userdata('id_eksten');
     }
@@ -59,7 +66,7 @@ class C_Pros_Inten_Eksten extends CI_Controller {
   private function save_ekstensifikasi($data = array())
   {
     foreach ($data['id_outlet'] as $key => $value) {
-      $val['id'] = $this->nsu->digit_id_generator('4', 'dks');
+      $val['id'] = $data['id'];
       $val['tahun'] = date('Y');
       $val['tanggal'] = $data['tanggal'];
       $val['id_detailer'] = $data['id_detailer'];
@@ -92,14 +99,19 @@ class C_Pros_Inten_Eksten extends CI_Controller {
     } elseif ($operation == 'delete') {
       # code...
     } else {
+      $data = $this->ins->get_all();
+      $rows = $data['data']->num_rows();
+      $id = 'dns' . $this->nsu->zerofill_generator(7, $rows);
+
       $input_var = $this->input->post();
+      $input_var['id'] = $id;
       $this->save_intens($input_var);
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan intensifikasi <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to save Detailer intensification.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Data intensifikasi <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'Detailer intensification has been <strong>saved</strong>.');
       }
       $this->session->unset_userdata('id_eksten');
     }
@@ -109,7 +121,7 @@ class C_Pros_Inten_Eksten extends CI_Controller {
 
   private function save_intens($data = array())
   {
-    $val['id'] = $this->nsu->digit_id_generator(4, 'dns');
+    $val['id'] = $data['id'];
     $val['tahun'] = date('Y');
     $val['id_eksten'] = $data['id_eksten'];
     $val['tanggal'] = $data['tanggal'];

@@ -9,7 +9,7 @@
         <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Performa Detailer Per Bulan</h4>
+              <h4 class="card-title" id="horz-layout-basic">Detailer Performance (Monthly)</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
@@ -25,9 +25,9 @@
                   <table class="table table-hover table-xs border-top-blue display nowrap dataex-html5-export" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode Produk</th>
-                        <th>Produk</th>
-                        <th>Kode Outlet</th>
+                        <th>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Outlet Id</th>
                         <th>Outlet</th>
                         <th>Target<br />(Rp)</th>
                         <th>Total Sales<br />(Rp)</th>

@@ -9,7 +9,7 @@
         <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Evaluasi Target Customer</h4>
+              <h4 class="card-title" id="horz-layout-basic">Customer Target Evaluation</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
@@ -18,10 +18,10 @@
                     <thead>
                       <tr>
                         <th>Area</th>
-                        <th>Kode Detailer</th>
+                        <th>Detailer Id</th>
                         <th>Detailer</th>
                         <th>Target<br />(unit)</th>
-                        <th>Aktual<br />(unit)</th>
+                        <th>Actual Sales<br />(unit)</th>
                         <th>Achievement<br />(%)</th>
                         <th>Tools</th>
                       </tr>
@@ -57,7 +57,7 @@
         <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Insentif</h4>
+              <h4 class="card-title" id="horz-layout-basic">Insentive</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
@@ -65,14 +65,15 @@
                   <table class="table table-hover table-xs border-top-blue display nowrap" id="simple-table-2">
                     <thead>
                       <tr>
+                        <th style="display: none">Month</th>
+                        <th>Month</th>
                         <th>Area</th>
-                        <th>Kode Detailer</th>
+                        <th>Detailer Id</th>
                         <th>Detailer</th>
-                        <th>Kode Outlet</th>
+                        <th>Outlet Id</th>
                         <th>Outlet</th>
-                        <th>Bulan</th>
                         <th>Achievement<br />(%)</th>
-                        <th>Insentif<br />(Rp)</th>
+                        <th>Insentive<br />(Rp)</th>
                         <th>Tools</th>
                       </tr>
                     </thead>
@@ -80,20 +81,21 @@
                       <?php foreach ($insentif['data']->result() as $value): ?>
                       <?php if (intval($value->achievement) > 80): ?>
                       <tr>
+                        <?php 
+                          $bulan = date('F', strtotime($value->tahun . '-' . $value->bulan));
+                         ?>
+                        <td style="display: none"><?php echo $value->bulan; ?></td>
+                        <td><?php echo $bulan; ?></td>
                         <td><?php echo ucwords($value->nama_area); ?></td>
                         <td><?php echo strtoupper($value->id_detailer); ?></td>
                         <td><?php echo ucwords($value->nama_detailer); ?></td>
                         <td><?php echo strtoupper($value->id_outlet); ?></td>
                         <td><?php echo ucwords($value->nama_outlet); ?></td>
-                        <?php 
-                          $bulan = date('F', strtotime($value->tahun . '-' . $value->bulan));
-                         ?>
-                        <td><?php echo $bulan; ?></td>
                         <td><?php echo number_format($value->achievement, 2, ',', '.'); ?></td>
                         <td><?php echo number_format($value->rupiah, 0, ',', '.'); ?></td>
                         <td>
                           <div class="btn-group-vertical">
-                            <a href="#" class="btn btn-warning">Klaim</a>
+                            <a href="#" class="btn btn-warning">Claim</a>
                             <a href="#" class="btn btn-primary">Print</a>
                           </div>
                         </td>
@@ -129,6 +131,7 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
+        "order": [[0, "asc"]],
       });
     $('#simple-table_filter').css({
       'text-align': 'center',
@@ -142,8 +145,6 @@
     $('#simple-table_wrapper').children(':last').remove();
   });
 </script>
-
-
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -159,6 +160,7 @@
   $(document).ready(function(){
     $('#simple-table-2').DataTable({
         "paging": false,
+        "order": [[0, "asc"]],
       });
     $('#simple-table-2_filter').css({
       'text-align': 'center',
