@@ -90,15 +90,15 @@
           <ul class="dropdown-menu">
             <li data-menu=""><a href="<?php echo site_url() ?>/subdist" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Subdist</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/prospek-ineks" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Prospek Intensifikasi Ekstensifikasi</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/prospek-ineks" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Intensification &amp; Extensification Prospect</a>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/fixed-cost" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Fixed Cost &amp; Ratio</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/rtd" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Prospect RTD</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/rtd" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>RTD Prospect</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/pma" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Prospect Marketing Activity</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/pma" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Marketing Activity Prospect</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/evaluasi-target-customer" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Evaluasi Target Customer</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/evaluasi-target-customer" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Customer Target Evaluation</a>
             </li>
             <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-money"></i>Monthly Call Plan</a>
               <ul class="dropdown-menu">
@@ -108,13 +108,13 @@
                 </li>
               </ul>
             </li>
-            <li data-menu=""><a href="<?php echo site_url(); ?>/wpr" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>WPR</a>
+            <li data-menu=""><a href="<?php echo site_url(); ?>/wpr" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Weekly Promotion Report (WPR)</a>
             </li>
             <li data-menu=""><a href="<?php echo site_url(); ?>/promo-trial" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Promo Trial</a>
             </li>
-            <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-money"></i>Surat Permohonan Disc. On &amp; Off Faktur</a>
+            <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-money"></i>On &amp; Off Discount Factur Submission Letter</a>
               <ul class="dropdown-menu">
-                <li data-menu="" ><a href="<?php echo site_url(); ?>/daftar-faktur" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Daftar Faktur</a>
+                <li data-menu="" ><a href="<?php echo site_url(); ?>/daftar-faktur" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>Factur Lists</a>
                 </li>
                 <li data-menu="" ><a href="<?php echo site_url(); ?>/ko-general" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-money"></i>General</a>
                 </li>
@@ -138,13 +138,13 @@
                 </li>
               </ul>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/sales-distributor" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Data Sales Distributor dan Jenis Product (all area per year)</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/sales-distributor" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Distributor &amp; Product Types Sales (yearly)</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/stock-product-nucleus" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Data Stock Product (Nucleus)</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/stock-product-nucleus" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Product Stocks (Nucleus)</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url(); ?>/stock-product-distributor" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Data Stock Product (Distributor)</a>
+            <li data-menu=""><a href="<?php echo site_url(); ?>/stock-product-distributor" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Product Stocks (Distributor)</a>
             </li>
-            <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-table"></i>Entry Breakdown Analisis Sales</a>
+            <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-table"></i>Entry Breakdown Sales Analytic</a>
               <ul class="dropdown-menu">
                 <li data-menu="dropdown-submenu" class="dropdown dropdown-submenu"><a href="#" data-toggle="dropdown" class="dropdown-item dropdown-toggle"><i class="fa fa-table"></i>per Outlet</a>
                   <ul class="dropdown-menu">
@@ -155,9 +155,9 @@
                 </li>
               </ul>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/pemindahan-sales" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Laporan Pemindahan Sales</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/pemindahan-sales" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Sales Displacement Report</a>
             </li>
-            <li data-menu=""><a href="<?php echo site_url() ?>/actual-sales" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Laporan Actual Sales per Year</a>
+            <li data-menu=""><a href="<?php echo site_url() ?>/actual-sales" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Actual Sales Report (yearly)</a>
             </li>
             <li data-menu=""><a href="<?php echo site_url() ?>/reward" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Reward</a>
             </li>
@@ -165,7 +165,7 @@
               <ul class="dropdown-menu">
                 <li data-menu="" ><a href="<?php echo site_url() ?>/klm-sales/" data-toggle="dropdown" class="dropdown-item"><i class="fa fa-table"></i>Sales (Leveling)</a>
                 </li>
-                <li data-menu=""><a href="<?php echo site_url() ?>/show-klm-dana/" data-toggle="dropdown" class="dropdown-item"><i  class="fa fa-table"></i>Dana</a>
+                <li data-menu=""><a href="<?php echo site_url() ?>/show-klm-dana/" data-toggle="dropdown" class="dropdown-item"><i  class="fa fa-table"></i>Cost</a>
                 </li>
               </ul>
             </li>

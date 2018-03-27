@@ -37,7 +37,7 @@
         <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Prospect RTD</h4>
+              <h4 class="card-title" id="horz-layout-basic">RTD Prospect</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
@@ -45,21 +45,29 @@
                   <table class="table table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Area</th>
-                        <th>Nama Agenda</th>
-                        <th>Tanggal Agenda</th>
-                        <th>Durasi</th>
-                        <th>Budget / Anggaran<br />(Rp)</th>
-                        <th>Deskripsi</th>
+                        <th rowspan="2">Id</th>
+                        <th rowspan="2">Area</th>
+                        <th rowspan="2">Agenda</th>
+                        <th colspan="2">Agenda Implementation Date</th>
+                        <th rowspan="2">Duration</th>
+                        <th rowspan="2">Cost<br />(Rp)</th>
+                        <th rowspan="2">Description</th>
+                      </tr>
+                      <tr>
+                        <th>From</th>
+                        <th>To</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php foreach ($rtd['data']->result() as $value): ?>
                       <tr>
+                        <td><?php echo strtoupper($value->id); ?></td>
                         <td>(<?php echo strtoupper($value->alias_area); ?>) - <?php echo strtoupper($value->nama_area); ?></td>
                         <td><?php echo strtoupper($value->nama); ?></td>
-                        <?php $tanggal = date('d-M-Y', strtotime($value->dari)); ?>
-                        <td><?php echo $tanggal; ?></td>
+                        <?php $dari = date('d-M-Y', strtotime($value->dari)); ?>
+                        <td><?php echo $dari; ?></td>
+                        <?php $sampai = date('d-M-Y', strtotime($value->sampai)); ?>
+                        <td><?php echo $sampai; ?></td>
                         <td><?php echo $value->durasi; ?> hari</td>
                         <td><?php echo number_format($value->biaya, 0, ',', '.'); ?></td>
                         <td><?php echo $value->keterangan; ?></td>
@@ -85,24 +93,24 @@
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir untuk menambah Prospect RTD baru</p>
+                  <p>RTD prospect submission form</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-rtd" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="row">
                       <div class="col-md-6 col-xs-12">
-                        <h5 class="form-section">1. Informasi Agenda</h5>
+                        <h5 class="form-section">1. Agenda Informatin</h5>
                         <div class="form-group">
-                          <label class="label-control">Nama Agenda</label>
+                          <label class="label-control">Agenda Name</label>
                           <input type="text" name="nama" class="form-control border-primary" required>
                         </div>
                         <div class="form-group row">
                           <div class="col-md-6 col-xs-12">
-                            <label class="label-control">Tanggal</label>
+                            <label class="label-control">Date</label>
                             <input type="date" name="dari" class="form-control border-primary" required>
                           </div>
                           <div class="col-md-6 col-xs-12">
-                            <label class="label-control">Durasi</label>
+                            <label class="label-control">Duration</label>
                             <select name="durasi" class="form-control select2">
                               <?php for($i = 1; $i < 31; $i++): ?>
                               <option value="<?php echo $i; ?>"><?php echo $i; ?> hari</option>
@@ -114,9 +122,9 @@
                           <div class="col-md-6 col-xs-12">
                             <label class="label-control">Area</label>
                             <select name="id_area" class="form-control select2" required>
-                              <option value="" selected disabled>Pilih area</option>
+                              <option value="" selected disabled>Choose area</option>
                               <?php if ($area['data']->num_rows() < 1): ?>
-                              <option value="" disabled>Belum tersedia</option>
+                              <option value="" disabled>Unavailable</option>
                               <?php else: ?>
                               <?php foreach ($area['data']->result() as $value): ?>
                               <option value="<?php echo $value->id; ?>">(<?php echo $value->alias_area ?>) - <?php echo $value->nama; ?></option>
@@ -126,7 +134,7 @@
                             </select>
                           </div>
                           <div class="col-md-6 col-xs-12">
-                            <label class="label-control">Biaya</label>
+                            <label class="label-control">Cost</label>
                             <fieldset>
                               <div class="input-group">
                                 <span class="input-group-addon">Rp</span>
@@ -137,17 +145,17 @@
                         </div>
                       </div>
                       <div class="col-md-6 col-xs-12">
-                        <h5 class="form-section">2. Deskripsi Agenda</h5>
+                        <h5 class="form-section">2. Description</h5>
                         <div class="form-group">
-                          <label class="label-control">Deskripsi</label>
+                          <label class="label-control">Description</label>
                           <textarea class="form-control border-primary" name="keterangan" rows="10" required></textarea>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
                   </div>
                 </form>
               </div>
@@ -175,6 +183,7 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
+        "order": [[0, "desc"]],
       });
     $('#simple-table_filter').css({
       'text-align': 'center',

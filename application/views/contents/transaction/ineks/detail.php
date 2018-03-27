@@ -17,23 +17,23 @@
         <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">History Ekstensifikasi / Intensifikasi Detailer</h4>
+              <h4 class="card-title" id="horz-layout-basic">Detailer Extensification / Intensification</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
                 <div class="row">
                   <div class="col-md-6 col-xs-12">
-                    <h5>Nama: <?php echo $name; ?></h5>
+                    <h5>Name: <?php echo $name; ?></h5>
                   </div>
                 </div>
                 <div class="table-responsive height-400">
                   <table class="table dataex-html5-export table-bordered table-hover table-xs border-top-blue" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Nama Outlet</th>
-                        <th>Produk</th>
+                        <th>Outlet</th>
+                        <th>Product</th>
                         <th>Target</th>
-                        <th>Jenis<br />(Eksten/Intens)</th>
+                        <th>Type<br />(Exten/Intens)</th>
                       </tr>
                     </thead>
                     <tbody>

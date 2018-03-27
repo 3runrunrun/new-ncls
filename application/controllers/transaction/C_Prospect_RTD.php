@@ -30,9 +30,13 @@ class C_Prospect_RTD extends CI_Controller {
     } elseif ($operation == 'approve') {
       # code...
     } else {
+      $data = $this->Rtd->get_all();
+      $rows = $data['data']->num_rows();
+      $id = 'rtd' . $this->nsu->zerofill_generator(7, $rows);
+
       $status = strtolower('waiting');
       $input_var = $this->input->post();
-      $input_var['id'] = $this->nsu->digit_id_generator(4, 'rtd');
+      $input_var['id'] = $id;
       $input_var['tahun'] = date('Y');
       $input_var['status'] = $status;
       $input_var['sampai'] = $this->nsu->add_date_by_days($input_var['dari'], $input_var['durasi']);
@@ -42,10 +46,10 @@ class C_Prospect_RTD extends CI_Controller {
 
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan Prospect RTD <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to save RTD prospect.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Prospect RTD <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'RTD Prospect has been <strong>saved</strong>.');
       }
     }
     

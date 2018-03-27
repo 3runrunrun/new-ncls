@@ -37,7 +37,7 @@
         <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Ekstensifikasi Intensifikasi</h4>
+              <h4 class="card-title" id="horz-layout-basic">Extensification &amp; Intensification</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
@@ -45,7 +45,7 @@
                   <table class="table table-hover table-xs border-top-blue display nowrap" id="simple-table">
                     <thead>
                       <tr>
-                        <th>Kode</th>
+                        <th>Extent Id</th>
                         <th>Area</th>
                         <th>Detailer</th>
                         <th>Outlet</th>
@@ -68,7 +68,7 @@
                         <td>
                           <div class="btn-group-vertical">
                             <a href="<?php echo site_url(); ?>/detail-intens/<?php echo $value->id_detailer; ?>" target="_blank" class="btn btn-primary">Detail</a>
-                            <a href="<?php echo site_url(); ?>/detailer-intens/<?php echo $value->id; ?>" class="btn btn-success">Intensifikasi</a>
+                            <a href="<?php echo site_url(); ?>/detailer-intens/<?php echo $value->id; ?>" class="btn btn-success">Intensification</a>
                           </div>
                         </td>
                       </tr>
@@ -88,25 +88,25 @@
         <div class="col-xs-12">
           <div class="card border-top-green">
             <div class="card-header">
-              <h4 class="card-title" id="horz-layout-basic">Ekstensifikasi</h4>
+              <h4 class="card-title" id="horz-layout-basic">Extensification</h4>
             </div>
             <div class="card-body">
               <div class="card-block">
                 <div class="card-text">
-                  <p>Formulir ekstensifikasi sales detailer</p>
+                  <p>Detailer extensification form</p>
                 </div>
                 <form action="<?php echo site_url(); ?>/store-eksten" class="form" method="POST" role="form">
                   <div class="form-body">
                     <div class="form-group">
-                      <label class="label-control">Tanggal</label>
+                      <label class="label-control">Date</label>
                       <input type="date" name="tanggal" class="form-control border-primary" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <div class="form-group">
                       <label class="label-control">Detailer</label>
                       <select name="id_detailer" class="form-control select2" required>
-                        <option value="" selected disabled>Pilih detailer</option>
+                        <option value="" selected disabled>Choose detailer</option>
                         <?php if ($detailer['data']->num_rows() < 1): ?>
-                        <option value="" disabled>Detailer belum tersedia</option>
+                        <option value="" disabled>Unavailable</option>
                         <?php else: ?>
                         <?php foreach ($detailer['data']->result() as $value): ?>
                         <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->id); ?> - (<?php echo $value->alias_area; ?>) - <?php echo $value->nama_detailer; ?></option>
@@ -120,35 +120,37 @@
                       <div class="col-md-6 col-xs-12 mb-1">
                         <label class="label-control">Outlet</label>
                         <select name="id_outlet[]" class="form-control select2" required>
-                          <option value="" selected disabled>Pilih outlet</option>
+                          <option value="" selected disabled>Choose outlet</option>
                           <?php if ($outlet['data']->num_rows() < 1): ?>
-                          <option value="" disabled>Outlet belum tersedia</option>
+                          <option value="" disabled>Unavailable</option>
                           <?php else: ?>
                           <?php foreach ($outlet['data']->result() as $value): ?>
                           <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->id); ?> - (<?php echo $value->alias_area; ?>) - <?php echo $value->nama_outlet; ?></option>
                           <?php endforeach; ?>
                           <?php endif; ?>
                         </select>
+                        <p>*) Check the <strong>outlets information</strong> in <a href="<?php echo site_url(); ?>/master-outlet" class="primary" target="_blank">this page</a>.</p>
                       </div>
                       <div class="col-md-6 col-xs-12 mb-1">
                         <label class="label-control">Customer</label>
                         <select name="id_customer[]" class="form-control select2" required>
-                          <option value="" selected disabled>Pilih customer</option>
+                          <option value="" selected disabled>Choose customer</option>
                           <?php if ($customer['data']->num_rows() < 1): ?>
-                          <option value="" disabled>Customer belum tersedia</option>
+                          <option value="" disabled>Unavailable</option>
                           <?php else: ?>
                           <?php foreach ($customer['data']->result() as $value): ?>
                           <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->id); ?> - (<?php echo $value->alias_area; ?>) - <?php echo $value->jenis; ?> - <?php echo $value->nama; ?></option>
                           <?php endforeach; ?>
                           <?php endif; ?>
                         </select>
+                        <p>*) Check the <strong>customers information</strong> in <a href="<?php echo site_url(); ?>/master-customer" class="primary" target="_blank">this page</a>.</p>
                       </div>
                       <div class="col-md-6 col-xs-12">
-                        <label class="label-control">Produk</label>
+                        <label class="label-control">Product</label>
                         <select name="id_produk[]" class="form-control select2" required>
-                          <option value="" selected disabled>Pilih produk</option>
+                          <option value="" selected disabled>Choose produk</option>
                           <?php if ($produk['data']->num_rows() < 1): ?>
-                          <option value="" disabled>Produk belum tersedia</option>
+                          <option value="" disabled>Unavailable</option>
                           <?php else: ?>
                           <?php foreach ($produk['data']->result() as $value): ?>
                           <option value="<?php echo $value->id; ?>"><?php echo strtoupper($value->id); ?> - <?php echo strtoupper($value->nama); ?></option>
@@ -157,15 +159,15 @@
                         </select>
                       </div>
                       <div class="col-md-6 col-xs-12 mb-1">
-                        <label class="label-control">Jumlah (unit)</label>
+                        <label class="label-control">Target (unit)</label>
                         <input type="number" name="target[]" class="form-control border-primary" min="0">
                       </div>
                       <div class="col-md-2 col-xs-12">
-                        <label class="label-control">Pertemuan</label>
+                        <label class="label-control">Encounter (pertemuan)</label>
                         <input type="number" name="pertemuan[]" class="form-control border-primary" min="0">
                       </div>
                       <div class="col-md-4 col-xs-12">
-                        <label class="label-control">Dana</label>
+                        <label class="label-control">Cost</label>
                         <fieldset>
                           <div class="input-group">
                             <span class="input-group-addon">Rp</span>
@@ -174,14 +176,14 @@
                         </fieldset>
                       </div>
                       <div class="col-md-5 col-xs-12">
-                        <label class="label-control">Biaya</label>
+                        <label class="label-control">Med Cost (per patient)</label>
                         <fieldset>
                           <div class="input-group">
                             <span class="input-group-addon">Rp</span>
                             <input type="number" name="biaya[]" class="form-control border-primary" min="0">
                           </div>
                         </fieldset>
-                        <p>*) Rerata per pasien</p>
+                        <p>*) Average (per patient)</p>
                       </div>
                       <div class="col-md-1 col-xs-12 del-repeater">
                         <label class="label-control">Biaya</label><br />
@@ -193,14 +195,14 @@
                     <div class="row">
                       <div class="col-md-2 col-xs-12">
                         <div class="form-group">
-                          <button type="button" id="add-repeater" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;Tambah target</button>
+                          <button type="button" id="add-repeater" class="btn btn-info"><i class="fa fa-plus"></i>&nbsp;Add target</button>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="form-actions center">
-                    <button type="submit" class="btn btn-success">Simpan</button>
-                    <button type="reset" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="reset" class="btn btn-warning">Cancel</button>
                   </div>
                 </form>
               </div>
@@ -228,6 +230,7 @@
   $(document).ready(function(){
     $('#simple-table').DataTable({
         "paging": false,
+        "order": [[0, "desc"]],
       });
     $('#simple-table_filter').css({
       'text-align': 'center',
@@ -237,7 +240,6 @@
     $('#simple-table_filter > label > input').addClass('input-md').removeClass('input-sm').attr({
         placeholder: 'Keyword',
       });
-
   });
 </script>
 

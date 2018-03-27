@@ -61,38 +61,38 @@
                 <div class="row">
                   <div class="col-xl-3 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
                       <div class="float-xs-left pl-2">
-                          <span class="fa fa-bar-chart fa-5x color-orange"></span>
+                          <span class="fa fa-bullseye fa-5x color-orange"></span>
                       </div>
                       <div class="float-xs-left ml-1">
-                        <span class="font-large-3 line-height-1 text-bold-300">25%</span>
-                          <span class="grey darken-1 block">Target</span>
+                        <span class="font-large-3 line-height-1 text-bold-300">10</span>
+                          <span class="grey darken-1 block">Sales Target (item)</span>
                       </div>
                   </div>
                   <div class="col-xl-3 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
                     <div class="float-xs-left pl-2">
-                      <span class="fa fa-user fa-5x color-tosca"></span>
+                      <span class="fa fa-trophy fa-5x color-tosca"></span>
                     </div>
                     <div class="float-xs-left ml-1">
                       <span class="font-large-3 line-height-1 text-bold-300"><?php echo $sp; ?></span>
-                      <span class="grey darken-1 block">Sales person</span>
+                      <span class="grey darken-1 block">Achievement (%)</span>
                     </div>
                   </div>
                   <div class="col-xl-3 col-lg-6 col-md-12 border-right-grey border-right-lighten-3 clearfix">
                     <div class="float-xs-left pl-2">
-                      <span class="fa fa-share-square-o fa-5x color-blue"></span>
+                      <span class="fa fa-money fa-5x color-blue"></span>
                     </div>
                     <div class="float-xs-left ml-1">
                       <span class="font-large-3 line-height-1 text-bold-300"><?php echo $sl; ?></span>
-                      <span class="grey darken-1 block">Sales</span>
+                      <span class="grey darken-1 block">Total Sales (Rp)</span>
                     </div>
                   </div>
                   <div class="col-xl-3 col-lg-6 col-md-12 clearfix">
                       <div class="float-xs-left pl-2 ">
-                        <span class="fa fa-money fa-5x color-red"></span>
+                        <span class="fa fa-archive fa-5x color-red"></span>
                       </div>
-                      <div class="float-xs-left ml-1 mt-1">
-                        <span class="line-height-1 text-bold-800"><?php echo $p; ?></span>
-                        <span class="grey darken-1 block">Rupiah</span>
+                      <div class="float-xs-left ml-1">
+                        <span class="font-large-3 line-height-1 text-bold-300"><?php echo $p; ?></span>
+                        <span class="grey darken-1 block">PO Request</span>
                       </div>
                   </div>
                 </div>
@@ -121,8 +121,8 @@
                 <table class="table table-hover mb-0" id="report-table-2">
                   <thead>
                     <tr>
-                      <th>Kode Area</th>
-                      <th>Kota / Area</th>
+                      <th>Area ID</th>
+                      <th>Area / City</th>
                       <th>Sales PPG</th>
                       <th>Sales PENTA</th>
                       <th>Sales PTKP</th>
@@ -249,10 +249,10 @@
                     <table class="table table-hover mb-0" id="simple-table">
                       <thead>
                         <tr>
-                          <th>Kode Detailer</th>
-                          <th>Nama</th>
+                          <th>Detailer Id</th>
+                          <th>Name</th>
                           <th>Area</th>
-                          <th>Penjualan</th>
+                          <th>Sales</th>
                           <th>Target</th>
                           <th>Achievement</th>
                         </tr>

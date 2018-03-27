@@ -49,6 +49,7 @@
                         <th>Name</th>
                         <th>Area</th>
                         <th>Employed Date</th>
+                        <th>Date of Birth</th>
                         <th>Status</th>
                       </tr>
                     </thead>
@@ -60,6 +61,8 @@
                         <td><?php echo $value->nama_area; ?></td>
                         <?php $tanggal_masuk = date('d-M-Y', strtotime($value->tanggal_masuk)) ?>
                         <td><?php echo $tanggal_masuk; ?></td>
+                        <?php $tanggal_lahir = date('d-M-Y', strtotime($value->tanggal_lahir)) ?>
+                        <td><?php echo $tanggal_lahir; ?></td>
                         <td><?php echo $value->status; ?></td>
                       </tr>
                       <?php endforeach ?>

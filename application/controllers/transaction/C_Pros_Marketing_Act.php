@@ -31,9 +31,13 @@ class C_Pros_Marketing_Act extends CI_Controller {
     } elseif ($operation == 'approve') {
       # code...
     } else {
+      $data = $this->Pma->get_all();
+      $rows = $data['data']->num_rows();
+      $id = 'pma' . $this->nsu->zerofill_generator(7, $rows);
+
       $status = strtolower('waiting');
       $input_var = $this->input->post();
-      $input_var['id'] = $this->nsu->digit_id_generator(4, 'pma');
+      $input_var['id'] = $id;
       $input_var['tahun'] = date('Y');
       $input_var['status'] = $status;
       $input_var['sampai'] = $this->nsu->add_date_by_days($input_var['dari'], $input_var['durasi']);
@@ -43,10 +47,10 @@ class C_Pros_Marketing_Act extends CI_Controller {
 
       if ($this->db->trans_status() === FALSE) {
         $this->db->trans_rollback();
-        $this->session->set_flashdata('error_msg', 'Penambahan Prospect Marketing Activity <strong>gagal</strong>.');
+        $this->session->set_flashdata('error_msg', '<strong>Failed</strong> to save Marketing Activity Prospect.');
       } else {
         $this->db->trans_commit();
-        $this->session->set_flashdata('success_msg', 'Prospect Marketing Activity <strong>berhasil</strong> disimpan.');
+        $this->session->set_flashdata('success_msg', 'Marketing Activity Prospect has been <strong>saved</strong>.');
       }
     }
     
@@ -98,7 +102,6 @@ class C_Pros_Marketing_Act extends CI_Controller {
     $val['bensin'] = $data['bensin'];
     $val['comm'] = $data['comm'];
     $val['entertainment'] = $data['entertainment'];
-    $val['medcare'] = $data['medcare'];
     $val['total'] = $data['total'];
     $val['potongan_ca'] = $data['potongan_ca'];
     $this->Pma_Detail->store($val);

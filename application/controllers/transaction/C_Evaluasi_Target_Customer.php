@@ -18,7 +18,6 @@ class C_Evaluasi_Target_Customer extends CI_Controller {
     $this->load->view('navbar');
     $this->load->view('contents/transaction/evaluasi/evaluasi-target-customer', $data);
     $this->load->view('footers/footer-js-form-simple-table');
-  
   }
 
   public function show($id)
