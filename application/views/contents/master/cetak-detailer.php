@@ -63,13 +63,7 @@ body {
         <td width="1%">:</td>
         <td><?php echo strtoupper($page1->nama_detailer); ?></td>  
         <td> Jenis Kelamin : 
-          <?php 
-            if ($page1->jenis_kelamin == 'laki-laki') {
-              echo "L";
-            } else {
-              echo "P";
-            }
-          ?>
+          <?php echo strtoupper($page1->jenis_kelamin) ?>
         </td>
       </tr>
       <tr>
@@ -93,7 +87,7 @@ body {
       <tr>
         <td>SPV/DSM/RSM</td>
         <td>:</td>
-        <td><?php echo $page1->id_spv; ?> / <?php echo $page1->id_rm; ?></td>  
+        <td><?php echo $page1->id_spv; ?> / <?php echo $page1->id_direktur; ?> / <?php echo $page1->id_rm; ?></td>  
         <td></td>
       </tr>
       <tr>
@@ -105,7 +99,7 @@ body {
       <tr>
         <td>Alamat</td>
         <td>:</td>
-        <td></td>  
+        <td><?php echo $page1->alamat; ?></td>  
         <td></td>
       </tr>
       <tr>
@@ -239,7 +233,7 @@ body {
         <td><?php echo $page1->norek; ?></td>  
         <td></td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td>Keterangan</td>
         <td>:</td>
         <td>Area Baru(Yes/No)*</td>  
@@ -256,7 +250,7 @@ body {
         <td></td>
         <td>No, Menggantikan : ex</td>  
         <td></td>
-      </tr>
+      </tr> -->
     </table>
   </div>
 
@@ -270,7 +264,7 @@ body {
     <div class="tengah">
     <img src="<?php echo base_url() ?>/img/logo-small.png" style="max-height: 150px; max-width: 250px; margin-bottom: 10px;"> 
     <center>
-      <U><h2>FORM FIELDFORCE BARU</h2></U>
+      <U><h2>FORM FIELDFORCE</h2></U>
     </center>
     <table border="0" width="100%" cellspacing="0">
       <tr>
@@ -279,13 +273,14 @@ body {
         <td width="2%">:</td>
         <td><?php echo strtoupper($page1->nama_detailer); ?></td>  
         <td> Jenis Kelamin : 
-          <?php 
+          <!-- <?php 
             if ($page1->jenis_kelamin == 'laki-laki') {
               echo "L";
             } else {
               echo "P";
             }
-          ?>
+          ?> -->
+          <?php echo strtoupper($page1->jenis_kelamin); ?>
         </td>
       </tr>
       <tr>
@@ -313,7 +308,7 @@ body {
         <td width="2%">05.</td>
         <td>SPV/DSM/RSM</td>
         <td>:</td>
-        <td><?php echo $page1->id_spv; ?> / <?php echo $page1->id_rm; ?></td>  
+        <td><?php echo $page1->id_spv; ?> / <?php echo $page1->id_direktur; ?> / <?php echo $page1->id_rm; ?></td>  
         <td></td>
       </tr>
       <tr>
@@ -372,7 +367,7 @@ body {
         <td><?php echo strtoupper($page1->bank); ?> / <?php echo $page1->norek; ?></td>  
         <td></td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td width="2%">14.</td>
         <td>Keterangan</td>
         <td>:</td>
@@ -392,7 +387,7 @@ body {
         <td></td>
         <td>No, Menggantikan : ex</td>  
         <td></td>
-      </tr>
+      </tr> -->
     </table>
   </div>
 </body>
