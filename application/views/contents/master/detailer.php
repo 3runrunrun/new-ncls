@@ -51,6 +51,7 @@
                         <th>Employed Date</th>
                         <th>Date of Birth</th>
                         <th>Status</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -64,6 +65,7 @@
                         <?php $tanggal_lahir = date('d-M-Y', strtotime($value->tanggal_lahir)) ?>
                         <td><?php echo $tanggal_lahir; ?></td>
                         <td><?php echo $value->status; ?></td>
+                        <td><a class="btn btn-primary" href="<?php echo site_url(); ?>/print-detailer/<?php echo $value->id; ?>">Print</a></td>
                       </tr>
                       <?php endforeach ?>
                     </tbody>
